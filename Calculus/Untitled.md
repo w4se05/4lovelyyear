@@ -116,12 +116,10 @@ $$T_n = \frac{\Delta x}{2} [f(x_0) + 2f(x_1) + 2f(x_2) + \dots + 2f(x_{n-1}) + f
 
 ## 8. Improper Integrals (Type 1)
 **Source:** *Chapter 6_Techniques of Integration.md*
-
 ### Definition (Infinite Intervals)
 Integrals where the interval of integration is infinite.
 1.  **Upper bound infinity:** $\int_{a}^{\infty} f(x) \, dx = \lim_{t \to \infty} \int_{a}^{t} f(x) \, dx$.
 2.  **Lower bound infinity:** $\int_{-\infty}^{b} f(x) \, dx = \lim_{t \to -\infty} \int_{t}^{b} f(x) \, dx$.
-
 ### Convergence
 * If the limit exists and is finite, the integral **converges**.
 * If the limit does not exist or is infinite, the integral **diverges**.

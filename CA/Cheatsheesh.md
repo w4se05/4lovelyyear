@@ -13,7 +13,6 @@
 4.  **Load Data:** Fetch the value from memory.
 5.  **Store Data:** Save to B[8] (Offset = $8 \times 4 = 32$).
 
-**MIPS Code:**
 ```mips
 sub  $s3, $s3, $s4      # Step 1: i - j
 sll  $t1, $s3, 2        # Step 2: Offset = (i - j) * 4
@@ -36,11 +35,6 @@ sw   $t0, 32($s7)       # Step 5: Store to B[8] (Offset 32)
 4. **Load `A[f+1]`:** Add 4 bytes to A[f]'s address (next word), then load.
 5. **Compute Sum:** Add the two loaded values.
 6. **Store:** Save result to address B[g].
-
-**MIPS Code:**
-
-MIPS Assembler
-
 ```
 sll  $t0, $s0, 2        # Step 1a: f * 4
 add  $t0, $s6, $t0      # Step 1b: Address of A[f]
@@ -58,19 +52,10 @@ sw   $t0, 0($t1)        # Step 6: Store result in B[g]
 **Task:** `if (A[i] > A[j]) swap(A[i], A[j]);`
 
 **Step-by-Step Derivation:**
-
 1. **Load:** Get values from memory for `A[i]` and `A[j]`.
-    
 2. **Compare:** Use `slt` (Set Less Than). Check if `A[j] < A[i]`.
-    
 3. **Branch:** If `A[j] >= A[i]` (meaning order is correct or equal), skip the swap.
-    
 4. **Swap:** If we didn't branch, store `A[j]`'s value into `A[i]`'s slot, and vice-versa.
-
-**MIPS Code:**
-
-MIPS Assembler
-
 ```
 # Assumes $s2 points to A[i], $t2 points to A[j]
 lw   $s3, 0($s2)        # Step 1: Load A[i]
@@ -163,59 +148,118 @@ Table: $7 / 2$ ($0111 / 0010$)
 | | 3: Shift Div right | 0011 | 0000 0001 | 0000 0001 |
 
 ### **Part C: Float Representation**
+### **The Formula**
+Use this to verify your final binary representation:
+$$V = (-1)^S \times (1 + \text{Fraction}) \times 2^{(\text{Exponent} - \text{Bias})}$$
+- **Bias (Single):** 127
+- **Bias (Double):** 1023
+### **Complex Example: Convert $-58.3125$ to IEEE 754**
 
-**Example:** Convert **-0.75** to IEEE 754.
+**Step 1: Determine Sign (S)**: Negative $\rightarrow$ **S = 1**
 
-**Step-by-Step Procedure:**
+**Step 2: Convert to Binary**
+- **Integer (58):** $32 + 16 + 8 + 2 \rightarrow 111010_{two}$
+- **Fraction (0.3125):**
+    - $0.3125 \times 2 = 0.625 \rightarrow \mathbf{0}$
+    - $0.625 \times 2 = 1.25 \rightarrow \mathbf{1}$
+    - $0.25 \times 2 = 0.5 \rightarrow \mathbf{0}$
+    - $0.5 \times 2 = 1.0 \rightarrow \mathbf{1}$
+- **Result:** $111010.0101_{two}$
 
-1. **Determine Sign (S):**
-    - Negative number $\rightarrow$ **S = 1**.
-2. **Convert to Binary:**
-    - $0.75 \times 2 = 1.5$ (Bit=1, Rem=0.5).
-    - $0.5 \times 2 = 1.0$ (Bit=1, Rem=0.0).
-    - Result: **$0.11_{two}$**.
+**Step 3: Normalize**
+- Shift decimal left by 5 places: $1.110100101_{two} \times 2^5$
+- **Real Exponent:** 5
 
-3. **Normalize:**
-    - Shift $0.11_{two}$ right to get one non-zero digit left of dot.
-    - Result: **$1.1_{two} \times 2^{-1}$**.
+**Step 4: Calculate Biased Exponent (E)**
+- **Single:** $5 + 127 = 132$ ($10000100_{two}$)
+- **Double:** $5 + 1023 = 1028$ ($10000000100_{two}$)
 
-4. **Calculate Biased Exponent (E):**
-    - **Single:** $-1 + 127 = 126$ ($01111110$).
-    - **Double:** $-1 + 1023 = 1022$ ($01111111110$).
+**Step 5: Determine Fraction (F)**
+- Drop the leading `1.` $\rightarrow$ **F = 110100101...**
+### **Exam Answer Frames**
+**Single Precision (32-bit)**
 
-5. **Determine Fraction (F):**
-    - Take normalized $1.1$, drop the leading `1.`.
-    - F = **$1000...$**
+|**S (1 bit)**|**Exponent (8 bits)**|**Fraction (23 bits)**|
+|---|---|---|
+|**1**|**10000100**|**11010010100000000000000**|
 
-Single Precision (32-bit):
+**Double Precision (64-bit)**
 
-|  S  | Exponent (8 bits) |   Fraction (23 bits)    |
-| :-: | :---------------: | :---------------------: |
-|  1  |     01111110      | 10000000000000000000000 |
-
-Double Precision (64-bit):
-
-| S | Exponent (11 bits) | Fraction (52 bits) |
-| :---: | :---: | :---: |
-| 1 | 01111111110 | 100000... (all zeros) |
-
----
+| **S (1 bit)** | **Exponent (11 bits)** | **Fraction (52 bits)**           |
+| ------------- | ---------------------- | -------------------------------- |
+| **1**         | **10000000100**        | **1101001010000... (all zeros)** |
 
 ## **Chapter 4: Datapath Exercises**
 
-## **Chapter 4: Datapath Exercises (The "Pro" Control Unit)**
+| **Instr**   | **RegDst** | **ALUOp**      | **ALUSrc**  | **Branch** | **MemRead**  | **MemWrite** | **RegWrite** | **MemtoReg** |
+| ----------- | ---------- | -------------- | ----------- | ---------- | ------------ | ------------ | ------------ | ------------ |
+| **R-Type**  | **1** (Rd) | **10** (Func)  | **0** (Reg) | 0          | 0            | 0            | **1**        | **0** (ALU)  |
+| **lw**      | **0** (Rt) | **00** (Add)   | **1** (Imm) | 0          | **1**        | 0            | **1**        | **1** (Mem)  |
+| **sw**      | **X**      | **00** (Add)   | **1** (Imm) | 0          | 0            | **1**        | **0**        | **X**        |
+| **beq**     | **X**      | **01** (Sub)   | **0** (Reg) | **1**      | 0            | 0            | **0**        | **X**        |
+### 1. R-Type Instructions (add, sub, and, or, slt)
 
-### **1. Master Control Truth Table (Grouped by Stage)**
-*Organized by where the signal is used in the pipeline. This helps you map it to the diagram.*
+- **Goal:** Read two registers, perform an operation (ALU), and write the result back to a register (`rd`).
 
-| **Instr**  | **RegDst** | **ALUOp**     | **ALUSrc**  | **Branch** | **MemRead** | **MemWrite** | **RegWrite** | **MemtoReg** |
-| ---------- | ---------- | ------------- | ----------- | ---------- | ----------- | ------------ | ------------ | ------------ |
-| **R-Type** | **1** (Rd) | **10** (Func) | **0** (Reg) | 0          | 0           | 0            | **1**        | **0** (ALU)  |
-| **lw**     | **0** (Rt) | **00** (Add)  | **1** (Imm) | 0          | **1**       | 0            | **1**        | **1** (Mem)  |
-| **sw**     | **X**      | **00** (Add)  | **1** (Imm) | 0          | 0           | **1**        | **0**        | **X**        |
-| **beq**    | **X**      | **01** (Sub)  | **0** (Reg) | **1**      | 0           | 0            | **0**        | **X**        |
+|**Signal**|**Value**|**Reason**|
+|---|---|---|
+|**RegDst**|**1**|**Destination is `rd`.** We write to the register specified in bits 15:11 (rd), not bits 20:16 (rt). The Mux selects the "1" path.|
+|**ALUSrc**|**0**|**Operand 2 is a Register.** The ALU needs two register inputs (`rs` and `rt`). Setting this to 0 blocks the Immediate value and selects `Read Data 2`.|
+|**MemtoReg**|**0**|**Data comes from ALU.** The value written back to the register file comes from the ALU result, not from Data Memory.|
+|**RegWrite**|**1**|**Write enabled.** We need to save the result.|
+|**MemRead**|0|We are not reading from Data Memory.|
+|**MemWrite**|0|We are not writing to Data Memory.|
+|**Branch**|0|This is not a branch instruction; PC just goes to PC+4.|
+|**ALUOp**|**10**|**Delegate to Function Code.** "10" tells the ALU Control unit: "Look at the instruction's `funct` field (last 6 bits) to decide if this is add, sub, AND, etc."|
+
+### 2. lw (Load Word)
+
+- **Goal:** Calculate an address (Base + Offset), read from Memory, and write that data into a register (`rt`).
+
+|**Signal**|**Value**|**Reason**|
+|---|---|---|
+|**RegDst**|**0**|**Destination is `rt`.** `lw` format is `lw $rt, offset($rs)`. There is no `rd` field. We write to bits 20:16.|
+|**ALUSrc**|**1**|**Operand 2 is Immediate.** We need to add the register base (`$rs`) to the 16-bit offset (Immediate). The Mux selects the sign-extended immediate.|
+|**MemtoReg**|**1**|**Data comes from Memory.** The value written back to the register file comes from Data Memory, not the ALU result.|
+|**RegWrite**|**1**|**Write enabled.** We are loading data _into_ a register.|
+|**MemRead**|**1**|**Read enabled.** We must read the value stored at the calculated address.|
+|**MemWrite**|0|We are not changing memory contents.|
+|**Branch**|0|Not a branch.|
+|**ALUOp**|**00**|**Force Add.** To calculate a memory address, we must _add_ the base address + offset. "00" forces the ALU to add.|
+
+
+### 3. sw (Store Word)
+
+- **Goal:** Calculate an address (Base + Offset) and write a register's value _into_ Memory.
+    
+
+|**Signal**|**Value**|**Reason**|
+|---|---|---|
+|**RegDst**|X|**Don't Care.** We are not writing to _any_ register (RegWrite is 0), so it doesn't matter which destination the Mux points to.|
+|**ALUSrc**|**1**|**Operand 2 is Immediate.** Just like `lw`, we need to add the offset to the base to find the address.|
+|**MemtoReg**|X|**Don't Care.** We aren't writing to a register, so the input to the register write data port is irrelevant.|
+|**RegWrite**|**0**|**Write Disabled.** Crucial! `sw` changes Memory, not the Register File.|
+|**MemRead**|0|We are not reading memory.|
+|**MemWrite**|**1**|**Write Enabled.** This is the only instruction that sets this to 1. It allows the data to be written into RAM.|
+|**Branch**|0|Not a branch.|
+|**ALUOp**|**00**|**Force Add.** Address calculation (Base + Offset).|
 
 ---
+
+### 4. beq (Branch if Equal)
+
+- **Goal:** Compare two registers (`rs` and `rt`). If they are equal, update the PC to the branch target.
+
+|**Signal**|**Value**|**Reason**|
+|---|---|---|
+|**RegDst**|X|**Don't Care.** No register write happens.|
+|**ALUSrc**|**0**|**Operand 2 is a Register.** To compare values, we must input `rs` and `rt` (both registers) into the ALU.|
+|**MemtoReg**|X|**Don't Care.** No register write happens.|
+|**RegWrite**|**0**|**Write Disabled.** `beq` updates the PC, not the general registers.|
+|**MemRead**|0|No memory access.|
+|**MemWrite**|0|No memory access.|
+|**Branch**|**1**|**Branch Enabled.** This signal goes to the AND gate with the ALU's "Zero" output. If (Branch=1 AND Zero=1), the PC Mux selects the branch target address.|
+|**ALUOp**|**01**|**Force Subtract.** To check if $a = b$, the ALU calculates $(a - b)$. If the result is 0, they are equal. "01" forces subtraction.|
 
 ### **3. The "X" Files (Don't Care Logic)**
 *Why is it X? Because safety mechanisms elsewhere prevent the garbage data from doing harm.*

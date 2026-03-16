@@ -54,6 +54,10 @@ This theorem connects differential calculus (derivatives) with integral calculus
 > $$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$
 > where $F$ is **any antiderivative** of $f$ (i.e., $F'(x) = f(x)$) .
 
+>[!Theorem] Extended Theorem (**Leibniz Integral Rule**.)
+>$$\frac{d}{dx} \int_{\color{blue}{g(x)}}^{\color{red}{h(x)}} f(u) \, du = \color{red}f({h(x)}) \cdot \color{red}{h'(x)} \color{blue}- f({g(x)}) \cdot \color{blue}{g'(x)}$$
+
+$\lim_{ t \to \infty} \left( \frac{1}{t-2} \right)^{\frac{5}{2}} \frac{2}{5}-\left( \frac{1}{3-2} \right)^{\frac{5}{2}} \frac{2}{5}$
 ---
 
 ## 4. Indefinite Integrals & Net Change (Teach Mode)
@@ -185,3 +189,20 @@ Two methods:
 | **Substitution** | $\int f(g(x))g'(x) dx = \int f(u) du$ | "Reverse Chain Rule". Don't forget $du$. |
 | **Even Function** | $\int_{-a}^{a} f(x) dx = 2 \int_{0}^{a} f(x) dx$ | Symmetric about y-axis (e.g., $x^2, \cos x$). |
 | **Odd Function** | $\int_{-a}^{a} f(x) dx = 0$ | Symmetric about origin (e.g., $x^3, \sin x$). |
+
+| **Function**                   | **Integral**                               |
+| ------------------------------ | ------------------------------------------ |
+| **Sine**                       | $\int \sin(x) \, dx = -\cos(x) + C$        |
+| **Cosine**                     | $\int \cos(x) \, dx = \sin(x) + C$         |
+| **Secant Squared**             | $\int \sec^2(x) \, dx = \tan(x) + C$       |
+| **Cosecant Squared**           | $\int \csc^2(x) \, dx = -\cot(x) + C$      |
+| **Secant $\cdot$ Tangent**     | $\int \sec(x)\tan(x) \, dx = \sec(x) + C$  |
+| **Cosecant $\cdot$ Cotangent** | $\int \csc(x)\cot(x) \, dx = -\csc(x) + C$ |
+| **Tangent**                    | $\int \tan(x) , dx = -\ln$                 |
+| **Cotangent**                  | $\int \cot(x) , dx = \ln$                  |
+
+| **Form**            | **Integral**                                         |
+| ------------------- | ---------------------------------------------------- |
+| **Arcsine Form**    | $\int \frac{1}{\sqrt{1-x^2}} \, dx = \arcsin(x) + C$ |
+| **Arctangent Form** | $\int \frac{1}{1+x^2} \, dx = \arctan(x) + C$        |
+| **Arcsecant Form**  | $\int \frac{1}{                                      |

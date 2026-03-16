@@ -1,8 +1,8 @@
-I want you to create a comprehensive, Obsidian-ready `.md` file for my course on **[Subject or Topic Name]**.  Use the uploaded files as the base to ensure full coverage of my syllabus. Please handle files one by one by topic/chapter and generate separate .md files.
+I want you to create a comprehensive, Obsidian-ready `.md` file for my course on **[Subject or Topic Name]**.  Use the uploaded files as the base to ensure full coverage of my syllabus. Please strictly followed the content in those files. Ensure that everything that is in the file is also in your generated note. Please handle files one by one by topic/chapter and generate separate .md files.
 Follow this exact structure and style: \[cite:.*?\]
 
-
 **Formatting Requirements:**
+- No citing is required. Do not put [cite_start] in my note. I do not want to remove them after
 
 - Write in clean Markdown (`.md`) with full LaTeX math support `$$..$$` or `$...$`, not `\(...\)`
     
@@ -50,13 +50,3 @@ Follow this exact structure and style: \[cite:.*?\]
 - Skip all the historical background if exists.
 -
 Finally, make it **comprehensive** — all essential definitions, theorems, and methods from the topic must be included
-
-
-Chapter 2: Array-related exercises
-
-Chapter 3: Single and double precision. See example in Chapter 3 - the teacher just changed the numbers.
-- Exercise 1: Multiplication and division
-- Exercise 2: Representation of float negative and positive numbers (single and double)
-- Note: When doing the exercises, you must create a table and frame it as in the book.
-
-Chapter 4: Focus on the exercise file, only modified a lil bit when it comes to the test, but the diagram is the same

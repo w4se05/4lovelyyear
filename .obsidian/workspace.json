@@ -83,16 +83,168 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Law and Data Protection/Chapter 1_Introduction & Legal Framework.md",
+                "file": "Calculus/Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Chapter 1_Introduction & Legal Framework"
+              "title": "Untitled"
+            }
+          },
+          {
+            "id": "c9875bdda85fe602",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Algebra/FINAL BOSS PHASE 2.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "FINAL BOSS PHASE 2"
+            }
+          },
+          {
+            "id": "9ee57dfb96925240",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Calculus/Chapter 4_ Applications of Differentiation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Chapter 4_ Applications of Differentiation"
+            }
+          },
+          {
+            "id": "92135395a26c5b35",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Calculus/Chapter 6_Techniques of Integration.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Chapter 6_Techniques of Integration"
+            }
+          },
+          {
+            "id": "0f4fda070f7c1f55",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Calculus/Untitled 1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 1"
+            }
+          },
+          {
+            "id": "d71d75b675da73ae",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Programming 1/Untitled 4.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 4"
+            }
+          },
+          {
+            "id": "5f155bd6f0a8b5bf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Obsidian Prompt.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Obsidian Prompt"
+            }
+          },
+          {
+            "id": "90835ef61b665248",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Module 1.1 - Networking Internals"
+            }
+          },
+          {
+            "id": "f5ea885f73e3e3bc",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.5"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.11.5"
+            }
+          },
+          {
+            "id": "7e8a2b045cbc03a4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled 3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 3"
+            }
+          },
+          {
+            "id": "93545ed7c47ce8e7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Discrete Math/1-Basic Counting Rules & Combinatorics.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1-Basic Counting Rules & Combinatorics"
+            }
+          },
+          {
+            "id": "f395577885cf0689",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Theoratical/1- Introduction & Fundamentals.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1- Introduction & Fundamentals"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 16
       }
     ],
     "direction": "vertical"
@@ -231,14 +383,23 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "cbc63644e67a21d4",
+            "type": "leaf",
+            "state": {
+              "type": "mermaid-toolbar-view",
+              "state": {},
+              "icon": "trident-custom",
+              "title": "Mermaid Toolbar"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -249,38 +410,44 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "18173049d680918a",
+  "active": "cbc63644e67a21d4",
   "lastOpenFiles": [
-    "Law and Data Protection/Vietnam Number 1.md",
-    "Law and Data Protection/CheatSheesh.md",
-    "Law and Data Protection/Chapter 8_International Data Transfers.md",
-    "Law and Data Protection/Chapter 7_ Data Protection Impact Assessment (DPIA).md",
-    "Law and Data Protection/Chapter 6_ Remedies, Liability, Penalties & Compensation.md",
-    "Law and Data Protection/Chapter 5_Special Categories of Personal Data.md",
-    "Law and Data Protection/Chapter 4_Data Subjects' Rights.md",
-    "Law and Data Protection/Chapter 3_GDPR Principles.md",
+    "Theoratical/1- Introduction & Fundamentals.md",
+    "Obsidian Prompt.md",
+    "Discrete Math/1-Basic Counting Rules & Combinatorics.md",
+    "Theoratical",
+    "Discrete Math",
+    "Algebra/TF Questions Key.md",
+    "Untitled 1.md",
+    "Untitled 3.md",
+    "Programming 1/Cheatsheesh/Chapter 1_C Fundamentals & Control Flow.md",
+    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.3 - Active Directory Fundamentals.md",
+    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.2 - Linux Proficiency (CLI).md",
+    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
+    "RED TEAM 101/Module 1 - The Systems Administrator",
+    "RED TEAM 101",
+    "Programming 1/Untitled 4.md",
+    "Programming 1/Untitled 3.md",
+    "Programming 1/Untitled 2.md",
+    "Programming 1/Untitled.md",
+    "Programming 1/Cheatsheesh/Chapter 2_Functions, Arrays & Pointers.md",
+    "Programming 1/Cheatsheesh/Chapter 3_ Structures, Strings & Files.md",
+    "Programming 1/Cheatsheesh",
+    "Untitled 2.md",
+    "Calculus/Untitled 1.md",
+    "Calculus/Untitled.md",
     "Law and Data Protection/Chapter 1_Introduction & Legal Framework.md",
     "Law and Data Protection/Chapter 2_Basics of the GDPR.md",
-    "Law and Data Protection/~$apter 8_International Data Transfers.md",
-    "Obsidian Prompt.md",
-    "Calculus/Chapter 4_ Applications of Differentiation.md",
-    "Calculus/Chapter 5_Integrals.md",
-    "Calculus/Chap 1_Sequences and Series.md",
     "Untitled.md",
-    "CA/Cheatsheesh.md",
-    "Calculus/Untitled.md",
-    "Programming 1/Untitled 4.md",
-    "CA/Chap 3.md",
-    "CA/Chap 4.md",
-    "CA/Chap 2.md",
-    "CA/Arithmetic for Computers.md",
-    "Algebra/Excalibur.md",
-    "Algebra/Mock Test.md",
-    "Algebra/Final Boss.md",
-    "Untitled",
+    "Law and Data Protection/Vietnam Number 1.md",
+    "Law and Data Protection/CheatSheesh.md",
+    "Calculus/Chap 1_Sequences and Series.md",
+    "Calculus/Chapter 5_Integrals.md",
+    "FY_Applied Math/PDF source/Lecture 4.pdf",
     "Programming 1",
     "Law and Data Protection",
     "Algebra.zip",
@@ -288,14 +455,9 @@
     "Calculus/Images/Screenshot 2025-12-10 134548.png",
     "Calculus/Images/Screenshot 2025-09-25 095429.png",
     "Algebra/Linear Algebra",
-    "Algebra/General Algebra",
-    "Cross Product (for $",
     "E.png",
     "D.png",
     "C.png",
-    "Assignment.zip",
-    "FY_Applied Math/PDF source/Lecture 9.pdf",
-    "FY_Applied Math/PDF source/Lecture 8.pdf",
     "FY_Applied Math/Images/Screenshot 2025-01-10 225527.png",
     "FY_Applied Math/Images/Screenshot 2024-12-19 002129.png",
     "FY_Applied Math/Images/Screenshot 2025-01-09 214350.png",

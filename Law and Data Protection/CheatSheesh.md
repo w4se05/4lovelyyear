@@ -1,49 +1,48 @@
 ### **THE ULTIMATE GDPR EXAM COMPANION**
 
-| **IF THE QUESTION IS ABOUT...**                          | **GO TO THIS CHAPTER (SLIDE DECK)** |
+| **IF THE QUESTION IS ABOUT...**  | **GO TO THIS CHAPTER (SLIDE DECK)** |
 | -------------------------------------------------------- | ----------------------------------- |
-| **Definitions & Basics**                                 | **01 & 02 - Introduction & Basics** |
-| * "Is this Personal Data?" (Name, IP, Cookie)*           |                                     |
-| * "Is it Anonymous or Pseudonymous?"*                    |                                     |
-| * "Who is the Controller vs Processor?"*                 |                                     |
-| * "Does GDPR apply here?" (Scope)*                       |                                     |
-|                                                          |                                     |
-| **"Can they process this?" (Regular Data)**              | **03 - Processing Requirements**    |
-| * Lawful Basis (Consent, Contract, Legitimate Interest)* |                                     |
-| * "Is the Consent valid?" (Pre-ticked boxes)*            |                                     |
-| * "Can they use it for a new purpose?"*                  |                                     |
-|                                                          |                                     |
-| **"Did they mess up the rules?"**                        | **04 - GDPR Principles**            |
-| * "They kept it too long" (Storage Limitation)*          |                                     |
-| * "They collected too much info" (Minimisation)*         |                                     |
-| * "The data was leaked/hacked" (Integrity)*              |                                     |
-|                                                          |                                     |
-| **The User's Power ("I want to...")**                    | **05 - Data Subjects Rights**       |
-| * "Delete my data" (Right to Erasure)*                   |                                     |
-| * "Give me a copy" (Access)*                             |                                     |
-| * "Stop marketing to me" (Object)*                       |                                     |
-| * "AI rejected my loan" (Automated Decision)*            |                                     |
-|                                                          |                                     |
-| **Sensitive / Special Data**                             | **06 - Special Categories**         |
-| * Health, Religion, Politics, Bio/Genetics*              |                                     |
-| * Criminal Records / Background Checks*                  |                                     |
-| * _Key: Look for the specific Exceptions here._          |                                     |
-|                                                          |                                     |
-| **Money, Jail & Complaints**                             | **07 - Remedies & Penalties**       |
-| * "How much is the fine?" (€10M vs €20M)*                |                                     |
-| * "Where do I complain?" (Which country)*                |                                     |
-| * Compensation for damages*                              |                                     |
-|                                                          |                                     |
-| **Sending Data Abroad**                                  | **08 - International Transfers**    |
-| * Cloud servers in USA / Asia*                           |                                     |
-| * "Is the country safe?" (Adequacy)*                     |                                     |
-| * Standard Contractual Clauses (SCCs)*                   |                                     |
-|                                                          |                                     |
+| **Definitions & Basics** | **01 & 02 - Introduction & Basics** |
+| * "Is this Personal Data?" (Name, IP, Cookie)*   |     |
+| * "Is it Anonymous or Pseudonymous?"*    |     |
+| * "Who is the Controller vs Processor?"* |     |
+| * "Does GDPR apply here?" (Scope)*       |     |
+|  |     |
+| **"Can they process this?" (Regular Data)**      | **03 - Processing Requirements**    |
+| * Lawful Basis (Consent, Contract, Legitimate Interest)* |     |
+| * "Is the Consent valid?" (Pre-ticked boxes)*    |     |
+| * "Can they use it for a new purpose?"*  |     |
+|  |     |
+| **"Did they mess up the rules?"**| **04 - GDPR Principles**    |
+| * "They kept it too long" (Storage Limitation)*  |     |
+| * "They collected too much info" (Minimisation)* |     |
+| * "The data was leaked/hacked" (Integrity)*      |     |
+|  |     |
+| **The User's Power ("I want to...")**    | **05 - Data Subjects Rights**       |
+| * "Delete my data" (Right to Erasure)*   |     |
+| * "Give me a copy" (Access)*     |     |
+| * "Stop marketing to me" (Object)*       |     |
+| * "AI rejected my loan" (Automated Decision)*    |     |
+|  |     |
+| **Sensitive / Special Data**     | **06 - Special Categories** |
+| * Health, Religion, Politics, Bio/Genetics*      |     |
+| * Criminal Records / Background Checks*  |     |
+| * _Key: Look for the specific Exceptions here._  |     |
+|  |     |
+| **Money, Jail & Complaints**     | **07 - Remedies & Penalties**       |
+| * "How much is the fine?" (€10M vs €20M)*|     |
+| * "Where do I complain?" (Which country)*|     |
+| * Compensation for damages*      |     |
+|  |     |
+| **Sending Data Abroad**  | **08 - International Transfers**    |
+| * Cloud servers in USA / Asia*   |     |
+| * "Is the country safe?" (Adequacy)*     |     |
+| * Standard Contractual Clauses (SCCs)*   |     |
+|  |     |
 
 #### **1. SCOPE: DOES GDPR APPLY?**
 
 - **Personal Data (The Trigger):**
-    
     - **Definition:** Info relating to an _identified_ or _identifiable_ natural person.
     - **Identifiers:** Name, ID number, location data, online identifier (IP address, cookies), physical/genetic/economic factors.
     - **"Identifiable" Test:** Take into account "all reasonable means" (cost, time, technology) used by the controller _or another person_ to identify them.
@@ -51,34 +50,23 @@
     - **Anonymisation:** ID is irreversibly removed. **VERDICT: NO, GDPR does not apply.**
     - **Deceased Persons:** **VERDICT: NO, GDPR does not apply.**
     - **Legal Persons (Companies):** Generally **NO**, but some protection exists (Case: _Bernh Larsen Holding AS v. Norway_).
-        
+
 - **Territorial Scope (Art 3):**
-    
     - **Establishment:** Processing by a controller/processor _established in the EU_ (regardless of where processing happens).
     - **Targeting:** Org is _outside EU_ but:
-        1. **Offers goods/services** to data subjects in the EU (payment not required).
-        2. **Monitors behaviour** of data subjects in the EU (e.g., tracking cookies, profiling).
-
+1. **Offers goods/services** to data subjects in the EU (payment not required).
+2. **Monitors behaviour** of data subjects in the EU (e.g., tracking cookies, profiling).
 - **Material Scope (Exemptions):**
-    
     - Activities outside EU law (National Security).
     - **Household Exemption:** Purely personal/household activity (e.g., personal address book).
 
----
-
 #### **2. ROLES: WHO IS LIABLE?**
-
 - **Data Controller:** Determines the **purposes** and **means** of processing. (The Boss). _Liable for everything._
-    
 - **Data Processor:** Processes data **on behalf of** the controller. (The Contractor). _Liable for security & complying with instructions._
-    
 - **DPO (Data Protection Officer):** Mandatory if:
-    
     - Public authority.
     - Core activity is systematic monitoring on a large scale.
     - Processing Special Categories on a large scale.
-
----
 
 #### **3. THE 7 PRINCIPLES (Article 5) - _Memorize These_**
 
@@ -92,36 +80,22 @@
 |**6. Integrity & Confidentiality**|Security. Protect against unauthorized access, loss, destruction (Encryption, Pseudonymisation).|
 |**7. Accountability**|Controller must be able to **demonstrate compliance**. (Documentation, logs, policies).|
 
----
-
 #### **4. LAWFULNESS (The "Green Light" - Art 6)**
 
 _You MUST have one of these for ANY processing._
-
 1. **Consent:**
-    
     - **Formula:** Freely given + Specific + Informed + Unambiguous.
-        
     - **Invalid if:** Pre-ticked boxes, silence, inactivity, bundled with a contract (if data isn't needed for the contract), imbalance of power (Employer/Employee).
-        
     - **Withdrawal:** Must be as easy to withdraw as to give.
-        
+
 2. **Contract:** Necessary for performance of a contract (e.g., shipping address to deliver item).
-    
 3. **Legal Obligation:** Compliance with EU/Member State law (e.g., Bank reporting fraud).
-    
 4. **Vital Interests:** Life-or-death (e.g., ER doctor needs blood type).
-    
 5. **Public Task:** Official authority (e.g., Tax authority, Police).
-    
 6. **Legitimate Interests:**
-    
     - **The Balancing Test:** Controller's interest vs. User's rights/freedoms.
-        
     - **Example:** Direct marketing (usually), fraud prevention, network security.
-        
     - _Note:_ Public authorities cannot use this for their tasks.
-        
 
 ---
 
@@ -191,29 +165,29 @@ _Processing is PROHIBITED unless you have an Exception._
 - **Right to Erasure (Art 17 - "Right to be Forgotten"):**
     
     - **When:** Purpose finished, Consent withdrawn, Unlawful processing.
-        
+
     - **Exceptions:** Freedom of expression, Legal obligation, Public health, Research.
-        
+
 - **Right to Restriction (Art 18):** "Pause" processing while verifying accuracy or legal claim.
     
 - **Right to Data Portability (Art 20):** Move data to another service.
     
     - _Conditions:_ Based on Consent/Contract AND Automated processing.
-        
+
 - **Right to Object (Art 21):**
     
     - **Direct Marketing:** **ABSOLUTE RIGHT** (Must stop immediately).
-        
+
     - **Legitimate Interest/Public Task:** Must stop unless "compelling legitimate grounds" override user.
-        
+
 - **Automated Decision Making (Art 22):**
     
     - **Rule:** Right NOT to be subject to a decision based _solely_ on automated processing (e.g., AI loan denial) which produces legal effects.
-        
+
     - **Exceptions:** Necessary for Contract, Authorized by Law, Explicit Consent.
-        
+
     - **Safeguard:** Right to human intervention, express point of view, contest decision.
-        
+
 
 ---
 
@@ -226,21 +200,19 @@ _Moving data outside EEA (EU + Norway, Liechtenstein, Iceland)._
 - **Step 2: Appropriate Safeguards?** (If No Adequacy):
     
     - **SCCs (Standard Contractual Clauses):** EU model contracts.
-        
+
     - **BCRs (Binding Corporate Rules):** For multinational groups (Gold standard for big corps).
-        
+
     - **Codes of Conduct / Certification Mechanisms.**
-        
+
 - **Step 3: Derogations (Exceptions - Specific Situations):**
     
     - Explicit Consent.
-        
     - Contract performance.
-        
     - Public Interest.
-        
+
     - Legal Claims.
-        
+
     - Vital Interests.
 
 - **Law Enforcement:** PNR Agreements (Passenger Name Records) & TFTP (Terrorist Finance Tracking) exist for transfers to USA/Australia/Canada.
@@ -271,9 +243,9 @@ _Moving data outside EEA (EU + Norway, Liechtenstein, Iceland)._
 1. **Check Data Type:** Is it Sensitive?
     
     - _Yes:_ Need Art 6 Basis + Art 9 Exception.
-        
+
     - _No:_ Need Art 6 Basis only.
-        
+
 2. **Check Basis:** Is the basis valid? (e.g., Was consent pre-ticked? Is legitimate interest valid?)
     
 
@@ -332,11 +304,11 @@ Memorize this 4-paragraph structure. It works for almost any "Critically analyse
 - **The Checklist:** "It must ensure:
     
     1. **Judicial Oversight:** Access should require a warrant (Lawfulness).
-        
+
     2. **Data Minimisation:** Only collect what is strictly necessary for the specific crime.
-        
+
     3. **Purpose Limitation:** Data collected for cybercrime cannot be used for political profiling."
-        
+
 - **Conclusion:** "Ultimately, while fighting crime is legitimate, it cannot override the fundamental right to data protection. The Convention is only compatible with GDPR if it respects the principle of proportionality."
     
 
@@ -351,11 +323,11 @@ Memorize this 4-paragraph structure. It works for almost any "Critically analyse
 2. **Cite the Articles:** You don't need the text, just the number.
     
     - **Art 5:** Principles (always relevant).
-        
+
     - **Art 6:** Lawful Basis.
-        
+
     - **Art 9:** Sensitive Data.
-        
+
     - **Art 44-49:** International Transfers.
-        
+
 3. **There is no "Right" Answer:** In law essays, you are graded on **how you argue**, not just the conclusion. If you say "The Convention is bad because it violates Article 5," and explain _why_, you get full marks, even if the professor thinks the Convention is good.

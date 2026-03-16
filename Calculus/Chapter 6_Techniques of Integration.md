@@ -10,7 +10,7 @@ Used for integrating **products** of functions (e.g., $x \ln x, x e^x$) or singl
 
 > [!Tip] Definite Integrals
 > $$\int_{a}^{b} u(x)v'(x) \, dx = \left[ u(x)v(x) \right]_{a}^{b} - \int_{a}^{b} v(x)u'(x) \, dx$$
-> .
+
 
 ---
 
@@ -23,8 +23,6 @@ Strategy for integrating combinations of powers of sine and cosine: $\int \sin^m
 | **Odd power of cosine** | Save one factor of $\cos x$. Convert remaining $\cos^2 x$ to $\sin^2 x$. Let $u = \sin x$. | $\cos^2 x = 1 - \sin^2 x$ |
 | **Odd power of sine** | Save one factor of $\sin x$. Convert remaining $\sin^2 x$ to $\cos^2 x$. Let $u = \cos x$. | $\sin^2 x = 1 - \cos^2 x$ |
 | **Both powers even** | Use half-angle identities to reduce powers. | $\sin^2 x = \frac{1}{2}(1 - \cos 2x)$ <br> $\cos^2 x = \frac{1}{2}(1 + \cos 2x)$ |
-
-
 
 *Note:* Similar strategies exist for $\tan^m x \sec^n x$ using $\sec^2 x = 1 + \tan^2 x$.
 
@@ -56,7 +54,6 @@ Used for integrating **rational functions** $f(x) = \frac{P(x)}{Q(x)}$.
     $$\frac{A_1}{x-a} + \frac{A_2}{(x-a)^2} + \dots + \frac{A_r}{(x-a)^r}$$
 3.  **Irreducible Quadratic Factors:** If $Q(x)$ contains $(ax^2 + bx + c)$ where $b^2 - 4ac < 0$, include:
     $$\frac{Ax + B}{ax^2 + bx + c}$$
-    .
 
 ---
 
@@ -71,7 +68,6 @@ Used when an antiderivative cannot be found in terms of elementary functions (e.
 > 3.  **Simpson's Rule ($S_n$):** Uses parabolas to approximate the curve ($n$ must be even).
 >     $$S_n = \frac{\Delta x}{3} [f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) + \dots + 4f(x_{n-1}) + f(x_n)]$$
 >     *Pattern:* $1, 4, 2, 4, 2, \dots, 4, 1$.
-> .
 
 ---
 
@@ -88,13 +84,13 @@ Integrals with infinite intervals or discontinuous integrands.
 > [!Definition] Type 2: Discontinuous Integrands
 > If $f$ is discontinuous at $b$ (vertical asymptote), then:
 > $$\int_{a}^{b} f(x) \, dx = \lim_{t \to b^-} \int_{a}^{t} f(x) \, dx$$
-> .
+
 
 > [!Theorem] Comparison Test
 > If $f(x) \ge g(x) \ge 0$ for $x \ge a$:
 > * If $\int_{a}^{\infty} f(x) \, dx$ converges, then $\int_{a}^{\infty} g(x) \, dx$ converges.
 > * If $\int_{a}^{\infty} g(x) \, dx$ diverges, then $\int_{a}^{\infty} f(x) \, dx$ diverges.
-> .
+
 
 ---
 

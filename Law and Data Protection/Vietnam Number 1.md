@@ -20,7 +20,7 @@
 * **Processor:** Processes data on behalf of the controller.
 * **De-identification:** Changing data so it cannot identify a person without additional info.
 
----
+
 
 ### 1.3 Rights and Obligations (Article 4)
 
@@ -33,7 +33,7 @@
 
 * **Obligations:** Subjects must provide accurate data and respect others' data .
 
----
+
 
 ### 1.4 Processing Conditions
 
@@ -49,8 +49,6 @@ Consent is **not required** in specific cases :
 3.  **State Management:** Serving state agency activities prescribed by law.
 4.  **Contract:** Fulfilling contractual agreements with the subject.
 
----
-
 ### 1.5 Cross-Border Transfers (Article 20)
 
 > [!Warning] 🌍 Transfer Requirements
@@ -61,19 +59,19 @@ Consent is **not required** in specific cases :
 
 **Exceptions to Assessment:** State agencies, internal employee data on cloud services, or personal transfers by the subject .
 
----
+
 
 ### 1.6 Specific Sector Regulations
 
 | Sector | Key Regulation |
-| :--- | :--- |
+| : | : |
 | **Marketing / Ads** | Must have **Consent**; users must be able to **Opt-out**; no "sub-leasing" data without permission . |
 | **Finance / Banking** | No credit scoring without consent; mandatory notification of account data loss . |
 | **HR / Employment** | Delete data if not hired (unless agreed); delete data upon contract termination. |
 | **Children (Art 24)** | Processing requires consent of the child (if $\ge$ 7 years old) **AND** the legal representative. |
 | **AI / Big Data** | Must not use AI/Big Data to infringe on national security or honor/dignity. AI processing must be classified by **risk level** . |
 
----
+
 
 ### 1.7 Penalties (Article 8)
 
@@ -82,7 +80,7 @@ Consent is **not required** in specific cases :
 > * **Buying/Selling Data:** Fine up to **10 times** the revenue from the violation.
 > * **Cross-Border Violations:** Fine up to **5% of the preceding year's turnover**.
 
----
+
 
 ## 2. 📘 Examples & Applications (Exam Mode)
 
@@ -116,7 +114,7 @@ Consent is **not required** in specific cases :
 > * **Requirement:** Advertising requires consent and a mechanism to opt-out.
 > * **Conclusion:** The bank is violating the law.
 
----
+
 
 ## 3. Summary
 
