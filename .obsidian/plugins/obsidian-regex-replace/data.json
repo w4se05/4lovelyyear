@@ -1,5 +1,5 @@
 {
-  "findText": "\\[cite:.*?\\]",
+  "findText": "\\[cite:[^\\]\\n\\r]*\\]",
   "replaceText": "",
   "useRegEx": true,
   "selOnly": false,

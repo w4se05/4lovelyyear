@@ -8,243 +8,49 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f776c0279ee601ee",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Law and Data Protection/Chapter 7_ Data Protection Impact Assessment (DPIA).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Chapter 7_ Data Protection Impact Assessment (DPIA)"
-            }
-          },
-          {
-            "id": "f130eb4cd8467ddf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Programming 1/Untitled.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled"
-            }
-          },
-          {
-            "id": "503de0d7cfd8ec87",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Programming 1/Untitled 2.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 2"
-            }
-          },
-          {
-            "id": "7d55cea77618a56e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Algebra/Mock Test.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Mock Test"
-            }
-          },
-          {
-            "id": "0a1645ba8cfac431",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Calculus/Chap 1_Sequences and Series.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Chap 1_Sequences and Series"
-            }
-          },
-          {
-            "id": "18173049d680918a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Calculus/Untitled.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled"
-            }
-          },
-          {
-            "id": "c9875bdda85fe602",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Algebra/FINAL BOSS PHASE 2.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "FINAL BOSS PHASE 2"
-            }
-          },
-          {
-            "id": "9ee57dfb96925240",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Calculus/Chapter 4_ Applications of Differentiation.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Chapter 4_ Applications of Differentiation"
-            }
-          },
-          {
-            "id": "92135395a26c5b35",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Calculus/Chapter 6_Techniques of Integration.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Chapter 6_Techniques of Integration"
-            }
-          },
-          {
-            "id": "0f4fda070f7c1f55",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Calculus/Untitled 1.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 1"
-            }
-          },
-          {
-            "id": "d71d75b675da73ae",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Programming 1/Untitled 4.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 4"
-            }
-          },
-          {
-            "id": "5f155bd6f0a8b5bf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Obsidian Prompt.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Obsidian Prompt"
-            }
-          },
-          {
-            "id": "90835ef61b665248",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Module 1.1 - Networking Internals"
-            }
-          },
-          {
-            "id": "f5ea885f73e3e3bc",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.11.5"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.11.5"
-            }
-          },
-          {
-            "id": "7e8a2b045cbc03a4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled 3.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 3"
-            }
-          },
-          {
-            "id": "93545ed7c47ce8e7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Discrete Math/1-Basic Counting Rules & Combinatorics.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "1-Basic Counting Rules & Combinatorics"
-            }
-          },
-          {
             "id": "f395577885cf0689",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Theoratical/1- Introduction & Fundamentals.md",
+                "file": "DSA/Lecture 2 -Algorithm Complexity Analysis.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1- Introduction & Fundamentals"
+              "title": "Lecture 2 -Algorithm Complexity Analysis"
+            }
+          },
+          {
+            "id": "ba5dcf1b531da8ef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Discrete Math/2-Advanced Counting.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2-Advanced Counting"
+            }
+          },
+          {
+            "id": "3785dffd09d71503",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Discrete Math/2- DM-Advanced-Counting.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2- DM-Advanced-Counting"
             }
           }
         ],
-        "currentTab": 16
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -385,7 +191,7 @@
             }
           },
           {
-            "id": "cbc63644e67a21d4",
+            "id": "f18ffbd6aafb3414",
             "type": "leaf",
             "state": {
               "type": "mermaid-toolbar-view",
@@ -399,7 +205,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -414,39 +221,40 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "cbc63644e67a21d4",
+  "active": "3785dffd09d71503",
   "lastOpenFiles": [
-    "Theoratical/1- Introduction & Fundamentals.md",
-    "Obsidian Prompt.md",
+    "Discrete Math/1- DM-Basic-Counting-Rules.md",
+    "Discrete Math/2- DM-Advanced-Counting.md",
+    "Discrete Math/2-Advanced Counting.md",
     "Discrete Math/1-Basic Counting Rules & Combinatorics.md",
+    "DSA/Lecture 2 -Algorithm Complexity Analysis.md",
+    "Obsidian Prompt.md",
+    "Discrete Math/4-Generating Functions and Recurrence Relations (cont).md",
+    "Discrete Math/3- Generating Functions, Recurrences, and Permutation Structure.md",
+    "Untitled.md",
+    "Calculus/Chap 2_ Limits and Derivatives.md",
+    "Calculus/Chapter 4_ Applications of Differentiation.md",
+    "Calculus/Chapter 3_Differentiation Rules.md",
+    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
+    "Programming 1/Untitled 4.md",
+    "Calculus/Untitled 1.md",
+    "Calculus/Chapter 6_Techniques of Integration.md",
+    "Algebra/FINAL BOSS PHASE 2.md",
+    "Calculus/Untitled.md",
+    "Calculus/Chap 1_Sequences and Series.md",
+    "Algebra/Mock Test.md",
+    "Programming 1/Untitled 2.md",
+    "Programming 1/Untitled.md",
+    "Law and Data Protection/Chapter 7_ Data Protection Impact Assessment (DPIA).md",
+    "DSA",
+    "Theoratical/1- Introduction & Fundamentals.md",
     "Theoratical",
     "Discrete Math",
     "Algebra/TF Questions Key.md",
-    "Untitled 1.md",
     "Untitled 3.md",
-    "Programming 1/Cheatsheesh/Chapter 1_C Fundamentals & Control Flow.md",
-    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.3 - Active Directory Fundamentals.md",
-    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.2 - Linux Proficiency (CLI).md",
-    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
     "RED TEAM 101/Module 1 - The Systems Administrator",
     "RED TEAM 101",
-    "Programming 1/Untitled 4.md",
-    "Programming 1/Untitled 3.md",
-    "Programming 1/Untitled 2.md",
-    "Programming 1/Untitled.md",
-    "Programming 1/Cheatsheesh/Chapter 2_Functions, Arrays & Pointers.md",
-    "Programming 1/Cheatsheesh/Chapter 3_ Structures, Strings & Files.md",
     "Programming 1/Cheatsheesh",
-    "Untitled 2.md",
-    "Calculus/Untitled 1.md",
-    "Calculus/Untitled.md",
-    "Law and Data Protection/Chapter 1_Introduction & Legal Framework.md",
-    "Law and Data Protection/Chapter 2_Basics of the GDPR.md",
-    "Untitled.md",
-    "Law and Data Protection/Vietnam Number 1.md",
-    "Law and Data Protection/CheatSheesh.md",
-    "Calculus/Chap 1_Sequences and Series.md",
-    "Calculus/Chapter 5_Integrals.md",
     "FY_Applied Math/PDF source/Lecture 4.pdf",
     "Programming 1",
     "Law and Data Protection",
@@ -454,7 +262,6 @@
     "Algebra/Linear Algebra/Unit_circle_angles.svg.png",
     "Calculus/Images/Screenshot 2025-12-10 134548.png",
     "Calculus/Images/Screenshot 2025-09-25 095429.png",
-    "Algebra/Linear Algebra",
     "E.png",
     "D.png",
     "C.png",
