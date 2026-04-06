@@ -1,7 +1,8 @@
 {
   "interfaceFontFamily": "Times New Roman",
   "textFontFamily": "Times New Roman",
-  "baseFontSize": 28,
-  "cssTheme": "Obsidian Nord",
-  "baseFontSizeAction": true
+  "baseFontSize": 16,
+  "cssTheme": "Shiba Inu",
+  "baseFontSizeAction": true,
+  "theme": "moonstone"
 }

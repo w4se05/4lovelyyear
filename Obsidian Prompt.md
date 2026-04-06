@@ -13,6 +13,8 @@
 > 
 > ## 📐 Formatting Requirements
 > 
+> - I installed mermaid graph, so feel free to draw some graph if needed
+> 
 > - Output each note inside a **single fenced markdown code block** (` ```markdown ... ``` `) so I can copy it cleanly.
 > - Write in clean Markdown with **full LaTeX math support** — use `$...$` for inline and `$$...$$` for display math. Never use `(...)` for LaTeX.
 > - **Notation:** If notation varies across source files, standardize it throughout and declare the chosen convention at the top of the note under a `> [!Note] Notation Conventions` callout.
