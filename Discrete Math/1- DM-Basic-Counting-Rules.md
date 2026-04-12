@@ -174,12 +174,12 @@ Before stating the rules, the source introduces the central objects that countin
 > Each entry is the sum of the two entries diagonally above it.
 >
 > $$\begin{array}{ccccccccccccc}
-> n=0: & & & & & & 1 \\
-> n=1: & & & & & 1 & & 1 \\
-> n=2: & & & & 1 & & 2 & & 1 \\
-> n=3: & & & 1 & & 3 & & 3 & & 1 \\
-> n=4: & & 1 & & 4 & & 6 & & 4 & & 1 \\
-> n=5: & 1 & & 5 & & 10 & & 10 & & 5 & & 1 \\
+> n=0: & & && & & & 1 \\
+> n=1: & & && & & 1 & & 1 \\
+> n=2: & && & & 1 & & 2 & & 1 \\
+> n=3: & && & 1 & & 3 & & 3 & & 1 \\
+> n=4: && & 1 & & 4 & & 6 & & 4 & & 1 \\
+> n=5: && 1 & & 5 & & 10 & & 10 & & 5 & & 1 \\
 > n=6: & 1 & & 6 & & 15 & & 20 & & 15 & & 6 & & 1
 > \end{array}$$
 

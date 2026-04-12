@@ -4,41 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "e6e83420d72f0dfd",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "f395577885cf0689",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/Lecture 2 -Algorithm Complexity Analysis.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lecture 2 -Algorithm Complexity Analysis"
-            }
-          },
-          {
-            "id": "3785dffd09d71503",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Theoratical/Finite_Automata (1).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Finite_Automata (1)"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
         "id": "8a4d8dcd3d88f682",
         "type": "tabs",
         "children": [
@@ -48,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Concepts_To_Master_Plain_English.md",
+                "file": "Theoratical/Finite_Automata_Complete_Guide.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Concepts_To_Master_Plain_English"
+              "title": "Finite_Automata_Complete_Guide"
+            }
+          },
+          {
+            "id": "65293fc65a502489",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Discrete Math/1- DM-Basic-Counting-Rules.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1- DM-Basic-Counting-Rules"
             }
           }
         ]
@@ -211,7 +190,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -226,18 +206,26 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "434769b95c74a11e",
+  "active": "aa994fc8f1d81656",
   "lastOpenFiles": [
-    "DSA/Lecture 2 -Algorithm Complexity Analysis.md",
-    "Theoratical/Finite_Automata (1).md",
-    "Obsidian Prompt.md",
-    "Theoratical/Finite_Automata.md",
-    "Theoratical/Untitled.md",
-    "Theoratical/1- Introduction & Fundamentals.md",
-    "Backend_Security_Networking_Deep_Dive.md",
-    "Concepts_To_Master_Plain_English.md",
     "Discrete Math/2- DM-Advanced-Counting.md",
     "Discrete Math/1- DM-Basic-Counting-Rules.md",
+    "Discrete Math/DM-Counting-Solutions.md",
+    "Theoratical/2- Finite_Automata.md",
+    "Concepts_To_Master_Plain_English.md",
+    "Untitled.md",
+    "Untitled 1.md",
+    "Obsidian Prompt.md",
+    "Law and Data Protection/Chapter 5_Special Categories of Personal Data.md",
+    "Law and Data Protection/Chapter 3_GDPR Principles.md",
+    "Theoratical/Finite_Automata.md",
+    "Theoratical/1- Introduction & Fundamentals.md",
+    "Theoratical/Untitled.md",
+    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
+    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.3 - Active Directory Fundamentals.md",
+    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.2 - Linux Proficiency (CLI).md",
+    "DSA/Lecture 2 -Algorithm Complexity Analysis.md",
+    "Backend_Security_Networking_Deep_Dive.md",
     "Calculus/Chap 1_Sequences and Series.md",
     "Calculus/Chap 2_ Limits and Derivatives.md",
     "Calculus/Untitled.md",
@@ -245,15 +233,7 @@
     "Discrete Math/1-Basic Counting Rules & Combinatorics.md",
     "Discrete Math/4-Generating Functions and Recurrence Relations (cont).md",
     "Discrete Math/3- Generating Functions, Recurrences, and Permutation Structure.md",
-    "Untitled.md",
     "Calculus/Chapter 4_ Applications of Differentiation.md",
-    "Calculus/Chapter 3_Differentiation Rules.md",
-    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
-    "Programming 1/Untitled 4.md",
-    "Calculus/Untitled 1.md",
-    "Calculus/Chapter 6_Techniques of Integration.md",
-    "Algebra/FINAL BOSS PHASE 2.md",
-    "Algebra/Mock Test.md",
     "DSA",
     "Theoratical",
     "Discrete Math",
