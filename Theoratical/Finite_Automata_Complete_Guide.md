@@ -10,8 +10,9 @@
 - [[#Part 3 — Nondeterministic Finite Accepter (NFA)]]
 - [[#Part 4 — Converting NFA to DFA]]
 - [[#Part 5 — Minimizing a DFA]]
-- [[#Part 6 — The C++ Implementation]]
-- [[#Part 7 — How to Use the Program]]
+- [[#Part 6 — Regular Expressions and re2nfa]]
+- [[#Part 7 — The C++ Implementation]]
+- [[#Part 8 — How to Use the Program]]
 
 ---
 
@@ -76,18 +77,7 @@ DFAs are usually drawn as **directed graphs**:
 
 Over alphabet `{a, b}`, we want to accept `ab`, `aab`, `bab`, `ababab` — any string whose last two characters are `ab`.
 
-```
-        a           b
-  ┌──────────►[q1]──────────►((q2))
-  │            │                │
-  │      a     │          a     │ b
-  │      └─────┘          ┌─────┘
-[q0]◄───────────────────────────────
-  │
-  └──► b ──► [q0]   (b loops back to start)
-```
-
-More clearly as a table (called a **transition table**):
+Transition table:
 
 | State | `a` | `b` |
 |-------|-----|-----|
@@ -98,7 +88,7 @@ More clearly as a table (called a **transition table**):
 **Reading `"aab"`:**
 
 ```
-Start:   currentState = q0
+Start:    currentState = q0
 Read 'a': δ(q0, a) = q1  →  currentState = q1
 Read 'a': δ(q1, a) = q1  →  currentState = q1
 Read 'b': δ(q1, b) = q2  →  currentState = q2
@@ -108,19 +98,11 @@ End: q2 is a final state → ACCEPTED ✓
 **Reading `"ba"`:**
 
 ```
-Start:   currentState = q0
+Start:    currentState = q0
 Read 'b': δ(q0, b) = q0  →  currentState = q0
 Read 'a': δ(q0, a) = q1  →  currentState = q1
 End: q1 is NOT a final state → REJECTED ✗
 ```
-
-## The Transition Function δ
-
-The rule `δ(q, a) = p` means:
-
-> "If I am currently in state `q` and I read character `a`, I move to state `p`."
-
-This is the heart of any DFA. In code, the transition table is stored as a 2D array where rows are states and columns are alphabet symbols.
 
 ## Exercise 1 — Checking if a String is Accepted
 
@@ -137,7 +119,7 @@ This is the heart of any DFA. In code, the transition table is stored as a 2D ar
      d. Move to the state in that cell
 3. After reading all characters:
      If current state is in F → "Valid!"
-     Otherwise             → "Invalid"
+     Otherwise               → "Invalid"
 ```
 
 ### The Code
@@ -148,42 +130,34 @@ void exercise1()
     freopen("dfa.inp", "r", stdin);
     int n, m;
     cin >> n >> m;
-    string dfa[n][m];          // the full table (n rows, m columns)
-    vector<string> fstate;     // list of final states
-    vector<string> sigma;      // list of alphabet symbols
+    string dfa[n][m];       // the full table (n rows, m columns)
+    vector<string> fstate;  // list of final states
+    vector<string> sigma;   // list of alphabet symbols
 
-    // Read the table, detect final states (marked with '*')
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < m; ++j)
         {
             cin >> dfa[i][j];
             if (dfa[i][j][0] == '*')
             {
-                dfa[i][j].erase(0, 1);          // remove the '*'
-                fstate.push_back(dfa[i][j]);    // remember it's final
+                dfa[i][j].erase(0, 1);        // remove the '*'
+                fstate.push_back(dfa[i][j]);  // remember it's final
             }
         }
 
-    // Row 0 is the header; columns 1..m-1 are the alphabet symbols
     for (int i = 1; i < m; ++i)
-        sigma.push_back(dfa[0][i]);
+        sigma.push_back(dfa[0][i]);  // header row → alphabet
 
     cin >> s;
-    string currentState = dfa[1][0];   // initial state = first data row
+    string currentState = dfa[1][0];  // initial state = first data row
 
     for (int i = 0; i < s.length(); ++i)
     {
-        // Which column does s[i] belong to?
-        auto it = find(begin(sigma), end(sigma), string(1, s[i]));
-        int index = distance(sigma.begin(), it) + 1;
+        auto it    = find(begin(sigma), end(sigma), string(1, s[i]));
+        int  index = distance(sigma.begin(), it) + 1;
 
-        if (index == m)   // not found in alphabet
-        {
-            cout << "\nInvalid!";
-            return;
-        }
+        if (index == m) { cout << "\nInvalid!"; return; }
 
-        // Find the row for currentState and move
         for (int j = 1; j < n; ++j)
             if (dfa[j][0] == currentState)
             {
@@ -202,19 +176,19 @@ void exercise1()
 ### Code Explanation — Line by Line
 
 **`freopen("dfa.inp", "r", stdin)`**
-Instead of typing input in the terminal every time, this redirects `cin` to read from the file `dfa.inp`. Every `cin >>` after this reads from the file automatically.
+Redirects `cin` to read from the file `dfa.inp` instead of the keyboard. Every `cin >>` after this line reads from the file automatically — no manual typing during testing.
 
 **`string dfa[n][m]`**
-A 2D array of strings. Row 0 is the header (`NULL a b ...`). Rows 1 to n-1 are the actual states. Column 0 is the state name, columns 1 onwards are transition destinations.
+A 2D array of strings. Row 0 is the header (`NULL a b ...`). Rows 1 to n-1 are the actual states. Column 0 is always the state name; columns 1 onwards are transition destinations.
 
 **`if (dfa[i][j][0] == '*')`**
-The `[0]` gets the first character of the string. If it's `*`, this state is final. We strip the `*` with `erase(0, 1)` so the name is clean.
+`[0]` gets the first character of the string. If it is `*`, this state is final. We strip it with `erase(0, 1)` so the name is clean for comparisons later.
 
 **`find(...) + distance(...)`**
-`find` returns an iterator pointing to where `s[i]` is in `sigma`. `distance` converts that iterator to an index number. We add `1` because column 0 is the state name, not a symbol column.
+`find` searches `sigma` for the character and returns an iterator. `distance` turns that iterator into a plain integer index. We add `1` because column 0 is the state name column, not a symbol column.
 
 **`index == m`**
-If `find` reaches the end of `sigma` without finding the character, `distance` returns `sigma.size()`, and `+1` makes it equal to `m` (number of columns). That means the character is not in the alphabet — reject.
+If `find` reaches the end without a match, `distance` returns `sigma.size()`, so `+1` equals `m`. That means the character is not in the alphabet — reject immediately.
 
 ---
 
@@ -225,93 +199,62 @@ If `find` reaches the end of `sigma` without finding the character, `distance` r
 In an NFA, a state can have:
 - **Zero** transitions for some input (no rule for that character)
 - **Multiple** transitions for the same input (go to several states at once)
-- **Lambda (λ) transitions** — also called **epsilon (ε) transitions** — moves to another state **without reading any character**
+- **Lambda (λ) transitions** — moves to another state **without reading any character**
 
 > [!tip] Intuition
-> Think of an NFA as a machine that can **split into parallel copies** of itself. When there are multiple possible transitions, the machine explores all of them simultaneously. If **any one** of the parallel copies ends up in a final state, the string is accepted.
+> Think of an NFA as a machine that **splits into parallel copies** of itself. When there are multiple possible transitions, all paths are explored simultaneously. If **any one** copy ends up in a final state, the string is accepted.
 
 ## Lambda (λ) Transitions
 
-A λ-transition lets the machine jump to another state for free — without consuming any input character. This makes NFAs much easier to design, even though they are harder to simulate directly.
-
-**Example:** An NFA where `q0` has a λ-transition to `q1`:
-
-```
-q0 --λ--> q1 --a--> q2 (final)
-```
-
-Even before reading any input, the machine is already "in both `q0` and `q1`" at the same time.
+A λ-transition lets the machine jump to another state for free — without consuming any input. This makes NFAs much easier to design, even though they are harder to simulate directly.
 
 ## The λ-closure
 
-The **λ-closure** of a state `q` is the set of all states reachable from `q` using **only λ-transitions** (zero or more of them), including `q` itself.
-
-**Example:**
+The **λ-closure** of a state `q` is the set of all states reachable from `q` using **only λ-transitions** (zero or more), including `q` itself.
 
 ```
 q0 --λ--> q1 --λ--> q2
-q2 --λ--> q3
-```
+                q2 --λ--> q3
 
-```
 λ-closure(q0) = {q0, q1, q2, q3}
 λ-closure(q1) = {q1, q2, q3}
 λ-closure(q2) = {q2, q3}
 λ-closure(q3) = {q3}
 ```
 
-The algorithm is a simple **BFS or DFS** starting from `q` and only following λ-edges.
+The algorithm is a simple **DFS** starting from `q`, following only λ-edges.
 
 ## The Extended Transition Function δ*
 
-Since an NFA can be in many states at once, we need a function that works on **sets** of states.
+`δ*(q, a)` answers: "starting from `q`, after reading `a`, which states can I possibly be in?"
 
-`δ*(q, a)` answers: "starting from state `q`, after reading character `a`, which states can I possibly be in?"
-
-The formula from the slide is:
+The formula:
 
 ```
 δ*(q, a) = λ-closure( move( λ-closure(q), a ) )
 ```
 
-Breaking it down step by step:
-
 | Step | Operation | What it does |
 |------|-----------|-------------|
-| 1 | `λ-closure(q)` | Find all states reachable from `q` via λ-transitions |
-| 2 | `move(T, a)` | From each state in set `T`, follow the `a`-transition (no λ) |
-| 3 | `λ-closure(result)` | From wherever we landed, follow any λ-transitions again |
+| 1 | `λ-closure(q)` | All states reachable via λ from `q` |
+| 2 | `move(T, a)` | Follow symbol `a` from every state in T (no λ) |
+| 3 | `λ-closure(result)` | Follow any λ-transitions from the landing states |
 
 ## Exercise 2 — Computing λ-closure and δ*
 
-**The task:** Read an NFA from a file, then for a given starting state `q` and symbol `a`, compute and print `λ-closure(q)` and `δ*(q, a)`.
+**The task:** Read an NFA, then for a given state `q` and symbol `a`, compute and print `λ-closure(q)` and `δ*(q, a)`.
 
-### The NFA Table Format
+### NFA Table Format
 
-Because NFA cells can hold **multiple states**, each cell is written as `{q1,q2}` or `{}` for empty. The λ-column is marked with `~` in the header.
-
-**Example `nfa.inp`:**
-
-```
-4 3
-NULL  a    ~
-q0   {q0}  {q1}
-q1   {q1}  {q2}
-*q2  {q2}  {}
-q0 a
-```
-
-This NFA has: `q0` reads `a` → stays at `q0`; `q0` has λ → `q1`; `q1` has λ → `q2`; `q2` is final.
+NFA cells hold **sets** of states written as `{q1,q2}` or `{}`. The λ-column uses `~` in the header.
 
 ### `parseCell()` — Reading Multi-State Cells
 
 ```cpp
 vector<string> parseCell(string cell)
 {
-    // Remove '{' and '}'
     cell.erase(remove(cell.begin(), cell.end(), '{'), cell.end());
     cell.erase(remove(cell.begin(), cell.end(), '}'), cell.end());
-    // Split by ','
     vector<string> res;
     stringstream ss(cell);
     string tok;
@@ -321,34 +264,30 @@ vector<string> parseCell(string cell)
 }
 ```
 
-`remove` moves all `{` characters to the end of the string; `erase` then cuts them off. Then `stringstream` + `getline` splits the remaining text by commas — the standard C++ way to split a string.
+`remove` shuffles all `{` characters to the end; `erase` cuts them off. Then `stringstream + getline` splits by commas — the standard C++ string-split idiom.
 
-### `lambdaClosure()` — BFS Over λ-Edges
+### `lambdaClosure()` — DFS Over λ-Edges
 
 ```cpp
-set<string> lambdaClosure(const string& state, int n, int m,
-                           string nfa[][100], int lambdaCol)
+set<string> lambdaClosure(const string& state, ...)
 {
     set<string> closure;
     stack<string> stk;
     stk.push(state);
-    closure.insert(state);      // a state is always in its own closure
+    closure.insert(state);      // always include the start
 
     while (!stk.empty())
     {
         string cur = stk.top(); stk.pop();
-
-        // Find the row for 'cur' in the table
         for (int i = 1; i < n; ++i)
             if (nfa[i][0] == cur)
             {
-                // Read the λ-column for this state
                 vector<string> nexts = parseCell(nfa[i][lambdaCol]);
                 for (auto& nx : nexts)
-                    if (!closure.count(nx))   // not visited yet
+                    if (!closure.count(nx))  // not yet visited
                     {
                         closure.insert(nx);
-                        stk.push(nx);         // explore from nx next
+                        stk.push(nx);
                     }
                 break;
             }
@@ -357,47 +296,7 @@ set<string> lambdaClosure(const string& state, int n, int m,
 }
 ```
 
-This is a standard **depth-first search**:
-- Push the starting state onto a stack
-- Pop a state, look at all its λ-transitions, push any unvisited ones
-- Stop when the stack is empty (no more new states reachable via λ)
-
-### Computing δ*(q, a)
-
-```cpp
-// Step 1: lambda-closure of the query state
-set<string> lc = lambdaClosure(q0, n, m, nfa, lambdaCol);
-
-// Step 2: move — for each state in lc, follow symbol 'a'
-set<string> mv = moveSet(lc, col, n, nfa);
-
-// Step 3: lambda-closure of the result
-set<string> ds = lambdaClosureSet(mv, n, m, nfa, lambdaCol);
-```
-
-### Trace for the Example
-
-Query: `q0 a`
-
-```
-Step 1 — λ-closure(q0):
-  Start: {q0}
-  q0 has λ → q1 → add q1: {q0, q1}
-  q1 has λ → q2 → add q2: {q0, q1, q2}
-  q2 has no λ-transitions
-  Result: {q0, q1, q2}
-
-Step 2 — move({q0, q1, q2}, a):
-  q0 on a → {q0}
-  q1 on a → {q1}
-  q2 on a → {q2}
-  Result: {q0, q1, q2}
-
-Step 3 — λ-closure({q0, q1, q2}):
-  Same as step 1: {q0, q1, q2}
-
-δ*(q0, a) = {q0, q1, q2}
-```
+Standard DFS: push a state, pop it, look at all its λ-destinations, push unvisited ones. Stops when the stack is empty.
 
 ---
 
@@ -405,100 +304,64 @@ Step 3 — λ-closure({q0, q1, q2}):
 
 ## Why Convert?
 
-NFAs are easy to design but hard to run directly (you'd have to track all parallel states). DFAs are easy to run. The **subset construction** algorithm converts any NFA into an equivalent DFA that accepts exactly the same strings.
+NFAs are easy to design but hard to execute (you would need to track all parallel states). DFAs are easy to run. The **subset construction** converts any NFA into an equivalent DFA accepting exactly the same strings.
 
 ## The Key Insight
 
-Each **DFA state** will represent a **set of NFA states** — specifically, all the NFA states the machine could possibly be in at that point.
-
-> [!example] Analogy
-> Imagine watching 10 different movies at once, each on a different TV. The "state" of your viewing session is the tuple of which scene each movie is on. When you press a button (read a character), all TVs advance according to their own rules. The subset construction turns this "all TVs at once" view into a single new machine.
+Each **DFA state** = a **set of NFA states** — all the NFA states the machine could possibly be in at that point.
 
 ## The Algorithm (page 46)
 
 ```
-1. Create the initial DFA state = λ-closure(q0 of NFA)
-2. Repeat until no DFA state has a missing transition:
-   3. Take any DFA state S = {qi, qj, ..., qk} that has
-      no outgoing edge for some symbol a
-   4. Compute the target:
-      δ_N*({qi, qj, ..., qk}, a) = λ-closure(move({qi,...,qk}, a))
-   5. If this target set is new, create a new DFA state for it
-   6. Add an edge from S to the target, labeled a
-7. Any DFA state that contains a final NFA state → mark as final
+1. Initial DFA state = λ-closure(q0 of NFA)
+2. Repeat until no DFA state has a missing edge:
+   - Take a DFA state S with no outgoing edge for symbol a
+   - Compute target = λ-closure(move(S, a))
+   - If target is new, create a new DFA state for it
+   - Add edge S --a--> target
+3. Any DFA state containing a final NFA state → mark as final
 ```
 
 ## Exercise 3 — nfa2dfa
 
-**The task:** Read an NFA, apply the subset construction, and print the resulting DFA table.
+**The task:** Read an NFA, run the subset construction, print the resulting DFA table.
 
-### The Worklist Approach
-
-Instead of "take any state with a missing edge", we use a **queue** (called a worklist). New DFA states are added to the queue as they are discovered, and we process them one by one until the queue is empty.
+### Code Walkthrough
 
 ```cpp
-void exercise3()
+set<string> init = lambdaClosure(nfa[1][0], ...);
+
+map<string, vector<string>> dfaTable;  // label → transitions
+map<string, set<string>>   labelToSet; // label → actual NFA state set
+queue<string> worklist;
+
+labelToSet[initLabel] = init;
+worklist.push(initLabel);
+
+while (!worklist.empty())
 {
-    // ... read NFA table same as exercise 2 ...
+    string curLabel = worklist.front(); worklist.pop();
 
-    // Represent each DFA state as a string like "{q0,q1,q2}"
-    auto setToLabel = [](const set<string>& s) -> string { ... };
-
-    // Initial DFA state = λ-closure(NFA initial state)
-    set<string> init = lambdaClosure(nfa[1][0], ...);
-    string initLabel = setToLabel(init);
-
-    map<string, vector<string>> dfaTable;   // label → list of transitions
-    map<string, set<string>> labelToSet;    // label → actual set of NFA states
-    queue<string> worklist;
-
-    labelToSet[initLabel] = init;
-    worklist.push(initLabel);
-
-    while (!worklist.empty())
+    for each symbol in sigma:
     {
-        string curLabel = worklist.front(); worklist.pop();
-        set<string>& cur = labelToSet[curLabel];
+        set<string> mv   = moveSet(cur, col, ...);
+        set<string> next = lambdaClosureSet(mv, ...);
+        string nextLabel = setToLabel(next);
 
-        for each symbol in sigma:
-        {
-            // Compute δ*(curSet, symbol)
-            set<string> mv   = moveSet(cur, col, ...);
-            set<string> next = lambdaClosureSet(mv, ...);
-            string nextLabel = setToLabel(next);
+        dfaTable[curLabel].push_back(nextLabel);
 
-            dfaTable[curLabel].push_back(nextLabel);
-
-            // If this is a brand new DFA state, add it to the queue
-            if (!next.empty() && !dfaTable.count(nextLabel))
-            {
-                labelToSet[nextLabel] = next;
-                worklist.push(nextLabel);
-            }
-        }
+        if (!next.empty() && !dfaTable.count(nextLabel))
+            worklist.push(nextLabel);  // newly discovered DFA state
     }
 }
 ```
 
-### Detecting Final States
-
-A DFA state (which is a set of NFA states) is **final** if it contains **at least one** NFA final state:
+A DFA state is **final** if its NFA-state set contains at least one NFA final state:
 
 ```cpp
 for (auto& fs : nfaFinal)
     if (st.count(fs)) { prefix += "*"; break; }
 ```
-
-### Example
-
-NFA with states `{q0, q1, q2}`, λ-transitions from `q0→q1→q2`, symbol `a` loops each state to itself:
-
-```
-DFA state       on 'a'
-→*{q0,q1,q2}   {q0,q1,q2}    ← loops to itself
-```
-
-Because the λ-closure of `q0` immediately reaches all states (including final `q2`), the single DFA state is both initial and final, and it loops on `a`.
 
 ---
 
@@ -506,252 +369,441 @@ Because the λ-closure of `q0` immediately reaches all states (including final `
 
 ## Why Minimize?
 
-A DFA produced by the subset construction can have many redundant states — states that behave identically. **Minimization** merges these redundant states to produce the **smallest possible DFA** that accepts the same language.
+A DFA converted from an NFA often has redundant states — states that behave identically for all inputs. Minimization merges them into the smallest possible equivalent DFA.
 
-## The Concept of Distinguishable States
+## Distinguishable vs Indistinguishable States
 
-Two states `p` and `q` are **distinguishable** if there exists some string `w` such that:
-- Starting from `p`, reading `w` → ends in a final state
-- Starting from `q`, reading `w` → does NOT end in a final state (or vice versa)
-
-If no such `w` exists, `p` and `q` are **indistinguishable** — they behave identically for all inputs — and can be safely merged.
+Two states `p` and `q` are **distinguishable** if there is some string `w` accepted from `p` but rejected from `q` (or vice versa). If no such string exists, they are **indistinguishable** and can be safely merged.
 
 ## The Three Phases
 
 ### Phase 1 — Remove Inaccessible States
 
-A state is **inaccessible** if there is no path to it from the initial state `q0`. Such states can never be reached during any computation, so they are useless.
+BFS from the initial state. Any state not reached is useless and is discarded.
 
-We find all accessible states using **BFS from q0**:
+### Phase 2 — `mark()`: Table-Filling Algorithm
 
-```
-Accessible = {q0}
-Queue = [q0]
+Build a triangular table of all state pairs. Mark a pair as distinguishable if:
 
-While queue is not empty:
-    cur = dequeue
-    For each transition δ(cur, a) = dest:
-        If dest not in Accessible:
-            Add dest to Accessible
-            Enqueue dest
-```
+**Base case:** one state is final, the other is not. Distinguishable by the empty string.
 
-Only the states in `Accessible` are kept.
-
-### Phase 2 — The `mark()` Algorithm (Table-Filling)
-
-This is the core of minimization. We fill a **triangular table** of all state pairs `(p, q)` where `p < q`. Each cell records whether the pair is **distinguishable**.
-
-#### Step 1 — Base Case (obvious distinguishable pairs)
-
-Mark every pair `(p, q)` where **one is final and the other is not**. We can distinguish them with the empty string `ε` — the final one accepts ε, the non-final one does not.
-
-```
-For all pairs (p, q):
-    if (p ∈ F and q ∉ F) or (p ∉ F and q ∈ F):
-        mark (p, q) as DISTINGUISHABLE
-```
-
-#### Step 2 — Propagation (inductive step)
-
-Now we propagate: if reading symbol `a` from `p` and `q` leads to a pair that is already distinguishable, then `p` and `q` are distinguishable too.
-
-```
-Repeat until no new pairs are marked:
-    For each UNMARKED pair (p, q):
-        For each symbol a in Σ:
-            Let pa = δ(p, a)
-            Let qa = δ(q, a)
-            If pa ≠ qa and (pa, qa) is already MARKED:
-                Mark (p, q) as DISTINGUISHABLE
-                Break
-```
-
-> [!example] Why this works
-> If `δ(p, a)` and `δ(q, a)` are distinguishable by some string `w`, then `p` and `q` are distinguishable by the string `aw` — just prepend `a` to the distinguishing string.
-
-#### Step 3 — Group Unmarked Pairs
-
-After the loop, any pair `(p, q)` that was **never marked** is indistinguishable. Group all mutually indistinguishable states together — these become the **equivalence classes**.
+**Propagation:** For unmarked pair `(p, q)` and symbol `a`, if `(δ(p,a), δ(q,a))` is already marked → mark `(p, q)` too. Repeat until no changes.
 
 ```cpp
-vector<int> group(ns, -1);
-int numGroups = 0;
-
-for (int i = 0; i < ns; ++i)
+bool changed = true;
+while (changed)
 {
-    if (group[i] != -1) continue;      // already assigned
-    group[i] = numGroups++;            // new class
-    for (int j = i+1; j < ns; ++j)
-        if (!dist[i][j])               // i and j are indistinguishable
-            group[j] = group[i];       // put j in the same class as i
+    changed = false;
+    for each unmarked pair (i, j):
+        for each symbol column k:
+        {
+            string ti = dfa[rows[i]][k];  // δ(p, a)
+            string tj = dfa[rows[j]][k];  // δ(q, a)
+            if (ti == tj) continue;
+            if dist[ti][tj] is marked:
+                mark dist[i][j] = true; changed = true;
+        }
 }
 ```
 
-### Phase 3 — The `reduce()` Algorithm (Building M̂)
+### Phase 3 — `reduce()`: Build the Minimized DFA
 
-Now we build the **minimized DFA M̂** from the equivalence classes:
+Any pair never marked → indistinguishable → group into one **equivalence class**.
 
-| Component | How to build it |
-|-----------|----------------|
-| **States** | One state per equivalence class |
-| **Initial state** | The class that contains the original `q0` |
-| **Final states** | Any class that contains at least one original final state |
-| **Transitions** | Pick any representative from each class; its transitions define the class's transitions |
+| Component | Rule |
+|-----------|------|
+| States | One per equivalence class |
+| Initial state | Class containing original `q0` |
+| Final states | Any class containing an original final state |
+| Transitions | Follow transitions of any representative from each class |
 
-The representative's transition `δ(rep, a) = dest` becomes `δ̂(class_of_rep, a) = class_of_dest`.
+## Exercise 4 — Worked Example
 
-This works because all states in a class are indistinguishable — they all go to the same class on each symbol (otherwise they would have been marked as distinguishable!).
-
-## Exercise 4 — Putting It Together
-
-**The task:** Read a DFA, remove inaccessible states, run `mark()`, group states into equivalence classes, then run `reduce()` and print the minimized DFA.
-
-### Full Worked Example
-
-**Original DFA** (6 states, alphabet `{a, b}`):
+Original 6-state DFA (final states `q4`, `q5`):
 
 | State | `a` | `b` |
 |-------|-----|-----|
 | `→q0` | `q1` | `q2` |
 | `q1` | `q1` | `q3` |
-| `q2` | `q1` | `q4` ★ |
-| `q3` | `q1` | `q5` |
-| `q4` ★ | `q1` | `q5` |
-| `q5` | `q1` | `q5` |
+| `q2` | `q1` | `q4`★ |
+| `q3` | `q1` | `q5`★ |
+| `q4`★ | `q1` | `q5`★ |
+| `q5`★ | `q1` | `q5`★ |
 
-All 6 states are accessible (BFS from q0 reaches all). Final states: `{q4}`.
-
-Wait — let's use the example from the code where `{q4, q5}` are both marked as final, making 3 classes emerge:
-
-| State | `a` | `b` | Final? |
-|-------|-----|-----|--------|
-| `→q0` | `q1` | `q2` | No |
-| `q1` | `q1` | `q3` | No |
-| `q2` | `q1` | `q4` | No |
-| `q3` | `q1` | `q5` | No |
-| `q4` ★ | `q1` | `q5` | **Yes** |
-| `q5` ★ | `q1` | `q5` | **Yes** |
-
-**Step 1 — Base case marking:**
-Final states: `{q4, q5}`. Non-final: `{q0, q1, q2, q3}`.
-Mark all pairs with one final and one non-final:
-`(q0,q4)`, `(q0,q5)`, `(q1,q4)`, `(q1,q5)`, `(q2,q4)`, `(q2,q5)`, `(q3,q4)`, `(q3,q5)` → all **MARKED**
-
-**Step 2 — Propagation:**
-
-Check `(q0, q1)`:
-- on `a`: δ(q0,a)=q1, δ(q1,a)=q1 → same, no info
-- on `b`: δ(q0,b)=q2, δ(q1,b)=q3 → is `(q2,q3)` marked? Not yet.
-
-Check `(q2, q3)`:
-- on `a`: δ(q2,a)=q1, δ(q3,a)=q1 → same
-- on `b`: δ(q2,b)=q4, δ(q3,b)=q5 → is `(q4,q5)` marked? `q4` and `q5` are BOTH final → **NOT marked**.
-
-Check `(q4, q5)`:
-- on `a`: δ(q4,a)=q1, δ(q5,a)=q1 → same
-- on `b`: δ(q4,b)=q5, δ(q5,b)=q5 → same
-→ `(q4,q5)` stays **UNMARKED** ✓
-
-Back to `(q2, q3)`: `(q4,q5)` not marked → `(q2,q3)` stays **UNMARKED** ✓
-Back to `(q0, q1)`: `(q2,q3)` not marked → `(q0,q1)` stays **UNMARKED** ✓
-
-**Step 3 — Equivalence classes:**
+After marking, three equivalence classes emerge:
 
 ```
-Class 0: {q0, q1}   ← never marked as distinguishable
-Class 1: {q2, q3}   ← never marked
-Class 2: {q4, q5}   ← never marked (both final)
+Class 0: {q0, q1}   ← both non-final, same transition pattern
+Class 1: {q2, q3}
+Class 2: {q4, q5}   ← both final, same transitions
+
+=== Minimized DFA ===
+  ->q0,q1   →  q0,q1  |  q2,q3
+    q2,q3   →  q0,q1  |  q4,q5
+   *q4,q5   →  q0,q1  |  q4,q5
 ```
 
-**Step 4 — Minimized DFA:**
-
-Using `q0` as rep for Class 0, `q2` for Class 1, `q4` for Class 2:
-
-| State | `a` | `b` |
-|-------|-----|-----|
-| `→q0,q1` | `q0,q1` | `q2,q3` |
-| `q2,q3` | `q0,q1` | `q4,q5` |
-| `q4,q5` ★ | `q0,q1` | `q4,q5` |
-
-**6 states → 3 states** ✓
+**6 states → 3 states ✓**
 
 ---
 
-# Part 6 — The C++ Implementation
+# Part 6 — Regular Expressions and re2nfa
+
+## What is a Regular Expression?
+
+A **regular expression** (regex) is a compact textual notation for describing a language. Instead of drawing an automaton, you write a pattern. The `re2nfa` procedure converts any regular expression into an NFA that accepts exactly the same language.
+
+## Regular Expression Syntax
+
+| Operator | Written as | Meaning | Example |
+|----------|-----------|---------|---------|
+| **Union** | `r1+r2` | strings in r1 **or** r2 | `a+b` accepts `a` or `b` |
+| **Concatenation** | `r1r2` | r1 **followed by** r2 | `ab` accepts only `"ab"` |
+| **Kleene star** | `r*` | zero or more repetitions of r | `a*` accepts `""`, `"a"`, `"aa"`, ... |
+| **Grouping** | `(r)` | override precedence | `(a+b)*` = any string of a's and b's |
+| **Empty language** | `#` | accepts nothing | no string is accepted |
+| **Lambda** | `~` | accepts only the empty string ε | accepts `""` only |
+
+**Precedence** (highest to lowest): `*` → concatenation → `+`
+
+So `ab+c` means `(ab)+c`, not `a(b+c)`. Use parentheses to override.
+
+## The re2nfa Procedure (pages 17–19)
+
+The idea: build a tiny NFA for each atomic piece of the regex, then combine those NFAs using three construction rules — one for each operator.
+
+### Step 1 — Primitive NFAs (page 17)
+
+Every basic element becomes a two-state NFA:
+
+**a) Empty language `#`**
+Two isolated states, no transitions. Nothing is ever accepted.
+```
+→[q0]     [q1★]      (no arrows)
+```
+
+**b) Lambda `~`**
+One λ-transition. Accepts only the empty string.
+```
+→[q0] --λ--> [q1★]
+```
+
+**c) Single symbol `a`**
+One `a`-transition. Accepts only the single character `a`.
+```
+→[q0] --a--> [q1★]
+```
+
+In code, each is a factory function that calls `newState()` twice (getting two fresh IDs) and optionally adds one transition.
+
+There are no globals. Instead, `exercise5()` declares `counter` and `nfa` as local variables and passes them down by reference — the same pattern used throughout the codebase with `dfa[n][m]`, `sigma`, and `fstate`:
+
+```cpp
+typedef map<int,map<string,set<int>>> NfaMap;  // type alias to keep signatures readable
+
+int newState(int& counter) { return counter++; }
+
+pair<int,int> makeEmpty(int& counter, NfaMap& nfa)
+{
+    int q0 = newState(counter), qf = newState(counter);
+    return {q0, qf};  // no transition added
+}
+
+pair<int,int> makeLambda(int& counter, NfaMap& nfa)
+{
+    int q0 = newState(counter), qf = newState(counter);
+    nfa[q0]["~"].insert(qf);
+    return {q0, qf};
+}
+
+pair<int,int> makeSymbol(const string& a, int& counter, NfaMap& nfa)
+{
+    int q0 = newState(counter), qf = newState(counter);
+    nfa[q0][a].insert(qf);
+    return {q0, qf};
+}
+```
+
+Each `make*` function returns a `pair<int,int>` — `.first` is the initial state, `.second` is the final state. All actual transitions live in the `NfaMap` passed by reference, so combining two NFAs only means adding a few entries to that map.
+
+### Step 2 — Combining NFAs (pages 18–19)
+
+#### Union: `r1 + r2` (page 18)
+
+Create a new start state that branches λ into both machines, and a new final state that both machines feed into via λ:
+
+```
+          λ --> [M(r1)] --λ
+→[new q0]                    --> [new qf★]
+          λ --> [M(r2)] --λ
+```
+
+**Conditions from the slide:** no edges coming into `q01`/`q02`, no edges going out of `qf1`/`qf2`. The primitive constructors guarantee this because each primitive's start and end states are brand new.
+
+```cpp
+pair<int,int> makeUnion(pair<int,int> a, pair<int,int> b, int& counter, NfaMap& nfa)
+{
+    int q0 = newState(counter), qf = newState(counter);
+    nfa[q0]["~"].insert(a.first);    // λ into first NFA
+    nfa[q0]["~"].insert(b.first);    // λ into second NFA
+    nfa[a.second]["~"].insert(qf);   // λ out of first NFA
+    nfa[b.second]["~"].insert(qf);   // λ out of second NFA
+    return {q0, qf};
+}
+```
+
+#### Concatenation: `r1 r2` (page 19)
+
+Wire the final state of M(r1) directly to the initial state of M(r2) with a λ-transition:
+
+```
+→[M(r1)] --λ--> [M(r2)★]
+```
+
+**Conditions from the slide:** no edges out of `qf1`, no edges into `q02` — again guaranteed by construction.
+
+```cpp
+pair<int,int> makeConcat(pair<int,int> a, pair<int,int> b, NfaMap& nfa)
+{
+    nfa[a.second]["~"].insert(b.first);  // bridge: end of r1 → start of r2
+    return {a.first, b.second};           // spans from r1's start to r2's end
+}
+```
+
+No new states are created. We only add one λ-edge and return new outer endpoints.
+
+#### Kleene Star: `r*` (page 19 / image 1)
+
+Wrap M(r) with a new start and end state. Wire them so the machine can:
+- Accept ε immediately by skipping M(r)
+- Go through M(r) once, then loop back to repeat
+- Exit after any repetition
+
+```
+→[new q0] --λ--> [M(r)] --λ--> [new qf★]
+     |                               ↑
+     └──────────λ────────────────────┘   (skip = accept ε)
+                [M(r)'s qf] --λ--> [M(r)'s q0]   (loop)
+```
+
+**Conditions from the slide:** no edges into the original `q0`, no edges out of the original `qf`.
+
+```cpp
+pair<int,int> makeStar(pair<int,int> a, int& counter, NfaMap& nfa)
+{
+    int q0 = newState(counter), qf = newState(counter);
+    nfa[q0]["~"].insert(a.first);     // enter M(r)
+    nfa[q0]["~"].insert(qf);          // skip M(r) entirely (accept ε)
+    nfa[a.second]["~"].insert(a.first); // loop: repeat M(r)
+    nfa[a.second]["~"].insert(qf);    // exit after this repetition
+    return {q0, qf};
+}
+```
+
+## Exercise 5 — re2nfa
+
+**The task:** Read a regular expression from `re.inp`, build its NFA using the construction rules above, and print the NFA transition table (ready to use as `nfa.inp`) plus a human-readable transition list.
+
+### The Recursive Descent Parser
+
+To turn text like `(a+b)*ab` into the right sequence of `makeUnion / makeConcat / makeStar` calls, we use a **recursive descent parser** — one function per level of operator precedence. Each level calls the higher-precedence level first, then handles its own operator in a loop.
+
+**Grammar:**
+```
+expr   →  term ( '+' term )*      ← union, lowest precedence
+term   →  factor factor*          ← concatenation (implicit)
+factor →  base '*'*               ← Kleene star
+base   →  '(' expr ')' | '#' | '~' | any letter
+```
+
+All four parser functions receive `re` (the string), `pos` (current read position), `counter`, and `nfa` by reference — no globals anywhere:
+
+```cpp
+pair<int,int> parseExpr(const string& re, int& pos, int& counter, NfaMap& nfa)
+{
+    pair<int,int> result = parseTerm(re, pos, counter, nfa);
+    while (pos < re.size() && re[pos] == '+')
+    {
+        pos++;   // consume '+'
+        result = makeUnion(result, parseTerm(re, pos, counter, nfa), counter, nfa);
+    }
+    return result;
+}
+
+pair<int,int> parseTerm(const string& re, int& pos, int& counter, NfaMap& nfa)
+{
+    pair<int,int> result = parseFactor(re, pos, counter, nfa);
+    while (pos < re.size() && re[pos] != '+' && re[pos] != ')')
+        result = makeConcat(result, parseFactor(re, pos, counter, nfa), nfa);
+    return result;
+}
+
+pair<int,int> parseFactor(const string& re, int& pos, int& counter, NfaMap& nfa)
+{
+    pair<int,int> result = parseBase(re, pos, counter, nfa);
+    while (pos < re.size() && re[pos] == '*')
+    {
+        pos++;
+        result = makeStar(result, counter, nfa);
+    }
+    return result;
+}
+
+pair<int,int> parseBase(const string& re, int& pos, int& counter, NfaMap& nfa)
+{
+    char c = re[pos];
+    if (c == '(') { pos++; auto r = parseExpr(re, pos, counter, nfa); pos++; return r; }
+    if (c == '#') { pos++; return makeEmpty(counter, nfa); }
+    if (c == '~') { pos++; return makeLambda(counter, nfa); }
+    pos++;
+    return makeSymbol(string(1, c), counter, nfa);
+}
+```
+
+And `exercise5()` is where everything is initialised — clean local scope, nothing leaking out:
+
+```cpp
+void exercise5()
+{
+    freopen("re.inp","r",stdin);
+    string re;
+    cin>>re;
+    fclose(stdin);
+
+    int counter=0;       // state ID counter — local, passed by ref
+    NfaMap nfa;          // all transitions — local, passed by ref
+    int pos=0;           // parser position — local, passed by ref
+
+    pair<int,int> result=parseExpr(re,pos,counter,nfa);
+    int q0=result.first, qf=result.second;
+    // ... print table ...
+}
+```
+
+### Why Recursive Descent?
+
+Each function handles exactly one level of precedence by calling the next-higher level first. `parseExpr` calls `parseTerm` (which handles `*` and concatenation) before dealing with `+`. This naturally gives `*` higher precedence than concatenation, and concatenation higher precedence than `+` — exactly what we want.
+
+### Full Worked Example — `(a+b)*ab`
+
+This is the classic NFA for "all strings over `{a,b}` that end in `ab`".
+
+**Parse tree:**
+
+```
+concat
+├── star
+│   └── union
+│       ├── symbol 'a'
+│       └── symbol 'b'
+├── symbol 'a'
+└── symbol 'b'
+```
+
+**Construction steps, state by state:**
+
+```
+makeSymbol('a')      → q0 --a--> q1★
+makeSymbol('b')      → q2 --b--> q3★
+makeUnion(↑, ↑)      → q4 --λ--> q0, q4 --λ--> q2
+                        q1 --λ--> q5, q3 --λ--> q5   [q5★ = union exit]
+makeStar(union)      → q6 --λ--> q4  (enter union)
+                        q6 --λ--> q7  (skip, accept ε)
+                        q5 --λ--> q4  (loop back)
+                        q5 --λ--> q7  (exit star)     [q7★ = star exit]
+makeSymbol('a')      → q8 --a--> q9★
+makeConcat(star, 'a')→ q7 --λ--> q8               [result: q6..q9]
+makeSymbol('b')      → q10 --b--> q11★
+makeConcat(↑, 'b')   → q9 --λ--> q10              [result: q6..q11★]
+```
+
+**Complete transition list:**
+
+```
+q6  --λ--> q4        enter the (a+b)* star
+q6  --λ--> q7        exit star immediately (accept ε for the star part)
+q4  --λ--> q0        enter 'a' branch of union
+q4  --λ--> q2        enter 'b' branch of union
+q0  --a--> q1
+q1  --λ--> q5        exit union
+q2  --b--> q3
+q3  --λ--> q5        exit union
+q5  --λ--> q4        loop: one more repetition of (a+b)
+q5  --λ--> q7        done with the star part
+q7  --λ--> q8        begin reading the suffix 'a'
+q8  --a--> q9
+q9  --λ--> q10       begin reading the suffix 'b'
+q10 --b--> q11★      final state — string accepted
+```
+
+**Acceptance trace for `"bab"`:**
+- Read `b`: q6 →λ→ q4 →λ→ q2 →b→ q3 →λ→ q5 →λ→ q4 (loop) ... then q5 →λ→ q7 (exit star)
+- Read `a`: q7 →λ→ q8 →a→ q9
+- Read `b`: q9 →λ→ q10 →b→ q11★ ✓ **Accepted**
+
+---
+
+# Part 7 — The C++ Implementation
 
 ## Program Structure
 
 ```
 main()
-  └─ asks: which exercise? (1-4)
+  └─ asks: which exercise? (1-5)
        ├─ exercise1()  →  reads dfa.inp, simulates DFA
        ├─ exercise2()  →  reads nfa.inp, computes λ-closure and δ*
        ├─ exercise3()  →  reads nfa.inp, runs subset construction
-       └─ exercise4()  →  reads dfa.inp, runs mark() + reduce()
+       ├─ exercise4()  →  reads dfa.inp, runs mark() + reduce()
+       └─ exercise5()  →  reads re.inp,  runs re2nfa parser + prints NFA
 ```
 
 ## Coding Style Conventions
 
-This code follows a consistent style throughout:
-
 | Convention | Example | Reason |
 |-----------|---------|--------|
 | `freopen` for file input | `freopen("dfa.inp","r",stdin)` | No manual typing during testing |
-| VLA for the table | `string dfa[n][m]` | Size read at runtime from file |
+| VLA for the table | `string dfa[n][m]` | Size known only at runtime |
 | `find` + `distance` | `auto it = find(...); int idx = distance(...)` | Convert iterator to index |
 | `*` prefix in input | `*q2` | Marks final states directly in the table |
-| Raw loops everywhere | `for(int i=0; ...)` | Explicit, easy to trace |
+| Raw `for` loops | `for(int i=0; ...)` | Explicit, easy to trace by hand |
 
 ## Key Helper Functions
 
-### `parseCell(string cell)` — used in Ex 2, 3
+| Function | Used in | Purpose |
+|----------|---------|---------|
+| `parseCell(cell)` | Ex 2, 3 | Parse `{q1,q2}` string into `vector<string>` |
+| `lambdaClosure(state,...)` | Ex 2, 3 | DFS over λ-edges from one state |
+| `lambdaClosureSet(set,...)` | Ex 2, 3 | λ-closure for a whole set of states |
+| `moveSet(states, col,...)` | Ex 2, 3 | Follow symbol `a` from a set of states |
+| `setToLabel(set)` | Ex 3 | `{"q0","q1"}` → `"{q0,q1}"` (DFA state name) |
+| `newState(counter)` | Ex 5 | Increments `counter` by ref and returns the new state ID |
+| `makeEmpty(counter, nfa)` | Ex 5 | Build NFA for `#` — two isolated states, no transitions |
+| `makeLambda(counter, nfa)` | Ex 5 | Build NFA for `~` — `q0 --~--> qf` |
+| `makeSymbol(a, counter, nfa)` | Ex 5 | Build NFA for a single character `a` |
+| `makeUnion(a, b, counter, nfa)` | Ex 5 | Combine two NFAs with `+` |
+| `makeConcat(a, b, nfa)` | Ex 5 | Chain two NFAs for concatenation (no new states needed) |
+| `makeStar(a, counter, nfa)` | Ex 5 | Wrap NFA with Kleene star |
+| `parseExpr/Term/Factor/Base(re, pos, counter, nfa)` | Ex 5 | Recursive descent parser — all state passed by ref |
 
-Converts `"{q1,q2}"` into a `vector<string> {"q1","q2"}`.
+## Key Data Structures
 
-```
-Input:  "{q1,q2,q3}"
-After remove '{' '}':  "q1,q2,q3"
-After split by ',':    ["q1", "q2", "q3"]
-```
-
-### `lambdaClosure(state, ...)` — used in Ex 2, 3
-
-DFS from `state` following only λ-column transitions. Returns `set<string>` of all reachable states.
-
-### `lambdaClosureSet(set, ...)` — used in Ex 2, 3
-
-Calls `lambdaClosure` for each state in the set and unions all results.
-
-### `moveSet(states, col, ...)` — used in Ex 2, 3
-
-For each state in `states`, reads column `col` from the NFA table, collects all destination states (parsing multi-state cells).
-
-### `setToLabel(set)` — used in Ex 3
-
-Converts `{"q0","q1","q2"}` to the string `"{q0,q1,q2}"` — used as the DFA state name.
-
-## Data Structures Explained
-
-### `map<string, vector<string>> dfaTable` (Ex 3)
-
-Maps each DFA state label to its list of transition targets (one per alphabet symbol). Using `map` instead of an array because DFA states are strings like `"{q0,q1}"`, not integers.
-
-### `map<string, set<string>> labelToSet` (Ex 3)
-
-Maps each DFA state label back to the actual set of NFA states it represents. Needed to compute further transitions.
-
-### `vector<vector<bool>> dist` (Ex 4)
-
-The distinguishability table. `dist[i][j] = true` means states at positions `i` and `j` in the accessible-rows list are distinguishable.
-
-### `vector<int> group` (Ex 4)
-
-`group[i]` = which equivalence class state `i` belongs to. Built by scanning the `dist` table.
+| Structure | Exercise | What it stores |
+|-----------|---------|----------------|
+| `string dfa[n][m]` | 1, 4 | Transition table as 2D string array |
+| `string nfa[n][100]` | 2, 3 | Same, fixed width for multi-state cells |
+| `vector<string> fstate` | 1–4 | Names of final states |
+| `vector<string> sigma` | 1–4 | Alphabet symbols |
+| `vector<vector<bool>> dist` | 4 | Distinguishability table for `mark()` |
+| `vector<int> group` | 4 | Equivalence class index per state |
+| `map<string,vector<string>> dfaTable` | 3 | DFA label → list of transition targets |
+| `map<string,set<string>> labelToSet` | 3 | DFA label → actual NFA state set |
+| `int counter` (local in `exercise5`) | 5 | Passed by ref to `newState()` — hands out fresh state IDs |
+| `NfaMap nfa` (local in `exercise5`) | 5 | `typedef map<int,map<string,set<int>>>` — all transitions built during parsing |
+| `pair<int,int>` | 5 | Return type of every `make*` and `parse*` — `.first` = initial state, `.second` = final state |
 
 ---
 
-# Part 7 — How to Use the Program
+# Part 8 — How to Use the Program
 
 ## Step 1 — Compile
 
@@ -760,21 +812,21 @@ g++ -std=c++17 -o Theoratical Theoratical.cpp
 ```
 
 > [!warning] Compiler Note
-> The code uses **Variable Length Arrays** (`string dfa[n][m]`) which is a GCC extension. It compiles fine with `g++` but may fail on MSVC (Visual Studio). Always use `g++` with `-std=c++17`.
+> `string dfa[n][m]` is a **Variable Length Array** — a GCC extension. It compiles fine with `g++` but will fail on MSVC. Always use `g++` with `-std=c++17`.
 
 ## Step 2 — Prepare Input Files
 
-### For Exercise 1 and 4 — `dfa.inp`
+### `dfa.inp` — Exercise 1 and 4
 
 ```
 <rows> <cols>
-NULL  a  b  ...
+NULL   sym1  sym2  ...
 state  dest  dest  ...
 *finalstate  dest  dest  ...
-stringtocheck
+stringtocheck          ← only for Exercise 1
 ```
 
-**Concrete example** (Ex 1 — DFA for strings ending in `ab`):
+**Exercise 1 example** — DFA accepting strings ending in `ab`:
 
 ```
 4 3
@@ -785,7 +837,7 @@ q1 q1 q2
 aab
 ```
 
-**Concrete example** (Ex 4 — 6-state DFA to minimize):
+**Exercise 4 example** — 6-state DFA to minimize:
 
 ```
 7 3
@@ -798,19 +850,17 @@ q3 q1 q5
 *q5 q1 q5
 ```
 
-*(No string needed for Ex 4 — just omit it or the program won't ask for it)*
-
-### For Exercise 2 and 3 — `nfa.inp`
+### `nfa.inp` — Exercise 2 and 3
 
 ```
 <rows> <cols>
-NULL  a  ~  ...       ← use ~ for lambda column
-state  {dest,...}  {dest,...}  ...
+NULL   sym1  ~             ← use ~ for the lambda column
+state  {dest,...}  {dest,...}
 *finalstate  ...
-querystate querysymbol    ← only for Ex 2
+querystate  querysymbol    ← only for Exercise 2
 ```
 
-**Concrete example:**
+**Example:**
 
 ```
 4 3
@@ -821,11 +871,33 @@ q1 {q1} {q2}
 q0 a
 ```
 
+### `re.inp` — Exercise 5
+
+One line: the regular expression.
+
+```
+(a+b)*ab
+```
+
+**Supported syntax:**
+
+| Symbol | Meaning |
+|--------|---------|
+| `+` | union |
+| `*` | Kleene star (postfix) |
+| `( )` | grouping |
+| `#` | empty language ∅ |
+| `~` | lambda / ε |
+| `a`–`z` | any single lowercase letter |
+
+> [!note] Concatenation is implicit
+> Just write `ab` for "a followed by b". No dot or operator needed between characters.
+
 ## Step 3 — Run
 
 ```bash
 ./Theoratical
-Choose exercise (1-4): 1
+Choose exercise (1-5): 5
 ```
 
 ## Expected Outputs
@@ -859,8 +931,8 @@ delta*(q0, a): {q0,q1,q2}
 
 ```
 === DFA (converted from NFA) ===
-State           a
-->*{q0,q1,q2}  {q0,q1,q2}
+State            a
+->*{q0,q1,q2}   {q0,q1,q2}
 ```
 
 ### Exercise 4
@@ -874,22 +946,66 @@ Equivalence classes:
   Class 2: {q4,q5}
 
 === Minimized DFA ===
-State       a         b
-->q0,q1    q0,q1     q2,q3
-  q2,q3    q0,q1     q4,q5
- *q4,q5    q0,q1     q4,q5
+State       a        b
+->q0,q1    q0,q1    q2,q3
+  q2,q3    q0,q1    q4,q5
+ *q4,q5    q0,q1    q4,q5
+```
+
+### Exercise 5 — input `(a+b)*ab`
+
+```
+Regular expression : (a+b)*ab
+Initial state      : q6
+Final state        : q11
+
+=== NFA table (nfa.inp format) ===
+13 4
+NULL    a       b       ~
+q6      {}      {}      {q4,q7}
+q0      {q1}    {}      {}
+q1      {}      {}      {q5}
+q2      {}      {q3}    {}
+q3      {}      {}      {q5}
+q4      {}      {}      {q0,q2}
+q5      {}      {}      {q4,q7}
+q7      {}      {}      {q8}
+q8      {q9}    {}      {}
+q9      {}      {}      {q10}
+q10     {}      {q11}   {}
+*q11    {}      {}      {}
+
+=== Transitions ===
+  q6 --~--> q4
+  q6 --~--> q7
+  q0 --a--> q1
+  q1 --~--> q5
+  q2 --b--> q3
+  q3 --~--> q5
+  q4 --~--> q0
+  q4 --~--> q2
+  q5 --~--> q4
+  q5 --~--> q7
+  q7 --~--> q8
+  q8 --a--> q9
+  q9 --~--> q10
+  q10 --b--> q11
 ```
 
 ---
 
-## Summary
+## Full Summary Table
 
-| Exercise | Algorithm | Input | Output |
-|----------|-----------|-------|--------|
-| 1 — DFA Acceptance | Simulate δ step by step | `dfa.inp` + string | Valid / Invalid |
-| 2 — NFA δ* | λ-closure (BFS) + move | `nfa.inp` + query | Closure and δ* sets |
-| 3 — NFA→DFA | Subset construction (worklist) | `nfa.inp` | Full DFA table |
-| 4 — DFA Minimize | BFS + table-filling + reduce | `dfa.inp` | Equivalence classes + minimized DFA |
+| Exercise | Slide | Algorithm | Input file | Output |
+|----------|-------|-----------|------------|--------|
+| 1 — DFA Acceptance | DFA | Simulate δ step by step | `dfa.inp` + string | `Valid!` / `Invalid` |
+| 2 — NFA δ* | NFA | λ-closure (DFS) + move | `nfa.inp` + query | Closure and δ* sets |
+| 3 — NFA→DFA | page 46 | Subset construction (worklist) | `nfa.inp` | Full DFA table |
+| 4 — DFA Minimize | pages 59–64 | BFS + table-filling + reduce | `dfa.inp` | Equivalence classes + minimized DFA |
+| 5 — RE→NFA | pages 17–19 | Recursive descent + Thompson construction | `re.inp` | NFA table + transition list |
+
+> [!tip] The Full Pipeline
+> You can chain all five exercises: write a regex in `re.inp` → run **Ex 5** to get an NFA → copy that output into `nfa.inp` → run **Ex 3** to get a DFA → copy into `dfa.inp` → run **Ex 4** to minimize → test a string with **Ex 1**. That is the complete path: **regex → NFA → DFA → minimized DFA → string test**.
 
 > [!tip] Learning Path
-> If this is your first time with automata: read Parts 1 and 2 first, run Exercise 1 with your own `dfa.inp`, and trace through the output manually. Once that clicks, move to Part 3 and Exercise 2. The NFA concepts build directly on the DFA ones.
+> Work through in order: **Ex 1 → 2 → 3 → 4 → 5**. Each one builds on the previous. Once Ex 5 feels natural, try the full pipeline above end-to-end with a regex of your own.

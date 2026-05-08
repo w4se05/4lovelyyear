@@ -1,7 +1,14 @@
 ---
-tags: [discrete-mathematics, generating-functions, recurrence-relations, permutations, stirling-numbers, inclusion-exclusion, derangements]
+tags:
+  - discrete-mathematics
+  - generating-functions
+  - recurrence-relations
+  - permutations
+  - stirling-numbers
+  - inclusion-exclusion
+  - derangements
 topic: "Advanced Counting: Generating Functions, Recurrences, Permutation Structure & PIE"
-course: "DISCRETE MATHEMATICS"
+course: DISCRETE MATHEMATICS
 ---
 
 > [!Note] 💡 Notation Conventions
@@ -59,7 +66,7 @@ course: "DISCRETE MATHEMATICS"
 >
 > **4.** $(1, -1, 1, -1, \ldots) \leftrightarrow \dfrac{1}{1+x}$
 >
-> **5.** $(1, 2, 2^2, 2^3, \ldots) \leftrightarrow \dfrac{1}{1-2x}$
+> **5.** $(1, r, r^2, r^3, \ldots) \leftrightarrow \dfrac{1}{1-rx}\quad\forall x \in \mathbb{R}$
 >
 > **6.** $(1, 0, 1, 0, \ldots) \leftrightarrow \dfrac{1}{1-x^2}$
 >
@@ -168,33 +175,157 @@ course: "DISCRETE MATHEMATICS"
 
 ## 6. From Generating Functions to Closed Formulas
 
-> [!Note] 💡 Key Tool
-> Given $F(x)$, the $n$-th sequence term is the coefficient of $x^n$. The method is:
-> **1.** Factor the denominator of $F(x)$.
-> **2.** Apply **partial fraction decomposition**.
-> **3.** Expand each fraction as a geometric series (Maclaurin series: $\dfrac{1}{1-cx} = \sum_{n=0}^\infty c^n x^n$).
-> **4.** Extract the coefficient of $x^n$.
-
-> [!Example] 📘 Closed Formula for Fibonacci Numbers
-> **Using:** Partial Fractions, Maclaurin Series
+> [!Note] 💡 The core question
+> Given a generating function $F(x) = \sum_{n=0}^{\infty} a_n x^n$, how do we recover the sequence term $a_n$ as a closed formula?
 >
-> **Given:** $F(x) = \dfrac{x}{1 - x - x^2}$
+> There are two methods. They always give the same answer — they are just different tools.
 >
-> **Step 1 — Factor the denominator:**
-> $$1 - x - x^2 = (1 - \alpha_1 x)(1 - \alpha_2 x)$$
-> where $\alpha_1 = \dfrac{1+\sqrt{5}}{2}$ and $\alpha_2 = \dfrac{1-\sqrt{5}}{2}$ (roots of $x^2 + x - 1 = 0$ scaled).
->
-> **Step 2 — Partial fraction decomposition:**
-> $$F(x) = \frac{1}{\sqrt{5}} \cdot \frac{1}{1 - \alpha_1 x} - \frac{1}{\sqrt{5}} \cdot \frac{1}{1 - \alpha_2 x}$$
->
-> **Step 3 — Expand as Maclaurin series:**
-> $$F(x) = \frac{1}{\sqrt{5}} \sum_{n=0}^{\infty} \alpha_1^n x^n - \frac{1}{\sqrt{5}} \sum_{n=0}^{\infty} \alpha_2^n x^n$$
->
-> **Step 4 — Extract coefficient of $x^n$:**
-> $$\boxed{f_n = \frac{1}{\sqrt{5}}\left(\alpha_1^n - \alpha_2^n\right) = \frac{1}{\sqrt{5}}\left[\left(\frac{1+\sqrt{5}}{2}\right)^n - \left(\frac{1-\sqrt{5}}{2}\right)^n\right]}$$
+> | | Method A | Method B |
+> |---|---|---|
+> | **Name** | Derivative formula | Maclaurin identity |
+> | **Formula** | $a_n = \dfrac{F^{(n)}(0)}{n!}$ | Factor → partial fractions → read off $c^n$ |
+> | **Best for** | Simple $F(x)$; understanding *why* | Rational $F(x)$; general closed formula |
+> | **Avoid when** | Denominator is complicated | $F(x)$ involves $e^x$, $\sin x$, etc. |
 
 ---
 
+> [!Note] 💡 Method A — the derivative formula $a_n = F^{(n)}(0)/n!$
+>
+> **Why it works — one idea at a time.**
+>
+> Start from the definition:
+> $$F(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + \cdots$$
+>
+> **Setting $x = 0$** kills every term that has an $x$ in it, leaving only $a_0$:
+> $$F(0) = a_0$$
+>
+> **Differentiating once** shifts all the coefficients down by one power:
+> $$F'(x) = a_1 + 2a_2 x + 3a_3 x^2 + \cdots$$
+> Now setting $x = 0$ isolates $a_1$: $\quad F'(0) = a_1$
+>
+> **Differentiating twice** and setting $x = 0$:
+> $$F''(x) = 2a_2 + 6a_3 x + \cdots \implies F''(0) = 2a_2$$
+>
+> Notice: we got $2a_2$, not $a_2$. The factor $2$ appeared because the power rule
+> on $x^2$ gives $2x$, and then $2 \cdot 1 = 2$ at $x=0$.
+>
+> **The general pattern.** Differentiating $x^n$ exactly $n$ times produces $n!$:
+> $$x^n \;\to\; nx^{n-1} \;\to\; n(n-1)x^{n-2} \;\to\; \cdots \;\to\; n!$$
+> So after $n$ differentiations, every term below degree $n$ has already vanished,
+> every term above degree $n$ still has an $x$ (so it vanishes at $x = 0$), and the
+> degree-$n$ term contributes exactly $n! \cdot a_n$:
+> $$F^{(n)}(0) = n! \cdot a_n$$
+> Dividing both sides by $n!$ (to undo the power-rule overcounting):
+> $$\boxed{a_n = \frac{F^{(n)}(0)}{n!}}$$
+
+---
+
+> [!Note] 💡 Method B — the Maclaurin identity
+>
+> The single identity that powers this whole method:
+> $$\frac{1}{1-cx} = \sum_{n=0}^{\infty} c^n x^n = 1 + cx + c^2x^2 + c^3x^3 + \cdots$$
+> The coefficient of $x^n$ on the right is exactly $c^n$ — no derivatives needed.
+>
+> **Why we need fractions of the form $\dfrac{1}{1-cx}$:**
+> The identity only works when the denominator is *linear* in $x$ with this exact shape.
+> If $F(x)$ has a quadratic or higher denominator, we must break it into a sum of
+> linear pieces first — that is what partial fractions does.
+>
+> **The four steps:**
+> **1.** Factor the denominator of $F(x)$ into factors of the form $(1 - \alpha_i x)$.
+> **2.** Write $F(x) = \dfrac{A_1}{1-\alpha_1 x} + \dfrac{A_2}{1-\alpha_2 x} + \cdots$ (partial fractions).
+> **3.** Apply the identity to each fraction: $\dfrac{A_i}{1-\alpha_i x} = A_i \displaystyle\sum_{n=0}^\infty \alpha_i^n x^n$.
+> **4.** Collect all $x^n$ terms: $a_n = A_1\alpha_1^n + A_2\alpha_2^n + \cdots$
+
+---
+
+> [!Example] 📘 Example — Simple case: $F(x) = \dfrac{1}{1-3x}$
+> **Using both methods on the same function, to compare.**
+>
+> **Method A:**
+>
+> Find the pattern for the $n$-th derivative of $\dfrac{1}{1-3x}$ using the chain rule:
+> $$F'(x) = \frac{3}{(1-3x)^2}, \quad F''(x) = \frac{3^2 \cdot 2!}{(1-3x)^3}, \quad \ldots \quad F^{(n)}(x) = \frac{3^n \cdot n!}{(1-3x)^{n+1}}$$
+> Set $x = 0$:
+> $$F^{(n)}(0) = 3^n \cdot n!$$
+> Apply the formula:
+> $$a_n = \frac{F^{(n)}(0)}{n!} = \frac{3^n \cdot n!}{n!} = \boxed{3^n}$$
+>
+> **Method B:**
+>
+> $F(x) = \dfrac{1}{1-3x}$ is already in the form $\dfrac{1}{1-cx}$ with $c = 3$.
+> Apply the Maclaurin identity directly:
+> $$F(x) = \sum_{n=0}^{\infty} 3^n x^n \implies \boxed{a_n = 3^n}$$
+>
+> Same answer. Method B needed one line; Method A needed a derivative pattern.
+>
+> **Verdict:** When $F(x)$ is already in the form $\dfrac{1}{1-cx}$, use Method B — it is immediate.
+> Method A is useful here only to *understand why* the formula is valid.
+
+---
+
+> [!Example] 📘 Example — Fibonacci: $F(x) = \dfrac{x}{1-x-x^2}$
+> **Using:** Method B (Method A is impractical here — the derivative pattern has no clean form)
+>
+> **Step 1 — Factor the denominator**
+>
+> We want $1 - x - x^2 = (1 - \alpha_1 x)(1-\alpha_2 x)$. Expanding the right side:
+> $$(1-\alpha_1 x)(1-\alpha_2 x) = 1 - (\alpha_1+\alpha_2)x + \alpha_1\alpha_2\,x^2$$
+> Matching with $1 - x - x^2$ gives the system:
+> $$\alpha_1 + \alpha_2 = 1, \qquad \alpha_1 \alpha_2 = -1$$
+> So $\alpha_1, \alpha_2$ are roots of $t^2 - t - 1 = 0$. By the quadratic formula:
+> $$\alpha_1 = \frac{1+\sqrt{5}}{2}, \qquad \alpha_2 = \frac{1-\sqrt{5}}{2}$$
+> Keep in mind: $\alpha_1 - \alpha_2 = \sqrt{5}$ — this appears in the next step.
+>
+> **Step 2 — Partial fraction decomposition**
+>
+> Write:
+> $$\frac{x}{(1-\alpha_1 x)(1-\alpha_2 x)} = \frac{A}{1-\alpha_1 x} + \frac{B}{1-\alpha_2 x}$$
+> Multiply both sides by $(1-\alpha_1 x)(1-\alpha_2 x)$:
+> $$x = A(1-\alpha_2 x) + B(1-\alpha_1 x)$$
+> **Solve for $A$:** set $x = 1/\alpha_1$ to zero out $B$:
+> $$\frac{1}{\alpha_1} = A \cdot \frac{\alpha_1 - \alpha_2}{\alpha_1} \implies A = \frac{1}{\alpha_1 - \alpha_2} = \frac{1}{\sqrt{5}}$$
+> **Solve for $B$:** set $x = 1/\alpha_2$ to zero out $A$:
+> $$\frac{1}{\alpha_2} = B \cdot \frac{\alpha_2 - \alpha_1}{\alpha_2} \implies B = \frac{1}{\alpha_2 - \alpha_1} = -\frac{1}{\sqrt{5}}$$
+> Result:
+> $$F(x) = \frac{1}{\sqrt{5}} \cdot \frac{1}{1-\alpha_1 x} - \frac{1}{\sqrt{5}} \cdot \frac{1}{1-\alpha_2 x}$$
+> Both fractions are now in the form $\dfrac{1}{1-cx}$.
+>
+> **Step 3 — Apply the Maclaurin identity to each fraction**
+>
+> $$\frac{1}{\sqrt{5}} \cdot \frac{1}{1-\alpha_1 x} = \frac{1}{\sqrt{5}}\sum_{n=0}^{\infty} \alpha_1^n\, x^n$$
+> $$\frac{1}{\sqrt{5}} \cdot \frac{1}{1-\alpha_2 x} = \frac{1}{\sqrt{5}}\sum_{n=0}^{\infty} \alpha_2^n\, x^n$$
+> Combining into one series:
+> $$F(x) = \sum_{n=0}^{\infty} \frac{\alpha_1^n - \alpha_2^n}{\sqrt{5}}\, x^n$$
+>
+> **Step 4 — Read off the coefficient of $x^n$**
+>
+> $$\boxed{f_n = \frac{1}{\sqrt{5}}\left[\left(\frac{1+\sqrt{5}}{2}\right)^n - \left(\frac{1-\sqrt{5}}{2}\right)^n\right]}$$
+>
+> **Verification:**
+>
+> | $n$ | 0 | 1 | 2 | 3 | 4 | 5 |
+> |---|---|---|---|---|---|---|
+> | $f_n$ | 0 | 1 | 1 | 2 | 3 | 5 |
+>
+> **Why does an irrational formula give integers?**
+> $\alpha_1$ and $\alpha_2$ are conjugate surds: $\alpha_1^n - \alpha_2^n$ is always an integer
+> multiple of $\sqrt{5}$, so the $\sqrt{5}$ in the denominator cancels exactly for every $n$.
+
+---
+
+> [!Note] 💡 What about $e^x$, $\sin x$, $\ln(1+x)$?
+> These are transcendental functions — their denominators cannot be factored, so
+> Method B does not apply. Their series were derived *once* using Method A and are
+> now standard results to memorise:
+>
+> $$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}, \qquad \sin x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}, \qquad \cos x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}$$
+> $$\ln(1+x) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1} x^n}{n}$$
+>
+> In discrete mathematics, generating functions are almost always rational
+> (polynomial over polynomial), so Method B covers nearly every problem you will see.
+
+---
 # Part B — Linear Recurrence Relations
 
 ---

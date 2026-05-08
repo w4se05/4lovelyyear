@@ -8,31 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "aa994fc8f1d81656",
+            "id": "7afc1c79fc9ac3e8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Theoratical/Finite_Automata_Complete_Guide.md",
+                "file": "DSA/Lecture_7_Hashing.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Finite_Automata_Complete_Guide"
-            }
-          },
-          {
-            "id": "65293fc65a502489",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Discrete Math/1- DM-Basic-Counting-Rules.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "1- DM-Basic-Counting-Rules"
+              "title": "Lecture_7_Hashing"
             }
           }
         ]
@@ -92,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 390.5110321044922
   },
   "right": {
     "id": "b252b19a04633e87",
@@ -206,44 +192,46 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "aa994fc8f1d81656",
+  "active": "7afc1c79fc9ac3e8",
   "lastOpenFiles": [
-    "Discrete Math/2- DM-Advanced-Counting.md",
-    "Discrete Math/1- DM-Basic-Counting-Rules.md",
-    "Discrete Math/DM-Counting-Solutions.md",
-    "Theoratical/2- Finite_Automata.md",
-    "Concepts_To_Master_Plain_English.md",
-    "Untitled.md",
-    "Untitled 1.md",
+    "IOT-Material/02-farm/lesson-06-detect-soil-moisture.md",
+    "IOT-Material/02-farm/lesson-07-automated-plant-watering.md",
+    "DSA/Lecture_7_Hashing.md",
+    "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
+    "DSA/Untitled.md",
+    "DSA/Lecture_6_LinkedLists.md",
+    "DSA/ADS. Lecture 2 - Algorithm complexity analysis.pdf",
+    "DSA/ADS. Lecture 3 - Search.pdf",
+    "DSA/ADS. Lecture 4 - Sorting.pdf",
+    "IOT-Material/02-farm/lesson-05-predict-plant-growth.md",
+    "IOT-Material/01-getting-started/lesson-04-connect-internet.md",
+    "DSA/Lecture_2_Algorithm_Complexity_Analysis.md",
     "Obsidian Prompt.md",
-    "Law and Data Protection/Chapter 5_Special Categories of Personal Data.md",
-    "Law and Data Protection/Chapter 3_GDPR Principles.md",
-    "Theoratical/Finite_Automata.md",
-    "Theoratical/1- Introduction & Fundamentals.md",
-    "Theoratical/Untitled.md",
-    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.1 - Networking Internals.md",
-    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.3 - Active Directory Fundamentals.md",
-    "RED TEAM 101/Module 1 - The Systems Administrator/Module 1.2 - Linux Proficiency (CLI).md",
-    "DSA/Lecture 2 -Algorithm Complexity Analysis.md",
-    "Backend_Security_Networking_Deep_Dive.md",
-    "Calculus/Chap 1_Sequences and Series.md",
-    "Calculus/Chap 2_ Limits and Derivatives.md",
-    "Calculus/Untitled.md",
-    "Discrete Math/2-Advanced Counting.md",
-    "Discrete Math/1-Basic Counting Rules & Combinatorics.md",
-    "Discrete Math/4-Generating Functions and Recurrence Relations (cont).md",
-    "Discrete Math/3- Generating Functions, Recurrences, and Permutation Structure.md",
-    "Calculus/Chapter 4_ Applications of Differentiation.md",
-    "DSA",
-    "Theoratical",
-    "Discrete Math",
-    "RED TEAM 101/Module 1 - The Systems Administrator",
-    "RED TEAM 101",
-    "Programming 1/Cheatsheesh",
-    "FY_Applied Math/PDF source/Lecture 4.pdf",
-    "Programming 1",
-    "Law and Data Protection",
-    "Algebra.zip",
+    "IOT-Material/02-farm/lesson-10-keep-plant-secure.md",
+    "IOT-Material/02-farm/lesson-08-migrate-to-cloud.md",
+    "IOT-Material/01-getting-started/lesson-01-introduction-to-iot.md",
+    "IOT-Material/02-farm/lesson-09-migrate-application-to-cloud.md",
+    "IOT-Material/02-farm/lesson-09-migrate-app-logic-to-cloud.md",
+    "IOT-Material/01-getting-started/lesson-03-sensors-and-actuators.md",
+    "IOT-Material/01-getting-started/lesson-02-deeper-dive.md",
+    "Discrete Math/DM-Counting-Solutions-Detailed.md",
+    "IOT-Material/03-transport/lesson-13-visualize-location-data.md",
+    "IOT-Material/03-transport/lesson-12-store-location-data.md",
+    "IOT-Material/03-transport/lesson-11-location-tracking.md",
+    "IOT-Material/IoT_MasterNotes_Part1_Lessons01-07.md",
+    "IOT-Material/02-farm/lesson-08-migrate-plant-to-cloud.md",
+    "IOT-Material/IoT_MasterNotes_Part2_Lessons08-14.md",
+    "IOT-Material/05-retail/lesson-20-check-stock-device.md",
+    "IOT-Material/04-manufacturing/lesson-18-trigger-fruit-detector.md",
+    "Pasted image 20260503100640.png",
+    "Pasted image 20260430160140.png",
+    "DSA/lec4_insert_merge.txt",
+    "DSA/lec4_qs_analysis.txt",
+    "DSA/lec4_qs_radix.txt",
+    "DSA/lec4_all.txt",
+    "DSA/lec3_all.txt",
+    "DSA/lec2_first25.txt",
+    "DSA/lec2_all.txt",
     "Algebra/Linear Algebra/Unit_circle_angles.svg.png",
     "Calculus/Images/Screenshot 2025-12-10 134548.png",
     "Calculus/Images/Screenshot 2025-09-25 095429.png",
@@ -251,8 +239,6 @@
     "D.png",
     "C.png",
     "FY_Applied Math/Images/Screenshot 2025-01-10 225527.png",
-    "FY_Applied Math/Images/Screenshot 2024-12-19 002129.png",
-    "FY_Applied Math/Images/Screenshot 2025-01-09 214350.png",
-    "FY_Applied Math/Images/Screenshot 2025-01-02 211130.png"
+    "FY_Applied Math/Images/Screenshot 2024-12-19 002129.png"
   ]
 }

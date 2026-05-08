@@ -1,0 +1,1 @@
+Teach me how to solve ... for an exam. Skip the theory and proofs — just give me the step-by-step procedure, the different cases I need to handle, and worked examples. Then organize it into an Obsidian markdown file.

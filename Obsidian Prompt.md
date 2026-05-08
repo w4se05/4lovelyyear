@@ -1,4 +1,4 @@
-> You are generating **Obsidian-ready study notes** for my **[COURSE NAME]** course.
+> You are generating **Obsidian-ready study notes** for my DSA course.
 > ---
 > 
 > ## 📁 Source & Scope
