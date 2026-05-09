@@ -99,7 +99,7 @@ IoT security involves ensuring:
 IoT Hub uses the **SharedAccessKey** in the connection string as a symmetric key:
 
 ```output
-HostName=soil-moisture-sensor.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=Bhry+ind7kKEIDxubK61RiEHHRTrPl7HUow8cEm/mU0=
+	HostName=...
 ```
 
 The key is **never sent** over the network. Instead:

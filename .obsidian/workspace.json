@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/Quiz3_HashTable_Solution (1).md",
+                "file": "IOT-Material/02-farm/lesson-10-keep-plant-secure.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Quiz3_HashTable_Solution (1)"
+              "title": "lesson-10-keep-plant-secure"
             }
           }
         ]
@@ -194,8 +194,10 @@
   },
   "active": "7afc1c79fc9ac3e8",
   "lastOpenFiles": [
-    "DSA/Quiz3_HashTable_Solution.md",
+    "IOT-Material/02-farm/lesson-09-migrate-application-to-cloud.md",
+    "IOT-Material/02-farm/lesson-10-keep-plant-secure.md",
     "DSA/Quiz3_HashTable_Solution (1).md",
+    "DSA/Quiz3_HashTable_Solution.md",
     "DSA/Lecture_7_Hashing.md",
     "IOT-Material/02-farm/lesson-06-detect-soil-moisture.md",
     "IOT-Material/02-farm/lesson-07-automated-plant-watering.md",
@@ -209,10 +211,8 @@
     "IOT-Material/01-getting-started/lesson-04-connect-internet.md",
     "DSA/Lecture_2_Algorithm_Complexity_Analysis.md",
     "Obsidian Prompt.md",
-    "IOT-Material/02-farm/lesson-10-keep-plant-secure.md",
     "IOT-Material/02-farm/lesson-08-migrate-to-cloud.md",
     "IOT-Material/01-getting-started/lesson-01-introduction-to-iot.md",
-    "IOT-Material/02-farm/lesson-09-migrate-application-to-cloud.md",
     "IOT-Material/02-farm/lesson-09-migrate-app-logic-to-cloud.md",
     "IOT-Material/01-getting-started/lesson-03-sensors-and-actuators.md",
     "IOT-Material/01-getting-started/lesson-02-deeper-dive.md",
