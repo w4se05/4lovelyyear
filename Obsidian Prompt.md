@@ -1,4 +1,4 @@
-> You are generating **Obsidian-ready study notes** for my DSA course.
+> You are generating **Obsidian-ready study notes** for my Discrete Math course.
 > ---
 > 
 > ## 📁 Source & Scope

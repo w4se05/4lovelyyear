@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "IOT-Material/02-farm/lesson-10-keep-plant-secure.md",
-                "mode": "source",
+                "file": "Discrete Math/DM-Graphs-Part1.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "lesson-10-keep-plant-secure"
+              "title": "DM-Graphs-Part1"
             }
           }
         ]
@@ -194,11 +194,25 @@
   },
   "active": "7afc1c79fc9ac3e8",
   "lastOpenFiles": [
+    "Discrete Math/DM-Graphs-Part2.md",
+    "Law and Data Protection/Chapter 1_Introduction & Legal Framework.md",
+    "Discrete Math/DM-Graphs-Part1.md",
+    "Discrete Math/DM-Ultimate-Cheatsheet.md",
+    "Obsidian Prompt.md",
+    "DSA/Lecture_8_Trees.md",
+    "DSA/Lecture_9_Graphs.md",
     "IOT-Material/02-farm/lesson-09-migrate-application-to-cloud.md",
+    "IOT-Material/02-farm/lesson-08-migrate-to-cloud.md",
+    "DSA/Lecture_7_Hashing.md",
+    "AP_Agent_Prompt.md",
+    "AP_Phan_bien_Thue_Muc_do_Han_long_NLD.md",
+    "Untitled.md",
+    "WUDC_Luan_diem_Phan_bien_Thue_Muc_do_Han_long_NLD.md",
+    "Discrete Math/1- DM-Basic-Counting-Rules.md",
+    "Discrete Math/DM_Counting_Cheatsheet.md",
     "IOT-Material/02-farm/lesson-10-keep-plant-secure.md",
     "DSA/Quiz3_HashTable_Solution (1).md",
     "DSA/Quiz3_HashTable_Solution.md",
-    "DSA/Lecture_7_Hashing.md",
     "IOT-Material/02-farm/lesson-06-detect-soil-moisture.md",
     "IOT-Material/02-farm/lesson-07-automated-plant-watering.md",
     "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
@@ -209,20 +223,6 @@
     "DSA/ADS. Lecture 4 - Sorting.pdf",
     "IOT-Material/02-farm/lesson-05-predict-plant-growth.md",
     "IOT-Material/01-getting-started/lesson-04-connect-internet.md",
-    "DSA/Lecture_2_Algorithm_Complexity_Analysis.md",
-    "Obsidian Prompt.md",
-    "IOT-Material/02-farm/lesson-08-migrate-to-cloud.md",
-    "IOT-Material/01-getting-started/lesson-01-introduction-to-iot.md",
-    "IOT-Material/02-farm/lesson-09-migrate-app-logic-to-cloud.md",
-    "IOT-Material/01-getting-started/lesson-03-sensors-and-actuators.md",
-    "IOT-Material/01-getting-started/lesson-02-deeper-dive.md",
-    "Discrete Math/DM-Counting-Solutions-Detailed.md",
-    "IOT-Material/03-transport/lesson-13-visualize-location-data.md",
-    "IOT-Material/03-transport/lesson-12-store-location-data.md",
-    "IOT-Material/03-transport/lesson-11-location-tracking.md",
-    "IOT-Material/IoT_MasterNotes_Part1_Lessons01-07.md",
-    "IOT-Material/02-farm/lesson-08-migrate-plant-to-cloud.md",
-    "IOT-Material/IoT_MasterNotes_Part2_Lessons08-14.md",
     "Pasted image 20260503100640.png",
     "Pasted image 20260430160140.png",
     "DSA/lec4_insert_merge.txt",
