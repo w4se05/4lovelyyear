@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "7afc1c79fc9ac3e8",
+            "id": "1e2c3a68bafe4a37",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Discrete Math/DM-Graphs-Part1.md",
-                "mode": "preview",
+                "file": "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DM-Graphs-Part1"
+              "title": "03_Regular_Language_and_Regular_Grammar"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 390.5110321044922
+    "width": 347.5
   },
   "right": {
     "id": "b252b19a04633e87",
@@ -167,8 +167,8 @@
             "state": {
               "type": "mermaid-toolbar-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "mermaid-toolbar-view"
+              "icon": "trident-custom",
+              "title": "Mermaid Toolbar"
             }
           }
         ],
@@ -192,53 +192,53 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "7afc1c79fc9ac3e8",
+  "active": "1e2c3a68bafe4a37",
   "lastOpenFiles": [
+    "Theoratical/TCS Exam Procedures Cheatsheet - FINAL.md",
+    "Theoratical/TCS_Midterm_Cheatsheet.md",
+    "Theoratical/TCS_Finite_Automata_Cheatsheet.md",
+    "Theoratical/Finite_Automata_Complete_Guide.md",
     "Discrete Math/DM-Graphs-Part2.md",
-    "Law and Data Protection/Chapter 1_Introduction & Legal Framework.md",
-    "Discrete Math/DM-Graphs-Part1.md",
-    "Discrete Math/DM-Ultimate-Cheatsheet.md",
+    "Exam_Solutions_Graph_Theory.md",
+    "Discrete Math/Graph_Theory_Visual_Script.md",
+    "Graphs-Master-Cheatsheet.md",
     "Obsidian Prompt.md",
-    "DSA/Lecture_8_Trees.md",
     "DSA/Lecture_9_Graphs.md",
-    "IOT-Material/02-farm/lesson-09-migrate-application-to-cloud.md",
-    "IOT-Material/02-farm/lesson-08-migrate-to-cloud.md",
-    "DSA/Lecture_7_Hashing.md",
-    "AP_Agent_Prompt.md",
-    "AP_Phan_bien_Thue_Muc_do_Han_long_NLD.md",
-    "Untitled.md",
-    "WUDC_Luan_diem_Phan_bien_Thue_Muc_do_Han_long_NLD.md",
-    "Discrete Math/1- DM-Basic-Counting-Rules.md",
-    "Discrete Math/DM_Counting_Cheatsheet.md",
-    "IOT-Material/02-farm/lesson-10-keep-plant-secure.md",
-    "DSA/Quiz3_HashTable_Solution (1).md",
-    "DSA/Quiz3_HashTable_Solution.md",
-    "IOT-Material/02-farm/lesson-06-detect-soil-moisture.md",
-    "IOT-Material/02-farm/lesson-07-automated-plant-watering.md",
-    "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
-    "DSA/Untitled.md",
+    "Graph Mock Test for my Baby.md",
+    "DSA/61CSE108_Graphs_Exam_Cheatsheet.md",
+    "DSA/Lecture_8_Trees.md",
+    "CODE-RED.md",
+    "Discrete Math/generate_video_v3.py",
+    "Discrete Math/generate_video_v2.py",
+    "Discrete Math/Graph_Theory_Complete.mp4",
+    "Discrete Math/generate_video.py",
+    "graph_video/frames/19_closing/closing_0059.png",
+    "graph_video/frames/19_closing/closing_0058.png",
+    "graph_video/frames/19_closing/closing_0057.png",
+    "graph_video/frames/19_closing/closing_0056.png",
+    "graph_video/frames/19_closing/closing_0055.png",
+    "graph_video/frames/19_closing/closing_0054.png",
+    "graph_video/frames/19_closing/closing_0053.png",
+    "graph_video/frames/19_closing/closing_0052.png",
+    "graph_video/frames/19_closing/closing_0051.png",
+    "graph_video/frames/19_closing/closing_0050.png",
+    "graph_video/frames/19_closing",
+    "graph_video/frames/18_planar",
+    "graph_video/frames/17_dijkstra",
+    "graph_video/frames/16_kruskals",
+    "graph_video/frames/15_prims",
+    "graph_video/frames/13_euler",
+    "DSA/Graph_Theory_Exam_Guide.md",
+    "Discrete Math/Graph-Theory-Visual-Script.md",
+    "Discrete Math/DM-Graphs-Part1.md",
+    "report.md",
     "DSA/Lecture_6_LinkedLists.md",
-    "DSA/ADS. Lecture 2 - Algorithm complexity analysis.pdf",
-    "DSA/ADS. Lecture 3 - Search.pdf",
-    "DSA/ADS. Lecture 4 - Sorting.pdf",
-    "IOT-Material/02-farm/lesson-05-predict-plant-growth.md",
-    "IOT-Material/01-getting-started/lesson-04-connect-internet.md",
-    "Pasted image 20260503100640.png",
-    "Pasted image 20260430160140.png",
-    "DSA/lec4_insert_merge.txt",
-    "DSA/lec4_qs_analysis.txt",
-    "DSA/lec4_qs_radix.txt",
-    "DSA/lec4_all.txt",
-    "DSA/lec3_all.txt",
-    "DSA/lec2_first25.txt",
-    "DSA/lec2_all.txt",
-    "Algebra/Linear Algebra/Unit_circle_angles.svg.png",
-    "Calculus/Images/Screenshot 2025-12-10 134548.png",
-    "Calculus/Images/Screenshot 2025-09-25 095429.png",
-    "E.png",
-    "D.png",
-    "C.png",
-    "FY_Applied Math/Images/Screenshot 2025-01-10 225527.png",
-    "FY_Applied Math/Images/Screenshot 2024-12-19 002129.png"
+    "DSA/Lecture_7_Hashing.md",
+    "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
+    "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
+    "Theoratical/04-Context-Free-Language.md",
+    "DSA/Quiz5_Trees_Solution (1).md",
+    "DSA/AVL_Trees_Cheatsheet.md",
+    "DSA/Quiz5_Trees_Solution.md"
   ]
 }

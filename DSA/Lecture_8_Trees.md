@@ -384,22 +384,35 @@ h-1  h          h   h          h  h-1
 
 > [!Example] 📘 AVL Check Examples
 > **Valid AVL:**
+> 
+> ```mermaid
+> graph TD
+>     10 --> 6
+>     10 --> 25
+>     25 --> 20
+>     25 --> 35
+> ```
+> 
+> Heights: node 10 → left height 1, right height 2. Diff = 1 ✓ (Valid)
+> 
+> ---
+> 
+> **Invalid AVL** (violation at node 10):
+> 
 > ```mermaid
 > graph TD
 >     10 --> 6
 >     10 --> 25
 >     25 --> 24
 >     25 --> 35
->     24 --> |""| n1[" "]
+>     24 --> n1[" "]
 >     35 --> 33
 >     35 --> 37
+>     
+>     style n1 fill:none,stroke:none,color:none
 > ```
-> Heights: node 10 → left height 1, right height 2. Diff = 1 ✓
->
-> **Invalid AVL** (violation at nodes 10 and 25):
-> ```
-> 10 → left subtree height 2, right subtree height 4. Diff = 2 ✗
-> ```
+> 
+> Heights: node 10 → left height 1, right height 3. Diff = 2 ✗ (Invalid)
 
 ### 9.2 Insertion
 

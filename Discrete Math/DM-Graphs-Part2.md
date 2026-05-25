@@ -178,7 +178,7 @@ course: "DISCRETE MATHEMATICS"
 > | $C_n$ | Yes (the cycle itself) | Yes |
 > | $W_n$ | Yes (use rim cycle, include hub) | Yes |
 > | $Q_n$ | Yes for $n \geq 2$ | Yes |
-> | $K_{m,n}$ | Yes iff $m = n$ | Yes iff $|m - n| \leq 1$ |
+> | $K_{m,n}$ | Yes iff $m = n$ | Yes iff $abs(m - n)\leq 1$ |
 
 > [!Example] 📘 Finding Hamiltonian Paths/Circuits
 > **Using:** Definition, vertex-visit tracking.

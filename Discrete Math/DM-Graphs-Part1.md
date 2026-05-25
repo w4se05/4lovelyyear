@@ -195,9 +195,75 @@ graph LR
 
 ---
 
-## 5. Representing Graphs: Adjacency Matrix
+## 5. Connectivity, Walks, Paths, and Cycles
 
-### 5.1 Undirected Graph
+> [!Definition] 📖 Movement in a Graph
+> 
+> Let $G = (V, E)$ be a graph. A journey through the graph is defined by a sequence of alternating vertices and edges, starting at $v_0$ and ending at $v_n$: $v_0, e_1, v_1, e_2, \ldots, e_n, v_n$. The **length** of this sequence is $n$ (the number of edges traversed).
+> 
+> **1. Walk:** An unrestricted sequence. Vertices and edges **can** be repeated.
+> 
+> **2. Trail:** A walk with **no repeated edges**. (Vertices can be repeated).
+> 
+> **3. Path:** A walk with **no repeated vertices**. (This logically guarantees no repeated edges).
+> 
+> **4. Closed Walk:** A walk that starts and ends at the same vertex ($v_0 = v_n$).
+> 
+> **5. Circuit:** A closed walk with **no repeated edges**.
+> 
+> **6. Cycle:** A closed walk of length $n \geq 3$ with **no repeated vertices**, except for the required $v_0 = v_n$.
+
+> [!Note] 💡 Visual Summary
+> 
+> |**Term**|**Can Repeat Vertices?**|**Can Repeat Edges?**|**Starts & Ends at Same Vertex?**|
+> |---|---|---|---|
+> |**Walk**|Yes|Yes|Optional|
+> |**Trail**|Yes|No|Optional|
+> |**Path**|No|No|No|
+> |**Circuit**|Yes|No|Yes|
+> |**Cycle**|No (Except start/end)|No|Yes|
+
+---
+
+### 5.1 Connectedness in Undirected Graphs
+
+> [!Definition] 📖 Connected Undirected Graphs
+> 
+> **1. Connected Graph:** An undirected graph is connected if there is a path between **every** pair of distinct vertices in the graph.
+> 
+> **2. Connected Component:** A maximal connected subgraph of $G$. A graph that is not connected consists of two or more disjoint connected components.
+> 
+> **3. Cut Vertex (Articulation Point):** A vertex whose removal (along with all incident edges) increases the number of connected components in the graph.
+> 
+> **4. Cut Edge (Bridge):** An edge whose removal increases the number of connected components in the graph.
+
+> [!Theorem] 📌 Path Existence
+> 
+> Let $G = (V, E)$ be an undirected graph. There is a **path** between two distinct vertices $u$ and $v$ if and only if there is a **walk** between $u$ and $v$.
+> 
+> _(If a walk repeats a vertex, the loop between the repetitions can be excised to form a shorter path)._
+
+---
+
+### 5.2 Connectedness in Directed Graphs
+
+> [!Definition] 📖 Connected Digraphs
+> 
+> Direction matters when evaluating connectivity in digraphs.
+> 
+> **1. Strongly Connected:** A directed graph is strongly connected if there is a directed path from $a$ to $b$ **and** a directed path from $b$ to $a$ for every pair of distinct vertices in the graph.
+> 
+> **2. Weakly Connected:** A directed graph is weakly connected if the **underlying undirected graph** (the graph obtained by ignoring the direction of all edges) is connected.
+
+> [!Warning] ⚠️ Strong vs. Weak
+> 
+> A strongly connected digraph is inherently weakly connected. However, a weakly connected digraph is not necessarily strongly connected (e.g., a simple path $A \to B \to C$ is weakly connected, but you cannot travel back from $C$ to $A$).
+
+---
+
+## 6. Representing Graphs: Adjacency Matrix
+
+### 6.1 Undirected Graph
 
 > [!Definition] 📖 Adjacency Matrix (Undirected)
 > Let $G = (V, E)$ be a simple graph with $|V| = n$, vertices ordered as $v_1, \ldots, v_n$. The **adjacency matrix** $A = [a_{ij}]_{n \times n}$ is:
@@ -221,7 +287,7 @@ graph LR
 
 ---
 
-### 5.2 Directed Graph
+### 6.2 Directed Graph
 
 > [!Definition] 📖 Adjacency Matrix (Digraph)
 > Let $G$ be a digraph with vertices $v_1, \ldots, v_n$. The adjacency matrix $A = [a_{ij}]_{n \times n}$ is:
@@ -233,14 +299,14 @@ graph LR
 
 ---
 
-### 5.3 Multigraph
+### 6.3 Multigraph
 
 > [!Definition] 📖 Adjacency Matrix (Multigraph)
-> For a multigraph, $a_{ij} = $ **number of edges** between $v_i$ and $v_j$. For a multidigraph, $a_{ij} = $ number of directed edges from $v_i$ to $v_j$.
+> For a multigraph, $a_{ij} =$ **number of edges** between $v_i$ and $v_j$. For a multidigraph, $a_{ij} =$ **number of directed edges** from $v_i$ to $v_j$.
 
 ---
 
-### 5.4 Laplacian Matrix
+### 6.4 Laplacian Matrix
 
 > [!Definition] 📖 Laplacian Matrix
 > Let $G = (V, E)$ with vertices ordered $v_1, \ldots, v_n$. The **Laplacian matrix** is:
@@ -270,7 +336,7 @@ graph LR
 
 ---
 
-### 5.5 Incidence Matrix
+### 6.5 Incidence Matrix
 
 > [!Definition] 📖 Incidence Matrix
 > Let $G$ be a multigraph with vertices $v_1, \ldots, v_n$ and edges $e_1, \ldots, e_m$. The **incidence matrix** $M = [m_{ij}]$ of size $n \times m$ is:
@@ -287,7 +353,7 @@ graph LR
 
 ---
 
-### 5.6 Counting Paths via Matrix Powers
+### 6.6 Counting Paths via Matrix Powers
 
 > [!Theorem] 📌 Paths via $A^r$
 > Let $G$ be a graph (undirected or directed) with adjacency matrix $A$ with respect to vertex ordering $v_1, \ldots, v_n$. The number of **paths of length $r$** from $v_i$ to $v_j$ equals the $(i, j)$-entry of $A^r$.
@@ -311,7 +377,7 @@ graph LR
 
 ---
 
-## 6. Graph Isomorphism
+## 7. Graph Isomorphism
 
 > [!Definition] 📖 Graph Isomorphism
 > Two graphs $G$ and $H$ are **isomorphic** (written $G \cong H$) if there exists a **bijection** $f: V(G) \to V(H)$ such that:
