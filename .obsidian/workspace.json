@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -194,17 +194,21 @@
   },
   "active": "1e2c3a68bafe4a37",
   "lastOpenFiles": [
+    "Theoratical/04-Context-Free-Language.md",
+    "Theoratical/05_CFG_Simplification_Normal_Forms.md",
+    "Obsidian Prompt.md",
+    "Graphs-Master-Cheatsheet.md",
+    "Exam_Solutions_Graph_Theory.md",
+    "Graph Mock Test for my Baby.md",
+    "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
+    "AP_Agent_Prompt.md",
     "Theoratical/TCS Exam Procedures Cheatsheet - FINAL.md",
     "Theoratical/TCS_Midterm_Cheatsheet.md",
     "Theoratical/TCS_Finite_Automata_Cheatsheet.md",
     "Theoratical/Finite_Automata_Complete_Guide.md",
     "Discrete Math/DM-Graphs-Part2.md",
-    "Exam_Solutions_Graph_Theory.md",
     "Discrete Math/Graph_Theory_Visual_Script.md",
-    "Graphs-Master-Cheatsheet.md",
-    "Obsidian Prompt.md",
     "DSA/Lecture_9_Graphs.md",
-    "Graph Mock Test for my Baby.md",
     "DSA/61CSE108_Graphs_Exam_Cheatsheet.md",
     "DSA/Lecture_8_Trees.md",
     "CODE-RED.md",
@@ -235,10 +239,6 @@
     "DSA/Lecture_6_LinkedLists.md",
     "DSA/Lecture_7_Hashing.md",
     "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
-    "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
-    "Theoratical/04-Context-Free-Language.md",
-    "DSA/Quiz5_Trees_Solution (1).md",
-    "DSA/AVL_Trees_Cheatsheet.md",
-    "DSA/Quiz5_Trees_Solution.md"
+    "DSA/Quiz5_Trees_Solution (1).md"
   ]
 }
