@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
-                "mode": "preview",
+                "file": "DSA/DSA_Lecture10_Dynamic_Programming.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03_Regular_Language_and_Regular_Grammar"
+              "title": "DSA_Lecture10_Dynamic_Programming"
+            }
+          },
+          {
+            "id": "dc0c72ccd5df8d35",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DSA/Practice Problems.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Practice Problems"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -78,7 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 347.5
+    "width": 389.5
   },
   "right": {
     "id": "b252b19a04633e87",
@@ -192,26 +207,34 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "1e2c3a68bafe4a37",
+  "active": "dc0c72ccd5df8d35",
   "lastOpenFiles": [
-    "Theoratical/04-Context-Free-Language.md",
-    "Theoratical/05_CFG_Simplification_Normal_Forms.md",
-    "Obsidian Prompt.md",
-    "Graphs-Master-Cheatsheet.md",
-    "Exam_Solutions_Graph_Theory.md",
-    "Graph Mock Test for my Baby.md",
-    "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
-    "AP_Agent_Prompt.md",
-    "Theoratical/TCS Exam Procedures Cheatsheet - FINAL.md",
-    "Theoratical/TCS_Midterm_Cheatsheet.md",
-    "Theoratical/TCS_Finite_Automata_Cheatsheet.md",
-    "Theoratical/Finite_Automata_Complete_Guide.md",
-    "Discrete Math/DM-Graphs-Part2.md",
-    "Discrete Math/Graph_Theory_Visual_Script.md",
-    "DSA/Lecture_9_Graphs.md",
-    "DSA/61CSE108_Graphs_Exam_Cheatsheet.md",
+    "DSA/DSA_Ultimate_Exam_Guide.md",
+    "DSA/Practice Problems.md",
+    "DSA/DSA_Lecture10_Dynamic_Programming.md",
+    "DSA/DSA_MockExam_DynamicProgramming.md",
+    "DSA/Lect.md",
+    "DSA/Lecture_2_Algorithm_Complexity_Analysis.md",
+    "DSA/DSA_Exam_Procedures.md",
+    "DSA/DSA_Final_Exam_Prep.md",
+    "DSA/Lecture_3_Search.md",
     "DSA/Lecture_8_Trees.md",
+    "DSA/Lecture_9_Graphs.md",
+    "DSA/gemini-code-1779955213870.md",
     "CODE-RED.md",
+    "DSA/Lecture_6_LinkedLists.md",
+    "DSA/Lecture_5_Stack_Queue_PriorityQueue.md",
+    "DSA_Lecture10_Dynamic_Programming.md",
+    "DSA/Lecture_4_Sorting.md",
+    "DSA/Lecture_7_Hashing.md",
+    "Untitled.md",
+    "DSA_MockExam_DynamicProgramming.md",
+    "DSA/Lecture10_Dynamic_Programming.md",
+    "Obsidian Prompt.md",
+    "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
+    "DSA/61CSE108_Graphs_Exam_Cheatsheet.md",
+    "Discrete Math/DM-Trees.md",
+    "Discrete Math/DM-Exam-Procedures.md",
     "Discrete Math/generate_video_v3.py",
     "Discrete Math/generate_video_v2.py",
     "Discrete Math/Graph_Theory_Complete.mp4",
@@ -231,14 +254,6 @@
     "graph_video/frames/17_dijkstra",
     "graph_video/frames/16_kruskals",
     "graph_video/frames/15_prims",
-    "graph_video/frames/13_euler",
-    "DSA/Graph_Theory_Exam_Guide.md",
-    "Discrete Math/Graph-Theory-Visual-Script.md",
-    "Discrete Math/DM-Graphs-Part1.md",
-    "report.md",
-    "DSA/Lecture_6_LinkedLists.md",
-    "DSA/Lecture_7_Hashing.md",
-    "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
-    "DSA/Quiz5_Trees_Solution (1).md"
+    "graph_video/frames/13_euler"
   ]
 }

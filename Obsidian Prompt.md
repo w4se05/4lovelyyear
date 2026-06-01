@@ -1,4 +1,4 @@
-> You are generating **Obsidian-ready study notes** for my # Theoretical Computer Science, Automata and Formal Languages course.
+> You are generating **Obsidian-ready study notes** for my DSA course.
 > ---
 > 
 > ## 📁 Source & Scope
