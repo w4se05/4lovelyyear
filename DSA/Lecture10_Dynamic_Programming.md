@@ -3,7 +3,7 @@ tags: [DSA, dynamic-programming, algorithms]
 topic: "Lecture 10: Dynamic Programming"
 course: "61CSE108 Algorithms and Data Structures"
 ---
-
+x
 > [!Note] 💡 Notation Conventions
 > - $n$ — number of items / matrices / characters, depending on context
 > - $m(i,j)$ — minimum scalar multiplications to compute matrix chain $\mathcal{M}_{i..j}$

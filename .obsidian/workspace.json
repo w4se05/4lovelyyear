@@ -22,31 +22,31 @@
             }
           },
           {
-            "id": "dc0c72ccd5df8d35",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "DSA/Practice Problems.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Practice Problems"
-            }
-          },
-          {
             "id": "85ac3da970ae605b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DSA/DSA_Ultimate_Exam_Guide.md",
+                "file": "DSA/DSA_MockExam_DynamicProgramming (1).md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "DSA_MockExam_DynamicProgramming (1)"
+            }
+          },
+          {
+            "id": "210c9491135084f1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DSA/Lecture10_Dynamic_Programming.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DSA_Ultimate_Exam_Guide"
+              "title": "Lecture10_Dynamic_Programming"
             }
           }
         ],
@@ -107,7 +107,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 389.5
+    "width": 200
   },
   "right": {
     "id": "b252b19a04633e87",
@@ -221,34 +221,39 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "dc0c72ccd5df8d35",
+  "active": "1a717b27330c7720",
   "lastOpenFiles": [
-    "DSA/DSA_Ultimate_Exam_Guide.md",
-    "DSA/Practice Problems.md",
-    "DSA/DSA_Lecture10_Dynamic_Programming.md",
-    "DSA/DSA_MockExam_DynamicProgramming.md",
-    "DSA/Lect.md",
-    "DSA/Lecture_2_Algorithm_Complexity_Analysis.md",
-    "DSA/DSA_Exam_Procedures.md",
-    "DSA/DSA_Final_Exam_Prep.md",
-    "DSA/Lecture_3_Search.md",
-    "DSA/Lecture_8_Trees.md",
-    "DSA/Lecture_9_Graphs.md",
-    "DSA/gemini-code-1779955213870.md",
-    "CODE-RED.md",
-    "DSA/Lecture_6_LinkedLists.md",
-    "DSA/Lecture_5_Stack_Queue_PriorityQueue.md",
-    "DSA_Lecture10_Dynamic_Programming.md",
-    "DSA/Lecture_4_Sorting.md",
-    "DSA/Lecture_7_Hashing.md",
-    "Untitled.md",
-    "DSA_MockExam_DynamicProgramming.md",
-    "DSA/Lecture10_Dynamic_Programming.md",
-    "Obsidian Prompt.md",
-    "DSA/Lecture6_LinkedLists_CHEATSHEET.md",
-    "DSA/61CSE108_Graphs_Exam_Cheatsheet.md",
-    "Discrete Math/DM-Trees.md",
-    "Discrete Math/DM-Exam-Procedures.md",
+    "Programming 2/Lectures/OOP_Lec8_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec9_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec7_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec6_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec13_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec5_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec3_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec12_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec11_StudyGuide.md",
+    "Programming 2/Lectures/OOP_Lec10_StudyGuide.md",
+    "Programming 2/Lectures",
+    "Programming 2/Lecture/OOP_Lec6_StudyGuide.md",
+    "Programming 2/Lecture/OOP_Lec13_StudyGuide.md",
+    "Programming 2/Lecture/OOP_Lec12_StudyGuide.md",
+    "Programming 2/Lecture/OOP_Lec11_StudyGuide.md",
+    "Programming 2/Lecture/OOP_Lec10_StudyGuide.md",
+    "Programming 2/Lecture/OOP_Lec3_StudyGuide.md",
+    "Programming 2/Lecture/OOP_Lec9_StudyGuide.md",
+    "Programming 2/Exercises/Lec6_ex1.md",
+    "Programming 2/Exercises/Lec5_ex1.md",
+    "Programming 2/Exercises/Lec3_ex1.md",
+    "DSA/Master_Problems_Sheet.md",
+    "Programming 2/Lecture/OOP_Lec8_StudyGuide.md",
+    "Programming 2/Exercises/Lec10_ex1.md",
+    "Programming 2/Exercises/Lec10_ex2.md",
+    "Programming 2/Exercises/Lec11_ex1.md",
+    "Programming 2/Exercises/Lec12_13_Ex1.md",
+    "Programming 2/Exercises",
+    "Programming 2/New folder",
+    "Programming 2/Lecture",
+    "Discrete Math/playbook.tex",
     "Discrete Math/generate_video_v3.py",
     "Discrete Math/generate_video_v2.py",
     "Discrete Math/Graph_Theory_Complete.mp4",
@@ -263,11 +268,6 @@
     "graph_video/frames/19_closing/closing_0052.png",
     "graph_video/frames/19_closing/closing_0051.png",
     "graph_video/frames/19_closing/closing_0050.png",
-    "graph_video/frames/19_closing",
-    "graph_video/frames/18_planar",
-    "graph_video/frames/17_dijkstra",
-    "graph_video/frames/16_kruskals",
-    "graph_video/frames/15_prims",
-    "graph_video/frames/13_euler"
+    "graph_video/frames/19_closing"
   ]
 }
