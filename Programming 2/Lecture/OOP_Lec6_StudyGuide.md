@@ -98,7 +98,7 @@ A university creates a `Transcript` object for each student-course pairing. Each
 
 ### 2.1 Basic Structure
 
-```
+```cpp
 class class_name { Member_List };
 ```
 

@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming 2/Lecture/OOP_Lec3_StudyGuide.md",
-                "mode": "source",
+                "file": "Programming 2/Lecture/OOP_Lec6_StudyGuide.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "OOP_Lec3_StudyGuide"
+              "title": "OOP_Lec6_StudyGuide"
             }
           }
         ],
@@ -93,7 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 529.5
+    "width": 200
   },
   "right": {
     "id": "b252b19a04633e87",
@@ -209,6 +209,11 @@
   },
   "active": "210c9491135084f1",
   "lastOpenFiles": [
+    "Programming 2/Exercises/Lec6_ex1.md",
+    "Programming 2/Lecture/OOP_Lec5_StudyGuide.md",
+    "Programming 2/Exercises/Lec5_ex1.md",
+    "Programming 2/Exercises/Lec3_ex1.md",
+    "Programming 2/Lecture/OOP_Lec3_StudyGuide.md",
     "Programming 2/Lecture/OOP_Lec13_StudyGuide.md",
     "Programming 2/Lecture/OOP_Lec12_StudyGuide.md",
     "Programming 2/Lecture/OOP_Lec11_StudyGuide.md",
@@ -225,17 +230,12 @@
     "Programming 2/OOP_Lec9.md",
     "Programming 2/OOP_Lec6.md",
     "Programming 2/Lecture/OOP_Lec7_StudyGuide.md",
-    "Programming 2/Lecture/OOP_Lec5_StudyGuide.md",
     "DSA/Lecture10_Dynamic_Programming.md",
     "Programming 2/Lectures/Lec8_ Inheritance in C++ — Study Guide.md",
     "Programming 2/Lecture/OOP_Lec6_StudyGuide.md",
-    "Programming 2/Lecture/OOP_Lec3_StudyGuide.md",
     "Programming 2/Lecture",
     "Programming 2/Lectures/Lec6_Objects and Classes in C++ — Study Guide.md",
     "Programming 2/Lectures/Lec5_Objects and Classes (Conceptual) — Study Guide.md",
-    "Programming 2/Lectures/Lec13_Object-Oriented Design — Study Guide.md",
-    "Programming 2/Lectures/Lec12_Container Classes (Linked Lists) — Study Guide.md",
-    "Programming 2/Lectures/Lec11_Templates and Friends — Study Guide.md",
     "Programming 2/Lectures",
     "Programming 2/Exercises",
     "Programming 2/New folder",

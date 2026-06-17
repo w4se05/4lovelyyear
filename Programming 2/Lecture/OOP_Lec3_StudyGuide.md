@@ -264,15 +264,15 @@ Inheritance enables **code reusability**. A new abstract data type (derived clas
 
 #### Terminology
 
-| Term | Definition |
-|---|---|
-| **Class** | The abstract data type (ADT) in object-oriented languages. |
-| **Object** | An instance of a class — a concrete entity with actual data values. |
-| **Derived class (subclass)** | A class defined through inheritance from another class. |
-| **Parent class (superclass)** | A class from which a new class is derived. |
-| **Methods** | The subprograms that define the operations on objects of a class. |
-| **Messages** | Calls to methods. A message has two parts: a method name and the destination object. |
-| **Message Protocol (Message Interface)** | The entire collection of an object's methods — its public API. |
+| Term                                     | Definition                                                                           |
+| ---------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Class**                                | The abstract data type (ADT) in object-oriented languages.                           |
+| **Object**                               | An instance of a class — a concrete entity with actual data values.                  |
+| **Derived class (subclass)**             | A class defined through inheritance from another class.                              |
+| **Parent class (superclass)**            | A class from which a new class is derived.                                           |
+| **Methods**                              | The subprograms that define the operations on objects of a class.                    |
+| **Messages**                             | Calls to methods. A message has two parts: a method name and the destination object. |
+| **Message Protocol (Message Interface)** | The entire collection of an object's methods — its public API.                       |
 
 #### Inheritance Hierarchy
 
