@@ -107,6 +107,7 @@ Consider:
 ### 4.3 Step 3 — Specify Dependencies on Other Classes
 
 Key dependency types:
+
 | Dependency | Description |
 |------------|-------------|
 | **Inheritance** | "is-a" relationship — derived class depends on base class |
@@ -159,6 +160,7 @@ Two most common reorganizations:
 - **Clerk** — actor
 
 **Candidate operations (verbs):**
+
 | Verb | Likely Class | Operation |
 |------|-------------|-----------|
 | creates | (Manager) | `createPurchaseOrder()` |
@@ -218,12 +220,14 @@ Scheduler ────uses────> Patient
 ### 6.5 Operations
 
 **Doctor:**
+
 | Operation | Description |
 |-----------|-------------|
 | `addToSchedule` | Add an appointment to the doctor's schedule |
 | `showAppointment` | Display the schedule |
 
 **Patient:**
+
 | Operation | Description |
 |-----------|-------------|
 | `inputName` | Enter patient's name |
@@ -232,6 +236,7 @@ Scheduler ────uses────> Patient
 | `setAppointment` | Schedule an appointment |
 
 **DailySchedule:**
+
 | Operation | Description |
 |-----------|-------------|
 | `setAppointment` | Add an appointment to the schedule |
@@ -239,16 +244,18 @@ Scheduler ────uses────> Patient
 | `showAppointments` | Display scheduled appointments |
 
 **Appointment:**
-| Operation | Description |
-|-----------|-------------|
-| Constructor | Create an appointment |
+
+| Operation     | Description                       |
+| ------------- | --------------------------------- |
+| Constructor   | Create an appointment             |
 | `isScheduled` | Check if an appointment is booked |
 
 **Scheduler:**
-| Operation | Description |
-|-----------|-------------|
-| `scheduleOneAppointment` | Orchestrate the booking process |
-| `printAllAppointment` | Print all scheduled appointments for all doctors |
+
+| Operation                | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| `scheduleOneAppointment` | Orchestrate the booking process                  |
+| `printAllAppointment`    | Print all scheduled appointments for all doctors |
 
 ### 6.6 Additional Helper Classes
 
