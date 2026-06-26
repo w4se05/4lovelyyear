@@ -25,14 +25,14 @@
             "id": "a987533551d38091",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "Theoratical/TCS_MockExam_Procedures.md",
-                "mode": "preview",
-                "source": false
+                "aFile": "conflict-files-obsidian-git.md",
+                "bFile": "conflict-files-obsidian-git.md",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "TCS_MockExam_Procedures"
+              "icon": "diff",
+              "title": "Diff: conflict-files-obsidian-git"
             }
           }
         ],
@@ -179,13 +179,23 @@
               "icon": "lucide-list",
               "title": "Outline of OOP_Lec7_StudyGuide"
             }
+          },
+          {
+            "id": "f4aadf7cce349881",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -202,8 +212,9 @@
   },
   "active": "a987533551d38091",
   "lastOpenFiles": [
-    "Theoratical/TCS_Midterm_Cheatsheet.md",
+    "conflict-files-obsidian-git.md",
     "Theoratical/TCS_MockExam_Procedures.md",
+    "Theoratical/TCS_Midterm_Cheatsheet.md",
     "Theoratical/04-Context-Free-Language.md",
     "Untitled.md",
     "Obsidian Prompt.md",
@@ -227,7 +238,6 @@
     "Programming 2_Cheatsheet_Generator/OOP_Lec9_StudyGuide.md",
     "Programming 2_Cheatsheet_Generator/OOP_Lec8_StudyGuide.md",
     "Programming 2_Cheatsheet_Generator/OOP_Lec7_StudyGuide.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec6_StudyGuide.md",
     "Programming 2_Cheatsheet_Generator",
     "Programming 2/Exercises/test_tmp/check.exe",
     "Programming 2/Exercises/test_tmp/check.cpp",
