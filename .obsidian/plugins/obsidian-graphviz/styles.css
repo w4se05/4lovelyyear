@@ -1,0 +1,9 @@
+.d3graphvizError{
+  color: red;
+  border: 1px solid red;
+}
+
+.theme-dark .block-language-dot img.graphviz {
+  filter: invert(100%);
+}
+

@@ -37,64 +37,83 @@ You convert a regular expression into a diagram of states and arrows, following 
 
 **Single symbol `a`:**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q1 : a
-    q1 --> [*]
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    q0;
+    node [shape=doublecircle];
+    q1;
+    start -> q0;
+    q0 -> q1 [label="a"];
+}
 ```
 
 **Union `r1 + r2`** — "either r1 or r2":
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> qs
-    qs --> r1_start : λ
-    qs --> r2_start : λ
-    r1_end --> qf : λ
-    r2_end --> qf : λ
-    qf --> [*]
-
-    state "NFA for r1" as r1_start
-    state "NFA for r1 (end)" as r1_end
-    state "NFA for r2" as r2_start
-    state "NFA for r2 (end)" as r2_end
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    qs;
+    r1s [label="NFA for r1"];
+    r1e [label="NFA for r1 (end)"];
+    r2s [label="NFA for r2"];
+    r2e [label="NFA for r2 (end)"];
+    node [shape=doublecircle];
+    qf;
+    start -> qs;
+    qs -> r1s [label="ε"];
+    qs -> r2s [label="ε"];
+    r1e -> qf [label="ε"];
+    r2e -> qf [label="ε"];
+}
 ```
 
 **Concatenation `r1r2`** — "r1 then r2":
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> r1s
-    r1s --> r1e : ...r1...
-    r1e --> r2s : λ
-    r2s --> r2e : ...r2...
-    r2e --> [*]
-
-    state "r1 start" as r1s
-    state "r1 end" as r1e
-    state "r2 start" as r2s
-    state "r2 end" as r2e
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    r1s [label="r1 start"];
+    r1e [label="r1 end"];
+    r2s [label="r2 start"];
+    node [shape=doublecircle];
+    r2e [label="r2 end"];
+    start -> r1s;
+    r1s -> r1e [label="...r1..."];
+    r1e -> r2s [label="ε"];
+    r2s -> r2e [label="...r2..."];
+}
 ```
 
 **Star `r*`** — "zero or more r":
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> qs
-    qs --> qf : λ (skip)
-    qs --> rs : λ
-    rs --> re : ...r...
-    re --> qf : λ
-    re --> rs : λ (loop back)
-    qf --> [*]
-
-    state "r start" as rs
-    state "r end" as re
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    qs;
+    rs [label="r start"];
+    re [label="r end"];
+    node [shape=doublecircle];
+    qf;
+    start -> qs;
+    qs -> qf [label="ε (skip)"];
+    qs -> rs [label="ε"];
+    rs -> re [label="...r..."];
+    re -> qf [label="ε"];
+    re -> rs [label="ε (loop)"];
+}
 ```
 
 ### Step-by-step procedure
@@ -118,141 +137,160 @@ Step 5. Mark the one start state (→) and one final state (double circle)
 
 **Parse the structure first:**
 
-```mermaid
-graph TD
-    ROOT["r1 = b(ab+b)* + a*b<br/><b>UNION (+)</b>"]
-    ROOT --> A["Part A: b(ab+b)*<br/><b>CONCATENATION</b>"]
-    ROOT --> B["Part B: a*b<br/><b>CONCATENATION</b>"]
-    A --> A1["atom: b"]
-    A --> A2["(ab+b)*<br/><b>STAR</b>"]
-    A2 --> A3["ab+b<br/><b>UNION</b>"]
-    A3 --> A31["ab<br/>CONCAT"]
-    A3 --> A32["b<br/>atom"]
-    B --> B1["a*<br/><b>STAR</b>"]
-    B --> B2["atom: b"]
-    B1 --> B11["a<br/>atom"]
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    root [label="r1 = b(ab+b)* + a*b | UNION (+)"];
+    partA [label="Part A: b(ab+b)* | CONCATENATION"];
+    atom_b1 [label="atom: b"];
+    star1 [label="(ab+b)* | STAR"];
+    union1 [label="ab+b | UNION"];
+    concat1 [label="ab | CONCAT"];
+    atom_b2 [label="b | atom"];
+    partB [label="Part B: a*b | CONCATENATION"];
+    star2 [label="a* | STAR"];
+    atom_a [label="a | atom"];
+    atom_b3 [label="atom: b"];
+    root -> partA;
+    root -> partB;
+    partA -> atom_b1;
+    partA -> star1;
+    star1 -> union1;
+    union1 -> concat1;
+    union1 -> atom_b2;
+    partB -> star2;
+    partB -> atom_b3;
+    star2 -> atom_a;
+}
 ```
 
 **Build Part A bottom-up:**
 
 1. NFA for `b` (states 0–1):
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> s0
-    s0 --> s1 : b
-    s1 --> [*]
-    state "0" as s0
-    state "1" as s1
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    s0;
+    node [shape=doublecircle];
+    s1;
+    start -> s0;
+    s0 -> s1 [label="b"];
+}
 ```
 
 2. NFA for `ab+b` (UNION, states 2–8):
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> s7
-    s7 --> s2 : λ
-    s7 --> s5 : λ
-    s2 --> s3 : a
-    s3 --> s4 : b
-    s5 --> s6 : b
-    s4 --> s8 : λ
-    s6 --> s8 : λ
-    s8 --> [*]
-
-    state "7" as s7
-    state "2" as s2
-    state "3" as s3
-    state "4" as s4
-    state "5" as s5
-    state "6" as s6
-    state "8" as s8
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    s2; s3; s4; s5; s6; s7;
+    node [shape=doublecircle];
+    s8;
+    start -> s7;
+    s7 -> s2 [label="ε"];
+    s7 -> s5 [label="ε"];
+    s2 -> s3 [label="a"];
+    s3 -> s4 [label="b"];
+    s5 -> s6 [label="b"];
+    s4 -> s8 [label="ε"];
+    s6 -> s8 [label="ε"];
+}
 ```
 
 3. STAR `(ab+b)*` — wrap the union NFA (states 9–10):
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> s9
-    s9 --> s10 : λ (skip)
-    s9 --> s7  : λ
-    s8 --> s10 : λ
-    s8 --> s7  : λ (loop)
-    s10 --> [*]
-
-    state "9" as s9
-    state "10" as s10
-    state "7 [union NFA start]" as s7
-    state "8 [union NFA end]" as s8
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    s9;
+    s7 [label="7 [union NFA start]"];
+    s8 [label="8 [union NFA end]"];
+    node [shape=doublecircle];
+    s10;
+    start -> s9;
+    s9 -> s10 [label="ε (skip)"];
+    s9 -> s7 [label="ε"];
+    s8 -> s10 [label="ε"];
+    s8 -> s7 [label="ε (loop)"];
+}
 ```
 
 4. CONCATENATE `b · (ab+b)*` — connect state 1 → state 9 via λ:
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> s0
-    s0 --> s1 : b
-    s1 --> s9 : λ
-    s9 --> s10 : λ (skip)
-    s9 --> s7 : λ
-    s7 --> s8 : [union NFA]
-    s8 --> s10 : λ
-    s8 --> s7 : λ (loop)
-    s10 --> [*]
-
-    state "0" as s0
-    state "1" as s1
-    state "9" as s9
-    state "10" as s10
-    state "7" as s7
-    state "8" as s8
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    s0; s1; s7; s8; s9;
+    node [shape=doublecircle];
+    s10;
+    start -> s0;
+    s0 -> s1 [label="b"];
+    s1 -> s9 [label="ε"];
+    s9 -> s10 [label="ε (skip)"];
+    s9 -> s7 [label="ε"];
+    s7 -> s8 [label="[union NFA]"];
+    s8 -> s10 [label="ε"];
+    s8 -> s7 [label="ε (loop)"];
+}
 ```
 
 **Build Part B: `a*b`**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> s11
-    s11 --> s12 : λ (skip)
-    s11 --> s13 : λ
-    s13 --> s14 : a
-    s14 --> s12 : λ
-    s14 --> s13 : λ (loop)
-    s12 --> s15 : λ
-    s15 --> s16 : b
-    s16 --> [*]
-
-    state "11" as s11
-    state "12" as s12
-    state "13" as s13
-    state "14" as s14
-    state "15" as s15
-    state "16" as s16
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    s11; s12; s13; s14; s15;
+    node [shape=doublecircle];
+    s16;
+    start -> s11;
+    s11 -> s12 [label="ε (skip)"];
+    s11 -> s13 [label="ε"];
+    s13 -> s14 [label="a"];
+    s14 -> s12 [label="ε"];
+    s14 -> s13 [label="ε (loop)"];
+    s12 -> s15 [label="ε"];
+    s15 -> s16 [label="b"];
+}
 ```
 
 **Final UNION of Part A and Part B (states 17–18):**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> s17
-    s17 --> s0  : λ
-    s17 --> s11 : λ
-    s10 --> s18 : λ
-    s16 --> s18 : λ
-    s18 --> [*]
-
-    state "17 (new start)" as s17
-    state "0 [Part A start]" as s0
-    state "11 [Part B start]" as s11
-    state "10 [Part A end]" as s10
-    state "16 [Part B end]" as s16
-    state "18 (new final)" as s18
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    s17;
+    s0 [label="0 [Part A start]"];
+    s11 [label="11 [Part B start]"];
+    s10 [label="10 [Part A end]"];
+    s16 [label="16 [Part B end]"];
+    node [shape=doublecircle];
+    s18;
+    start -> s17;
+    s17 -> s0 [label="ε"];
+    s17 -> s11 [label="ε"];
+    s10 -> s18 [label="ε"];
+    s16 -> s18 [label="ε"];
+}
 ```
 
 ---
@@ -261,69 +299,62 @@ stateDiagram-v2
 
 **Parse structure:**
 
-```mermaid
-graph TD
-    ROOT["r2 = b + a* + b*a*<br/><b>UNION of 3 parts</b>"]
-    ROOT --> P1["Part 1: b<br/>atom"]
-    ROOT --> P2["Part 2: a*<br/><b>STAR</b>"]
-    ROOT --> P3["Part 3: b*a*<br/><b>CONCATENATION</b>"]
-    P2 --> P2a["a (atom)"]
-    P3 --> P3a["b* (STAR)"]
-    P3 --> P3b["a* (STAR)"]
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    root [label="r2 = b + a* + b*a* | UNION of 3 parts"];
+    part1 [label="Part 1: b | atom"];
+    part2 [label="Part 2: a* | STAR"];
+    atom_a [label="a (atom)"];
+    part3 [label="Part 3: b*a* | CONCATENATION"];
+    b_star [label="b* (STAR)"];
+    a_star [label="a* (STAR)"];
+    root -> part1;
+    root -> part2;
+    root -> part3;
+    part2 -> atom_a;
+    part3 -> b_star;
+    part3 -> a_star;
+}
 ```
 
 **Final UNION (new start=14, new final=15):**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> s14
-
-    s14 --> s0  : λ
-    s14 --> s2  : λ
-    s14 --> s6  : λ
-
-    s0  --> s1  : b
-
-    s2  --> s3  : λ (skip)
-    s2  --> s4  : λ
-    s4  --> s5  : a
-    s5  --> s3  : λ
-    s5  --> s4  : λ (loop)
-
-    s6  --> s7  : λ (skip)
-    s6  --> s8  : λ
-    s8  --> s9  : b
-    s9  --> s7  : λ
-    s9  --> s8  : λ (loop)
-    s7  --> s10 : λ
-    s10 --> s11 : λ (skip)
-    s10 --> s12 : λ
-    s12 --> s13 : a
-    s13 --> s11 : λ
-    s13 --> s12 : λ (loop)
-
-    s1  --> s15 : λ
-    s3  --> s15 : λ
-    s11 --> s15 : λ
-    s15 --> [*]
-
-    state "14" as s14
-    state "0" as s0
-    state "1" as s1
-    state "2" as s2
-    state "3" as s3
-    state "4" as s4
-    state "5" as s5
-    state "6" as s6
-    state "7" as s7
-    state "8" as s8
-    state "9" as s9
-    state "10" as s10
-    state "11" as s11
-    state "12" as s12
-    state "13" as s13
-    state "15" as s15
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    s0; s1; s2; s3; s4; s5; s6; s7; s8; s9; s10; s11; s12; s13; s14;
+    node [shape=doublecircle];
+    s15;
+    start -> s14;
+    s14 -> s0 [label="ε"];
+    s14 -> s2 [label="ε"];
+    s14 -> s6 [label="ε"];
+    s0 -> s1 [label="b"];
+    s2 -> s3 [label="ε (skip)"];
+    s2 -> s4 [label="ε"];
+    s4 -> s5 [label="a"];
+    s5 -> s3 [label="ε"];
+    s5 -> s4 [label="ε (loop)"];
+    s6 -> s7 [label="ε (skip)"];
+    s6 -> s8 [label="ε"];
+    s8 -> s9 [label="b"];
+    s9 -> s7 [label="ε"];
+    s9 -> s8 [label="ε (loop)"];
+    s7 -> s10 [label="ε"];
+    s10 -> s11 [label="ε (skip)"];
+    s10 -> s12 [label="ε"];
+    s12 -> s13 [label="a"];
+    s13 -> s11 [label="ε"];
+    s13 -> s12 [label="ε (loop)"];
+    s1 -> s15 [label="ε"];
+    s3 -> s15 [label="ε"];
+    s11 -> s15 [label="ε"];
+}
 ```
 
 ---
@@ -360,29 +391,31 @@ Step 5. Draw the result — states are sets, but rename them q0, q1, ... for nea
 
 ### ✏️ Worked Example: OTG for r1 = b(ab+b)\* + a\*b
 
-**Optimal TG (4 states):**
+**Optimal TG (5 states):**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q1 : b
-    q0 --> q2 : a
-    q1 --> q1 : a
-    q1 --> qf : b
-    q1 --> q1 : b (self-loop, the loop part exits on b)
-    q2 --> q2 : a
-    q2 --> qf : b
-    qf --> [*]
-
-    state "q0 (start)" as q0
-    state "q1" as q1
-    state "q2" as q2
-    state "qf (final)" as qf
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    q0; q1; q_int; q2;
+    node [shape=doublecircle];
+    qf;
+    start -> q0;
+    q0 -> q1 [label="b"];
+    q0 -> q2 [label="a"];
+    q1 -> q_int [label="a"];
+    q_int -> q1 [label="b"];
+    q1 -> q1 [label="b"];
+    q1 -> qf [label="b"];
+    q2 -> q2 [label="a"];
+    q2 -> qf [label="b"];
+}
 ```
 
 > [!note]
-> q1 has self-loops on both `a` and `b` because `(ab+b)*` can consume any mix of a's and b's. It reaches final on any `b` that exits the loop.
+> The `(ab+b)*` loop demands that every `a` be followed by a `b` (concatenation rule). The old design gave q1 free `a`/`b` self-loops, which incorrectly accepted arbitrary mixes. The fix introduces q_int: q1 —a→ q_int —b→ q1, forcing `a` to pair with `b`. The self-loop on `q1` handles the standalone `b` alternative in the union.
 
 ---
 
@@ -392,21 +425,22 @@ stateDiagram-v2
 
 **Optimal TG (3 states):**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q1 : b
-    q0 --> q2 : a
-    q1 --> q1 : b
-    q1 --> q2 : a
-    q2 --> q2 : a
-    q2 --> [*]
-    q0 --> [*]
-
-    state "q0 (start+final)" as q0
-    state "q1" as q1
-    state "q2 (final)" as q2
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=doublecircle];
+    q0; q2;
+    node [shape=circle];
+    q1;
+    start -> q0;
+    q0 -> q1 [label="b"];
+    q0 -> q2 [label="a"];
+    q1 -> q1 [label="b"];
+    q1 -> q2 [label="a"];
+    q2 -> q2 [label="a"];
+}
 ```
 
 ---
@@ -423,19 +457,25 @@ $$\text{new edge } i \to j = r_{iq} \cdot (r_{qq})^* \cdot r_{qj}$$
 
 ### Step-by-step procedure
 
-```mermaid
-flowchart TD
-    A["Step 1<br/>Add super-start qs<br/>(λ-arrow to original start)"]
-    B["Step 2<br/>Add super-final qf<br/>(λ-arrow from each final state)"]
-    C["Step 3<br/>Choose any state to eliminate<br/>(NOT qs or qf)"]
-    D["Step 4<br/>For every i→q and q→j pair:<br/>compute new i→j label using formula<br/>Union (+) if edge already exists"]
-    E["Step 5<br/>Delete q and all its edges"]
-    F{"Only qs<br/>and qf<br/>remain?"}
-    G["Step 7<br/>Label on qs→qf edge<br/>= your Regular Expression ✓"]
-
-    A --> B --> C --> D --> E --> F
-    F -- No --> C
-    F -- Yes --> G
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    A [label="Step 1\nAdd super-start qs\n(λ-arrow to original start)"];
+    B [label="Step 2\nAdd super-final qf\n(λ-arrow from each final state)"];
+    C [label="Step 3\nChoose any state to eliminate\n(NOT qs or qf)"];
+    D [label="Step 4\nFor every i->q and q->j pair:\ncompute new i->j label using formula\nUnion (+) if edge already exists"];
+    E [label="Step 5\nDelete q and all its edges"];
+    F [shape=diamond, label="Only qs\nand qf\nremain?"];
+    G [label="Step 7\nLabel on qs->qf edge\n= your Regular Expression ✓"];
+    A -> B;
+    B -> C;
+    C -> D;
+    D -> E;
+    E -> F;
+    F -> C [label="No"];
+    F -> G [label="Yes"];
+}
 ```
 
 > [!tip] Eliminate states with **no self-loop** first — the formula simplifies to `r_iq · r_qj` (no star needed).
@@ -446,66 +486,86 @@ flowchart TD
 
 **The automaton:**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q0 : a,b
-    q0 --> q1 : a,b
-    q1 --> q2 : a,b
-    q2 --> q2 : b
-    q2 --> q0 : a
-    q2 --> [*]
-
-    state "q0 (start)" as q0
-    state "q1" as q1
-    state "q2 (final)" as q2
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    q0; q1;
+    node [shape=doublecircle];
+    q2;
+    start -> q0;
+    q0 -> q0 [label="a, b"];
+    q0 -> q1 [label="a, b"];
+    q1 -> q2 [label="a, b"];
+    q2 -> q2 [label="b"];
+    q2 -> q0 [label="a"];
+}
 ```
 
 **After adding qs and qf (edge labels combined):**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> qs
-    qs --> q0 : λ
-    q0 --> q0 : a+b
-    q0 --> q1 : a+b
-    q1 --> q2 : a+b
-    q2 --> q2 : b
-    q2 --> q0 : a
-    q2 --> qf : λ
-    qf --> [*]
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    qs; q0; q1; q2;
+    node [shape=doublecircle];
+    qf;
+    start -> qs;
+    qs -> q0 [label="ε"];
+    q0 -> q0 [label="a+b"];
+    q0 -> q1 [label="a+b"];
+    q1 -> q2 [label="a+b"];
+    q2 -> q2 [label="b"];
+    q2 -> q0 [label="a"];
+    q2 -> qf [label="ε"];
+}
 ```
 
 **Eliminate q1 (no self-loop):**
 New edge q0 → q2 = `(a+b)(a+b)`
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> qs
-    qs --> q0 : λ
-    q0 --> q0 : a+b
-    q0 --> q2 : "(a+b)(a+b)"
-    q2 --> q2 : b
-    q2 --> q0 : a
-    q2 --> qf : λ
-    qf --> [*]
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    qs; q0; q2;
+    node [shape=doublecircle];
+    qf;
+    start -> qs;
+    qs -> q0 [label="ε"];
+    q0 -> q0 [label="a+b"];
+    q0 -> q2 [label="(a+b)(a+b)"];
+    q2 -> q2 [label="b"];
+    q2 -> q0 [label="a"];
+    q2 -> qf [label="ε"];
+}
 ```
 
 **Eliminate q0 (self-loop = `a+b`):**
 - `qs → q2`: `λ · (a+b)* · (a+b)(a+b)` = `(a+b)*(a+b)(a+b)`
 - `q2 → q2` new: `a · (a+b)* · (a+b)(a+b)` → combined self-loop: `b + a(a+b)*(a+b)(a+b)`
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> qs
-    qs --> q2 : "(a+b)*(a+b)(a+b)"
-    q2 --> q2 : "b + a(a+b)*(a+b)(a+b)"
-    q2 --> qf : λ
-    qf --> [*]
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    qs; q2;
+    node [shape=doublecircle];
+    qf;
+    start -> qs;
+    qs -> q2 [label="(a+b)*(a+b)(a+b)"];
+    q2 -> q2 [label="b + a(a+b)*(a+b)(a+b)"];
+    q2 -> qf [label="ε"];
+}
 ```
 
 **Eliminate q2:**
@@ -518,18 +578,23 @@ $$r = (a+b)^*(a+b)^2 \cdot \Big(b + a(a+b)^*(a+b)^2\Big)^*$$
 
 ### Step-by-step procedure
 
-```mermaid
-flowchart TD
-    A["Step 1<br/>Scan for variables with multiple alternatives<br/>or nullable variables"]
-    B["Step 2<br/>Try short strings:<br/>a, b, ab, aa, aaa, λ"]
-    C["Step 3<br/>For chosen string w:<br/>Write TWO different parse trees"]
-    D{"Found 2<br/>distinct trees?"}
-    E["✅ AMBIGUOUS<br/>State: w = [string] has two parse trees"]
-    F["Try next string or longer string"]
-
-    A --> B --> C --> D
-    D -- Yes --> E
-    D -- No --> F --> C
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    A [label="Step 1\nScan for variables with multiple alternatives\nor nullable variables"];
+    B [label="Step 2\nTry short strings:\na, b, ab, aa, aaa, λ"];
+    C [label="Step 3\nFor chosen string w:\nWrite TWO different parse trees"];
+    D [shape=diamond, label="Found 2\ndistinct trees?"];
+    E [label="✓ AMBIGUOUS\nState: w = [string] has two parse trees"];
+    F [label="Try next string or longer string"];
+    A -> B;
+    B -> C;
+    C -> D;
+    D -> E [label="Yes"];
+    D -> F [label="No"];
+    F -> C;
+}
 ```
 
 ---
@@ -547,24 +612,48 @@ D → a | aB
 
 **Parse Tree 1** (via `S → A`):
 
-```mermaid
-graph TD
-    S1["S"] --> A1["A  (S→A)"]
-    A1 --> a1["a"] & B1["B  (A→aB)"]
-    B1 --> a2["a"] & D1["D  (B→aD)"]
-    D1 --> a3["a  (D→a)"]
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    S1;
+    A1 [label="A (S→A)"];
+    a1 [label="a"];
+    B1 [label="B (A→aB)"];
+    a2 [label="a"];
+    D1 [label="D (B→aD)"];
+    a3 [label="a (D→a)"];
+    S1 -> A1;
+    A1 -> a1;
+    A1 -> B1;
+    B1 -> a2;
+    B1 -> D1;
+    D1 -> a3;
+}
 ```
 
 Derivation: S ⇒ A ⇒ aB ⇒ aaD ⇒ **aaa** ✓
 
 **Parse Tree 2** (via `S → B`):
 
-```mermaid
-graph TD
-    S2["S"] --> B2["B  (S→B)"]
-    B2 --> a4["a"] & D2["D  (B→aD)"]
-    D2 --> a5["a"] & B3["B  (D→aB)"]
-    B3 --> a6["a  (B→a)"]
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    S2;
+    B2 [label="B (S→B)"];
+    a4 [label="a"];
+    D2 [label="D (B→aD)"];
+    a5 [label="a"];
+    B3 [label="B (D→aB)"];
+    a6 [label="a (B→a)"];
+    S2 -> B2;
+    B2 -> a4;
+    B2 -> D2;
+    D2 -> a5;
+    D2 -> B3;
+    B3 -> a6;
+}
 ```
 
 Derivation: S ⇒ B ⇒ aD ⇒ aaB ⇒ **aaa** ✓
@@ -584,51 +673,62 @@ Derivation: S ⇒ B ⇒ aD ⇒ aaB ⇒ **aaa** ✓
 
 ### Overview of the three phases
 
-```mermaid
-flowchart LR
-    RLG["Right Linear<br/>Grammar G_R"] -->|"Phase 1<br/>Variables=States<br/>Productions=Arrows"| NFA["NFA S₁"]
-    NFA -->|"Phase 2<br/>Swap start↔final<br/>Reverse all arrows"| RNFA["Reversed<br/>NFA S₂"]
-    RNFA -->|"Phase 3<br/>Read arrows as<br/>Left Linear rules"| LLG["Left Linear<br/>Grammar G_L"]
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    RLG [label="Right Linear\nGrammar GR"];
+    NFA [label="NFA S1"];
+    RNFA [label="Reversed\nNFA S2"];
+    LLG [label="Left Linear\nGrammar GL"];
+    RLG -> NFA [label="Phase 1\nVariables=States\nProductions=Arrows"];
+    NFA -> RNFA [label="Phase 2\nSwap start<->final\nReverse all arrows"];
+    RNFA -> LLG [label="Phase 3\nRead arrows as\nLeft Linear rules"];
+}
 ```
 
 ### Phase 1: RLG → NFA (translation rules)
 
-```mermaid
-flowchart LR
-    subgraph "Production"
-        P1["A → aB"]
-        P2["A → a"]
-        P3["A → λ"]
-        P4["A → abB"]
-    end
-    subgraph "NFA Arrow"
-        R1["A --a--> B"]
-        R2["A --a--> F  (final state)"]
-        R3["A becomes a final state"]
-        R4["A --a--> (new) --b--> B"]
-    end
-    P1 --> R1
-    P2 --> R2
-    P3 --> R3
-    P4 --> R4
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    prod [label="Production", shape=plain];
+    nfa [label="NFA Arrow", shape=plain];
+    p1 [label="A → aB"];
+    p2 [label="A → a"];
+    p3 [label="A → λ"];
+    p4 [label="A → abB"];
+    r1 [label="A --a--> B"];
+    r2 [label="A --a--> F (final state)"];
+    r3 [label="A becomes a final state"];
+    r4 [label="A --a--> (new) --b--> B"];
+    { rank=same; p1; r1; }
+    { rank=same; p2; r2; }
+    { rank=same; p3; r3; }
+    { rank=same; p4; r4; }
+    p1 -> r1;
+    p2 -> r2;
+    p3 -> r3;
+    p4 -> r4;
+}
 ```
 
 ### Phase 2: Reverse the NFA
 
-```mermaid
-flowchart LR
-    subgraph "Original NFA S₁"
-        OS["→ Old Start"] 
-        OF["Old Final ◎"]
-        OS -->|"a"| OF
-    end
-    subgraph "Reversed NFA S₂"
-        NS["→ New Start<br/>(was old final)"]
-        NF["New Final ◎<br/>(was old start)"]
-        NF -->|"a"| NS
-    end
-    OF -.->|"becomes"| NS
-    OS -.->|"becomes"| NF
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    os [label="→ Old Start"];
+    of [label="Old Final ⊗"];
+    ns [label="→ New Start\n(was old final)"];
+    nf [label="New Final ⊗\n(was old start)"];
+    os -> of [label="a"];
+    nf -> ns [label="a", dir=forward];
+    of -> ns [label="becomes", style=dashed, constraint=false];
+    os -> nf [label="becomes", style=dashed, constraint=false];
+}
 ```
 
 ---
@@ -637,64 +737,71 @@ flowchart LR
 
 **Phase 1 — NFA from G_R:**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> S
-    S --> A : b
-    S --> T : a
-    T --> S : b
-    S --> C : a
-    A --> B : a
-    A --> U : a
-    B --> F : b
-    U --> F : b
-    C --> A : a
-    F --> [*]
-
-    state "S (start)" as S
-    state "T" as T
-    state "A" as A
-    state "B" as B
-    state "C" as C
-    state "U" as U
-    state "F (final)" as F
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    S; A; T; C; B; U;
+    node [shape=doublecircle];
+    F;
+    start -> S;
+    S -> A [label="b"];
+    S -> T [label="a"];
+    T -> S [label="b"];
+    S -> C [label="a"];
+    A -> B [label="a"];
+    A -> U [label="a"];
+    B -> F [label="b"];
+    U -> F [label="b"];
+    C -> A [label="a"];
+}
 ```
 
 **Phase 2 — Reversed NFA S₂** (swap start↔final, flip all arrows):
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> F
-    F --> B : b
-    F --> U : b
-    B --> A : a
-    U --> A : a
-    A --> S : b
-    A --> C : a
-    C --> S : a
-    T --> S : b
-    S --> T : a
-    S --> [*]
-
-    state "F (new start)" as F
-    state "S (new final)" as S
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    F; B; U; A; C; T;
+    node [shape=doublecircle];
+    S;
+    start -> F;
+    F -> B [label="b"];
+    F -> U [label="b"];
+    B -> A [label="a"];
+    U -> A [label="a"];
+    A -> S [label="b"];
+    A -> C [label="a"];
+    C -> S [label="a"];
+    T -> S [label="b"];
+    S -> T [label="a"];
+}
 ```
 
 **Phase 3 — Read as Left Linear Grammar G_L:**
 
-- `F → b` (new start, terminal only)
+- `F → λ` (start variable — produces empty string; NOT a terminal)
 - `B → Fb` ... read reversed arrows as `X → Ya` means seeing `Y --a--> X`
+- Substitute `F → λ` into dependent productions:
+  - `B → Fb → λb` simplifies to `B → b`
+  - `U → Fb → λb` simplifies to `U → b`
 - Final LLG (F is start variable):
 
 ```
-F → bb | b | aA      (start variable)
-B → Fa
+F → λ             (start variable)
+B → b
 A → bS | aC
 C → aS
 S → baS
 ```
+
+> [!warning] LLG start variable
+> The start variable of a Left-Linear Grammar must derive λ, never a terminal directly. Assigning `F → b` causes downstream doubling (e.g. `B → Fb` becomes `B → bb` instead of the correct `B → b`).
 
 ---
 
@@ -708,20 +815,22 @@ A CFG is an **s-grammar** if and only if **BOTH** conditions hold:
 
 ### Decision procedure
 
-```mermaid
-flowchart TD
-    A["For each variable A,<br/>list the first symbol of each production"]
-    B{"Any production<br/>starts with a<br/>non-terminal or λ?"}
-    C["❌ FAILS condition 1<br/>NOT an s-grammar<br/>(cite the offending production)"]
-    D{"Any (variable, terminal)<br/>pair appears in<br/>2+ productions?"}
-    E["❌ FAILS condition 2<br/>NOT an s-grammar<br/>(cite the duplicate pair)"]
-    F["✅ IS an s-grammar"]
-
-    A --> B
-    B -- Yes --> C
-    B -- No --> D
-    D -- Yes --> E
-    D -- No --> F
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    A [label="For each variable A,\nlist the first symbol of each production"];
+    B [shape=diamond, label="Any production\nstarts with a\nnon-terminal or λ?"];
+    C [label="× FAILS condition 1\nNOT an s-grammar\n(cite the offending production)"];
+    D [shape=diamond, label="Any (variable, terminal)\npair appears in\n2+ productions?"];
+    E [label="× FAILS condition 2\nNOT an s-grammar\n(cite the duplicate pair)"];
+    F [label="✓ IS an s-grammar"];
+    A -> B;
+    B -> C [label="Yes"];
+    B -> D [label="No"];
+    D -> E [label="Yes"];
+    D -> F [label="No"];
+}
 ```
 
 ---
@@ -773,67 +882,77 @@ flowchart TD
 
 ### The three passes — mandatory order
 
-```mermaid
-flowchart LR
-    G["Original<br/>Grammar G"]
-    P1["Pass 1<br/>Remove λ-productions"]
-    P2["Pass 2<br/>Remove unit productions<br/>(A → B)"]
-    P3["Pass 3<br/>Remove useless productions"]
-    Gp["Simplified<br/>Grammar G'"]
-
-    G --> P1 --> P2 --> P3 --> Gp
-
-    style P1 fill:#fef3c7
-    style P2 fill:#dbeafe
-    style P3 fill:#dcfce7
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    G [label="Original\nGrammar G"];
+    P1 [label="Pass 1\nRemove λ-productions"];
+    P2 [label="Pass 2\nRemove unit productions\n(A → B)"];
+    P3 [label="Pass 3\nRemove useless productions"];
+    Gp [label="Simplified\nGrammar G'"];
+    G -> P1;
+    P1 -> P2;
+    P2 -> P3;
+    P3 -> Gp;
+}
 ```
 
 ### Pass 1: Remove λ-productions
 
-```mermaid
-flowchart TD
-    A["Round 1: Mark X nullable if X → λ exists"]
-    B["Round 2: Mark X nullable if X → Y₁Y₂…Yₙ<br/>and ALL Yᵢ already marked nullable"]
-    C{"Any new<br/>nullables<br/>found?"}
-    D["For each production, generate new productions<br/>by removing each subset of nullable variables"]
-    E["Delete all X → λ productions<br/>(keep S → λ only if λ ∈ L(G))"]
-
-    A --> B --> C
-    C -- Yes --> B
-    C -- No --> D --> E
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    A [label="Round 1: Mark X nullable if X → λ exists"];
+    B [label="Round 2: Mark X nullable if X → Y1Y2...Yn\nand ALL Yi already marked nullable"];
+    C [shape=diamond, label="Any new\nnullables\nfound?"];
+    D [label="For each production, generate new productions\nby removing each subset of nullable variables"];
+    E [label="Delete all X → λ productions\n(keep S → λ only if λ ∈ L(G))"];
+    A -> B;
+    B -> C;
+    C -> B [label="Yes"];
+    C -> D [label="No"];
+    D -> E;
+}
 ```
 
 ### Pass 2: Remove unit productions
 
-```mermaid
-flowchart TD
-    A["Base unit pairs: (A,A) for all variables"]
-    B["If (A,B) is a pair and B→C is unit:<br/>add (A,C)"]
-    C{"New pairs<br/>found?"}
-    D["For each unit pair (A,B):<br/>copy all non-unit productions of B to A"]
-    E["Delete all unit productions A → B"]
-
-    A --> B --> C
-    C -- Yes --> B
-    C -- No --> D --> E
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    A [label="Base unit pairs: (A,A) for all variables"];
+    B [label="If (A,B) is a pair and B→C is unit:\nadd (A,C)"];
+    C [shape=diamond, label="New pairs\nfound?"];
+    D [label="For each unit pair (A,B):\ncopy all non-unit productions of B to A"];
+    E [label="Delete all unit productions A → B"];
+    A -> B;
+    B -> C;
+    C -> B [label="Yes"];
+    C -> D [label="No"];
+    D -> E;
+}
 ```
 
 ### Pass 3: Remove useless productions
 
-```mermaid
-flowchart LR
-    subgraph "Case 1: Non-generating"
-        G1["Mark X 'generating' if<br/>X → terminal string"]
-        G2["Mark X 'generating' if<br/>X → α where all symbols<br/>in α are generating/terminal"]
-        G3["Remove all non-generating<br/>variables and their productions"]
-        G1 --> G2 --> G3
-    end
-    subgraph "Case 2: Non-reachable"
-        R1["S is reachable"]
-        R2["If A is reachable and A→α:<br/>mark all variables in α reachable"]
-        R3["Remove all non-reachable<br/>variables and their productions"]
-        R1 --> R2 --> R3
-    end
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    G1 [label="Mark X 'generating' if\nX → terminal string"];
+    G2 [label="Mark X 'generating' if\nX → α where all symbols\nin α are generating/terminal"];
+    G3 [label="Remove all non-generating\nvariables and their productions"];
+    R1 [label="S is reachable"];
+    R2 [label="If A is reachable and A→α:\nmark all variables in α reachable"];
+    R3 [label="Remove all non-reachable\nvariables and their productions"];
+    G1 -> G2;
+    G2 -> G3;
+    R1 -> R2;
+    R2 -> R3;
+}
 ```
 
 ---
@@ -852,13 +971,18 @@ E → b
 
 **Pass 1 — Nullable variables:**
 
-```mermaid
-graph LR
-    R1["Round 1:<br/>A (A→λ)<br/>D (D→λ)"]
-    R2["Round 2:<br/>C (C→D, D nullable)<br/>B (B→C, C nullable)"]
-    R3["Round 3:<br/>S (S→A, A nullable)"]
-    R1 --> R2 --> R3
-    R3 --> DONE["Nullable = {A, D, C, B, S}"]
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    R1 [label="Round 1:\nA (A→λ)\nD (D→λ)"];
+    R2 [label="Round 2:\nC (C→D, D nullable)\nB (B→C, C nullable)"];
+    R3 [label="Round 3:\nS (S→A, A nullable)"];
+    DONE [label="Nullable = {A, D, C, B, S}"];
+    R1 -> R2;
+    R2 -> R3;
+    R3 -> DONE;
+}
 ```
 
 **Grammar after Pass 1 (P₁):**
@@ -873,13 +997,19 @@ E → b
 
 **Pass 2 — Unit pairs and resolutions:**
 
-```mermaid
-graph TD
-    UP["Unit productions: S→A, B→C"]
-    PA["(S,A): copy A's non-unit productions to S<br/>→ S gains: bAD, bA, bD, b"]
-    PB["(B,C): copy C's non-unit productions to B<br/>→ B gains: AcDD, cDD, AcD, Ac, cD, c"]
-    DEL["Delete S→A and B→C"]
-    UP --> PA & PB --> DEL
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    UP [label="Unit productions: S→A, B→C"];
+    PA [label="(S,A): copy A's non-unit productions to S\n→ S gains: bAD, bA, bD, b"];
+    PB [label="(B,C): copy C's non-unit productions to B\n→ B gains: AcDD, cDD, AcD, Ac, cD, c"];
+    DEL [label="Delete S→A and B→C"];
+    UP -> PA;
+    UP -> PB;
+    PA -> DEL;
+    PB -> DEL;
+}
 ```
 
 **Grammar after Pass 2 (P₂):**
@@ -894,13 +1024,18 @@ E → b
 
 **Pass 3 — Useless variables:**
 
-```mermaid
-graph LR
-    GEN["All variables generate ✓<br/>(D→a, E→b, A→b, B→b, C→c, S→a)"]
-    REA["Reachable from S:<br/>S ✓, A ✓, B ✓, C ✓, D ✓"]
-    UNREA["E is NEVER mentioned<br/>in any production → NOT reachable"]
-    REM["Remove E → b"]
-    GEN --> REA --> UNREA --> REM
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    GEN [label="All variables generate ✓\n(D→a, E→b, A→b, B→b, C→c, S→a)"];
+    REA [label="Reachable from S:\nS ✓, A ✓, B ✓, C ✓, D ✓"];
+    UNREA [label="E is NEVER mentioned\nin any production → NOT reachable"];
+    REM [label="Remove E → b"];
+    GEN -> REA;
+    REA -> UNREA;
+    UNREA -> REM;
+}
 ```
 
 **Final simplified grammar G':**
@@ -923,13 +1058,16 @@ Every production must be exactly:
 
 ### Step-by-step procedure
 
-```mermaid
-flowchart TD
-    A["Step 1: For every terminal 'a' appearing in<br/>a RHS of length ≥ 2:<br/>• Introduce Bₐ → a<br/>• Replace 'a' in long RHS with Bₐ"]
-    B["Step 2: For every RHS of length ≥ 3:<br/>chain it into pairs using new variables<br/>A → X₁X₂X₃X₄<br/>  becomes: A → X₁D₁<br/>           D₁ → X₂D₂<br/>           D₂ → X₃X₄"]
-    C["Step 3: Productions of length 1 (A→a)<br/>and length 2 (A→BC) are already fine"]
-
-    A --> B --> C
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    A [label="Step 1: For every terminal a appearing in\na RHS of length ≥ 2:\n• Introduce Ba → a\n• Replace a in long RHS with Ba"];
+    B [label="Step 2: For every RHS of length ≥ 3:\nchain it into pairs using new variables\nA → X1X2X3X4\nbecomes: A → X1D1, D1 → X2D2, D2 → X3X4"];
+    C [label="Step 3: Productions of length 1 (A→a)\nand length 2 (A→BC) are already fine"];
+    A -> B;
+    B -> C;
+}
 ```
 
 > [!warning]
@@ -937,14 +1075,20 @@ flowchart TD
 
 ### ✏️ Worked Example (from G')
 
-```mermaid
-graph TD
-    TERM["Introduce terminal variables:<br/>Bₐ → a<br/>Bb → b<br/>Bc → c"]
-    EX1["S → aS (length 2 with terminal):<br/>replace a → S → BₐS ✓"]
-    EX2["S → aBD (length 3):<br/>S → BₐBD → introduce D₁→BD<br/>⟹ S → BₐD₁, D₁ → BD"]
-    EX3["A → bAD (length 3):<br/>A → BbAD → introduce D₂→AD<br/>⟹ A → BbD₂, D₂ → AD"]
-    EX4["B → AcDD (length 4):<br/>B → ABcDD → chain:<br/>B → AD₃, D₃ → BcD₄, D₄ → DD"]
-    TERM --> EX1 & EX2 & EX3 & EX4
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    TERM [label="Introduce terminal variables:\nBa → a\nBb → b\nBc → c"];
+    EX1 [label="S → aS (length 2 with terminal):\nreplace a → S → BaS ✓"];
+    EX2 [label="S → aBD (length 3):\nS → BaBD → introduce D1→BD\n⇒ S → BaD1, D1 → BD"];
+    EX3 [label="A → bAD (length 3):\nA → BbAD → introduce D2→AD\n⇒ A → BbD2, D2 → AD"];
+    EX4 [label="B → AcDD (length 4):\nB → ABcDD → chain:\nB → AD3, D3 → BcD4, D4 → DD"];
+    TERM -> EX1;
+    TERM -> EX2;
+    TERM -> EX3;
+    TERM -> EX4;
+}
 ```
 
 ---
@@ -959,17 +1103,21 @@ Every production must start with a terminal:
 
 ### Step-by-step procedure
 
-```mermaid
-flowchart TD
-    A["Step 1: Start from simplified grammar G'"]
-    B["Step 2: For every production starting<br/>with a non-terminal:<br/>A → Bα and B → b₁β₁ | b₂β₂ | …<br/>Substitute: A → b₁β₁α | b₂β₂α | …"]
-    C{"Every RHS<br/>starts with<br/>a terminal?"}
-    D["Step 3: Handle left recursion if needed:<br/>A → Aα | β  becomes:<br/>A → βA'<br/>A' → αA' | α"]
-    DONE["✅ Grammar is in GNF"]
-
-    A --> B --> C
-    C -- No --> B
-    C -- Yes --> D --> DONE
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    A [label="Step 1: Start from simplified grammar G'"];
+    B [label="Step 2: For every production starting\nwith a non-terminal:\nA → Bα and B → b1β1 | b2β2 | ...\nSubstitute: A → b1β1α | b2β2α | ..."];
+    C [shape=diamond, label="Every RHS\nstarts with\na terminal?"];
+    D [label="Step 3: Handle left recursion if needed:\nA → Aα | β becomes:\nA → β A'\nA' → α A' | α"];
+    DONE [label="✓ Grammar is in GNF"];
+    A -> B;
+    B -> C;
+    C -> B [label="No"];
+    C -> D [label="Yes"];
+    D -> DONE;
+}
 ```
 
 ---
@@ -981,18 +1129,20 @@ Given a GNF grammar, mechanically write the NPDA. It always has exactly **3 stat
 
 ### The fixed template (memorise this)
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q1 : λ, Z / SZ<br/>(push start variable)
-    q1 --> q1 : a, A / α<br/>(for each rule A→aα)
-    q1 --> q2 : λ, Z / λ<br/>(stack empty → accept)
-    q2 --> [*]
-
-    state "q₀ (start)" as q0
-    state "q₁ (working)" as q1
-    state "q₂ (final)" as q2
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    q0; q1;
+    node [shape=doublecircle];
+    q2;
+    start -> q0;
+    q0 -> q1 [label="λ, Z / SZ\n(push start variable)"];
+    q1 -> q1 [label="a, A / α\n(for each rule A → aα)"];
+    q1 -> q2 [label="λ, Z / λ\n(stack empty → accept)"];
+}
 ```
 
 > [!warning] Stack push order
@@ -1012,57 +1162,63 @@ D → a
 
 **NPDA transition diagram:**
 
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q1 : "λ, Z/SZ"
-    q1 --> q1 : "a, S/A"
-    q1 --> q1 : "b, S/BD"
-    q1 --> q1 : "c, S/λ"
-    q1 --> q1 : "a, A/λ"
-    q1 --> q1 : "b, B/D"
-    q1 --> q1 : "a, D/λ"
-    q1 --> q2 : "λ, Z/λ"
-    q2 --> [*]
-
-    state "q₀" as q0
-    state "q₁" as q1
-    state "q₂ (final)" as q2
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    q0; q1;
+    node [shape=doublecircle];
+    q2;
+    start -> q0;
+    q0 -> q1 [label="λ, Z / SZ\n(push start variable)", fontsize=10];
+    q1 -> q1 [label="a, S / A\nb, S / BD\nc, S / λ\na, A / λ\nb, B / D\na, D / λ", fontsize=10];
+    q1 -> q2 [label="λ, Z / λ\n(empty stack \→ accept)", fontsize=10];
+}
 ```
 
-**Transition function:**
+**Transition function (all processing loops on q₁):**
+
 ```
-δ(q₀, λ, Z)  = (q₁, SZ)     ← always first
+δ(q₀, λ, Z)  = (q₁, SZ)     ← push start variable (always first)
 
 δ(q₁, a, S)  = (q₁, A)      ← S → aA
-δ(q₁, b, S)  = (q₁, BD)     ← S → bBD  (B on top)
-δ(q₁, c, S)  = (q₁, λ)      ← S → c
+δ(q₁, b, S)  = (q₁, BD)     ← S → bBD  (B on top of stack)
+δ(q₁, c, S)  = (q₁, λ)      ← S → c     (pop S, push nothing)
+δ(q₁, a, A)  = (q₁, λ)      ← A → a     (pop A)
+δ(q₁, b, B)  = (q₁, D)      ← B → bD    (replace B with D)
+δ(q₁, a, D)  = (q₁, λ)      ← D → a     (pop D)
 
-δ(q₁, a, A)  = (q₁, λ)      ← A → a
-δ(q₁, b, B)  = (q₁, D)      ← B → bD
-δ(q₁, a, D)  = (q₁, λ)      ← D → a
-
-δ(q₁, λ, Z)  = (q₂, λ)      ← always last
+δ(q₁, λ, Z)  = (q₂, λ)      ← empty stack → accept (always last)
 ```
 
 **Trace — input `"c"` (accepted):**
 
-```mermaid
-sequenceDiagram
-    participant Input
-    participant State
-    participant Stack
-
-    Note over State,Stack: Initial
-    State->>Stack: q₀, Z
-    Note over State,Stack: δ(q₀,λ,Z)=(q₁,SZ)
-    State->>Stack: q₁, SZ
-    Input->>State: read 'c'
-    Note over State,Stack: δ(q₁,c,S)=(q₁,λ) → pop S
-    State->>Stack: q₁, Z
-    Note over State,Stack: δ(q₁,λ,Z)=(q₂,λ) → ACCEPT ✓
-    State->>Stack: q₂, ∅
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    header [label="Input | State | Stack", shape=plain];
+    initial [label="Initial", style=dashed];
+    step1 [label="q0, Z"];
+    delta1 [label="δ(q0,λ,Z)=(q1,SZ)", style=dashed];
+    step2 [label="q1, SZ"];
+    read_c [label="read c"];
+    delta2 [label="δ(q1,c,S)=(q1,λ) → pop S", style=dashed];
+    step3 [label="q1, Z"];
+    delta3 [label="δ(q1,λ,Z)=(q2,λ) → ACCEPT ✓", style=dashed];
+    step4 [label="q2, ∅"];
+    header -> initial;
+    initial -> step1;
+    step1 -> delta1;
+    delta1 -> step2;
+    step2 -> read_c;
+    read_c -> delta2;
+    delta2 -> step3;
+    step3 -> delta3;
+    delta3 -> step4;
+}
 ```
 
 ---

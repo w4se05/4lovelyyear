@@ -1,0 +1,5 @@
+{
+  "dotPath": "C:\\Program Files\\Graphviz\\bin\\dot.exe",
+  "renderer": "dot",
+  "imageFormat": "svg"
+}

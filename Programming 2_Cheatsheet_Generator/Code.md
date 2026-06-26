@@ -358,6 +358,9 @@ C::setx(C x) { x.x=100; }   // ❌
 ```cpp
 #include <iostream>
 #include <vector>
+
+#include <iostream>
+#include <vector>
 using namespace std;
 
 class Quadrilateral {
@@ -520,6 +523,8 @@ Drawing a Triangle
 
 ```cpp
 #include <iostream>
+
+#include <iostream>
 using namespace std;
 
 class A1 { public: A1() { cout << "A1\n"; } };
@@ -622,6 +627,13 @@ Drawing Triangle
 ## Q5: Galactic Habitability Simulation
 
 ```cpp
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <random>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -745,6 +757,8 @@ Kepler-62d [Terrestrial] dist=0.95 AU, radius=0.87 R_e, gravity=2.80 m/s^2, habi
 
 ```cpp
 #include <iostream>
+
+#include <iostream>
 using namespace std;
 
 class Mother {
@@ -773,6 +787,9 @@ I am the Daughter
 ## Q2: Animal, Zebra, Dolphin
 
 ```cpp
+#include <iostream>
+#include <string>
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -819,6 +836,10 @@ Flipper is 3 years old. Origin: Pacific Ocean
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
 class VGUStudent {
@@ -848,6 +869,9 @@ public:
 ## Q4: Person / Student / Teacher
 
 ```cpp
+#include <iostream>
+#include <string>
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -958,6 +982,7 @@ Drawing Triangle
 
 ```cpp
 #include <iostream>
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -995,6 +1020,8 @@ Drawing Circle
 ## Q3: Pass by Value vs Reference (Slicing!)
 
 ```cpp
+#include <iostream>
+
 #include <iostream>
 using namespace std;
 
@@ -1039,6 +1066,9 @@ But if `Shape` were concrete (non-pure), the call would compile but `s.draw()` w
 ```cpp
 #include <iostream>
 #include <cmath>
+
+#include <iostream>
+#include <cmath>
 using namespace std;
 
 class Shape {
@@ -1073,6 +1103,10 @@ public:
 ## Q5: Array of Shapes Sorted by Decreasing Area
 
 ```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -1404,6 +1438,7 @@ public:
 
 ```cpp
 #include <iostream>
+#include <iostream>
 #include <iomanip>
 using namespace std;
 
@@ -1474,6 +1509,11 @@ t1 later
 ## Q2: Complex Class (Sort by Modulus)
 
 ```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -1549,6 +1589,11 @@ Sorted by decreasing modulus:
 ## Q1: Matrix Norms
 
 ```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -1636,6 +1681,9 @@ Total:     27
 ## Q2: Generic Stack Template (Array-based)
 
 ```cpp
+#include <iostream>
+#include <string>
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -1959,6 +2007,10 @@ The **Farey sequence** of order N is the set of all reduced fractions $\frac{a}{
 #include <vector>
 #include <algorithm>
 #include <numeric>
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 struct Fraction {
