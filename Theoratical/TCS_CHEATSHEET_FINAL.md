@@ -13,21 +13,20 @@ created: 2025-06-17
 
 ## NOTATION REFERENCE
 
-| Symbol | Meaning |
-|---|---|
-| `→` | start state arrow |
-| `(q)` | regular state |
-| `((q))` | final state (double circle) |
-| `--a-->` | transition on symbol `a` |
-| `λ` | empty string (epsilon) |
-| `r*` | zero or more repetitions of r |
-| `r+` | one or more repetitions of r |
-| `r1 + r2` | union (either r1 or r2) |
-| `r1r2` | concatenation (r1 then r2) |
+| Symbol                | Meaning                                                                         |
+| --------------------- | ------------------------------------------------------------------------------- |
+| `→`                   | start state arrow                                                               |
+| `(q)`                 | regular state                                                                   |
+| `((q))`               | final state (double circle)                                                     |
+| `--a-->`              | transition on symbol `a`                                                        |
+| `λ`                   | empty string (lambda)                                                           |
+| `r*`                  | zero or more repetitions of r                                                   |
+| `r+`                  | one or more repetitions of r                                                    |
+| `r1 + r2`             | union (either r1 or r2)                                                         |
+| `r1r2`                | concatenation (r1 then r2)                                                      |
 | `δ(q, a, X) = (p, α)` | NPDA: in state q, reading a, with X on top of stack → go to p, replace X with α |
 
 ---
-
 ## PROBLEM 1A — Build NFA from a Regular Expression (Thompson's Construction)
 
 ### What you're doing
@@ -67,10 +66,10 @@ digraph G {
     node [shape=doublecircle];
     qf;
     start -> qs;
-    qs -> r1s [label="ε"];
-    qs -> r2s [label="ε"];
-    r1e -> qf [label="ε"];
-    r2e -> qf [label="ε"];
+    qs -> r1s [label="λ"];
+    qs -> r2s [label="λ"];
+    r1e -> qf [label="λ"];
+    r2e -> qf [label="λ"];
 }
 ```
 
@@ -89,7 +88,7 @@ digraph G {
     r2e [label="r2 end"];
     start -> r1s;
     r1s -> r1e [label="...r1..."];
-    r1e -> r2s [label="ε"];
+    r1e -> r2s [label="λ"];
     r2s -> r2e [label="...r2..."];
 }
 ```
@@ -108,11 +107,11 @@ digraph G {
     node [shape=doublecircle];
     qf;
     start -> qs;
-    qs -> qf [label="ε (skip)"];
-    qs -> rs [label="ε"];
+    qs -> qf [label="λ(skip)"];
+    qs -> rs [label="λ"];
     rs -> re [label="...r..."];
-    re -> qf [label="ε"];
-    re -> rs [label="ε (loop)"];
+    re -> qf [label="λ"];
+    re -> rs [label="λ(loop)"];
 }
 ```
 
@@ -129,8 +128,23 @@ Step 5. Mark the one start state (→) and one final state (double circle)
 
 > [!warning] Operator priority (most to least binding)
 > `*`  >  concatenation  >  `+`
-> So `ab*+c` parses as `(a(b*))+c`, NOT `(ab)*(+c)`
+> So `ab*+c` parses as `(a(b*))+c`, NOT `a(b*+c)`
 
+## QUICK SANITY CHECK — Thompson NFA Node Count
+
+### The Fast Counting Formula
+Before drawing your NFA, calculate the exact number of nodes (states) it *should* have. Every symbol and operator adds a predictable number of states in a strict Thompson construction.
+
+#  **N = 2 * (S + U + K)**
+
+**Where:**
+* **S (Symbols):** Total count of terminal characters (e.g., `a`, `b`).
+* **U (Unions):** Total count of `+` operators.
+* **K (Kleene Stars):** Total count of `*` operators.
+* *(Note: Concatenations add 0 new states).*
+---
+> [!note] Practical note
+> The worked examples below sometimes merge adjacent states (e.g., the end of one atom with the start of the next in concatenation, or use a flat multi-way union instead of nested binary unions). As a result, the drawn NFA may have **fewer** states than the strict formula predicts. The formula gives the maximum / strict-Thompson count — use it as an upper bound, not an exact target.
 ---
 
 ### ✏️ Fully Worked Example: r1 = b(ab + b)* + a\*b
@@ -147,6 +161,8 @@ digraph G {
     star1 [label="(ab+b)* | STAR"];
     union1 [label="ab+b | UNION"];
     concat1 [label="ab | CONCAT"];
+    concat_a [label="a | atom"];
+    concat_b [label="b | atom"];
     atom_b2 [label="b | atom"];
     partB [label="Part B: a*b | CONCATENATION"];
     star2 [label="a* | STAR"];
@@ -159,6 +175,8 @@ digraph G {
     star1 -> union1;
     union1 -> concat1;
     union1 -> atom_b2;
+    concat1 -> concat_a;
+    concat1 -> concat_b;
     partB -> star2;
     partB -> atom_b3;
     star2 -> atom_a;
@@ -195,13 +213,13 @@ digraph G {
     node [shape=doublecircle];
     s8;
     start -> s7;
-    s7 -> s2 [label="ε"];
-    s7 -> s5 [label="ε"];
+    s7 -> s2 [label="λ"];
+    s7 -> s5 [label="λ"];
     s2 -> s3 [label="a"];
     s3 -> s4 [label="b"];
     s5 -> s6 [label="b"];
-    s4 -> s8 [label="ε"];
-    s6 -> s8 [label="ε"];
+    s4 -> s8 [label="λ"];
+    s6 -> s8 [label="λ"];
 }
 ```
 
@@ -219,10 +237,10 @@ digraph G {
     node [shape=doublecircle];
     s10;
     start -> s9;
-    s9 -> s10 [label="ε (skip)"];
-    s9 -> s7 [label="ε"];
-    s8 -> s10 [label="ε"];
-    s8 -> s7 [label="ε (loop)"];
+    s9 -> s10 [label="λ(skip)"];
+    s9 -> s7 [label="λ"];
+    s8 -> s10 [label="λ"];
+    s8 -> s7 [label="λ(loop)"];
 }
 ```
 
@@ -239,12 +257,12 @@ digraph G {
     s10;
     start -> s0;
     s0 -> s1 [label="b"];
-    s1 -> s9 [label="ε"];
-    s9 -> s10 [label="ε (skip)"];
-    s9 -> s7 [label="ε"];
+    s1 -> s9 [label="λ"];
+    s9 -> s10 [label="λ(skip)"];
+    s9 -> s7 [label="λ"];
     s7 -> s8 [label="[union NFA]"];
-    s8 -> s10 [label="ε"];
-    s8 -> s7 [label="ε (loop)"];
+    s8 -> s10 [label="λ"];
+    s8 -> s7 [label="λ(loop)"];
 }
 ```
 
@@ -260,12 +278,12 @@ digraph G {
     node [shape=doublecircle];
     s16;
     start -> s11;
-    s11 -> s12 [label="ε (skip)"];
-    s11 -> s13 [label="ε"];
+    s11 -> s12 [label="λ(skip)"];
+    s11 -> s13 [label="λ"];
     s13 -> s14 [label="a"];
-    s14 -> s12 [label="ε"];
-    s14 -> s13 [label="ε (loop)"];
-    s12 -> s15 [label="ε"];
+    s14 -> s12 [label="λ"];
+    s14 -> s13 [label="λ(loop)"];
+    s12 -> s15 [label="λ"];
     s15 -> s16 [label="b"];
 }
 ```
@@ -286,10 +304,10 @@ digraph G {
     node [shape=doublecircle];
     s18;
     start -> s17;
-    s17 -> s0 [label="ε"];
-    s17 -> s11 [label="ε"];
-    s10 -> s18 [label="ε"];
-    s16 -> s18 [label="ε"];
+    s17 -> s0 [label="λ"];
+    s17 -> s11 [label="λ"];
+    s10 -> s18 [label="λ"];
+    s16 -> s18 [label="λ"];
 }
 ```
 
@@ -309,13 +327,17 @@ digraph G {
     atom_a [label="a (atom)"];
     part3 [label="Part 3: b*a* | CONCATENATION"];
     b_star [label="b* (STAR)"];
+    b_atom [label="b (atom)"];
     a_star [label="a* (STAR)"];
+    a_atom [label="a (atom)"];
     root -> part1;
     root -> part2;
     root -> part3;
     part2 -> atom_a;
     part3 -> b_star;
     part3 -> a_star;
+    b_star -> b_atom;
+    a_star -> a_atom;
 }
 ```
 
@@ -331,29 +353,29 @@ digraph G {
     node [shape=doublecircle];
     s15;
     start -> s14;
-    s14 -> s0 [label="ε"];
-    s14 -> s2 [label="ε"];
-    s14 -> s6 [label="ε"];
+    s14 -> s0 [label="λ"];
+    s14 -> s2 [label="λ"];
+    s14 -> s6 [label="λ"];
     s0 -> s1 [label="b"];
-    s2 -> s3 [label="ε (skip)"];
-    s2 -> s4 [label="ε"];
+    s2 -> s3 [label="λ(skip)"];
+    s2 -> s4 [label="λ"];
     s4 -> s5 [label="a"];
-    s5 -> s3 [label="ε"];
-    s5 -> s4 [label="ε (loop)"];
-    s6 -> s7 [label="ε (skip)"];
-    s6 -> s8 [label="ε"];
+    s5 -> s3 [label="λ"];
+    s5 -> s4 [label="λ(loop)"];
+    s6 -> s7 [label="λ(skip)"];
+    s6 -> s8 [label="λ"];
     s8 -> s9 [label="b"];
-    s9 -> s7 [label="ε"];
-    s9 -> s8 [label="ε (loop)"];
-    s7 -> s10 [label="ε"];
-    s10 -> s11 [label="ε (skip)"];
-    s10 -> s12 [label="ε"];
+    s9 -> s7 [label="λ"];
+    s9 -> s8 [label="λ(loop)"];
+    s7 -> s10 [label="λ"];
+    s10 -> s11 [label="λ(skip)"];
+    s10 -> s12 [label="λ"];
     s12 -> s13 [label="a"];
-    s13 -> s11 [label="ε"];
-    s13 -> s12 [label="ε (loop)"];
-    s1 -> s15 [label="ε"];
-    s3 -> s15 [label="ε"];
-    s11 -> s15 [label="ε"];
+    s13 -> s11 [label="λ"];
+    s13 -> s12 [label="λ(loop)"];
+    s1 -> s15 [label="λ"];
+    s3 -> s15 [label="λ"];
+    s11 -> s15 [label="λ"];
 }
 ```
 
@@ -362,7 +384,7 @@ digraph G {
 ## PROBLEM 1B — Improve the NFA (Optimal Transition Graph / OTG)
 
 ### What you're doing
-The Thompson NFA is bloated with λ-transitions. The OTG is the equivalent NFA/DFA with no λ-transitions and minimal states. You get there via **subset construction with λ-closure**.
+The Thompson NFA is bloated with λ-transitions. The OTG is the equivalent NFA with no λ-transitions and minimal states. You get there via **subset construction with λ-closure**.
 
 ### Key concept: λ-closure
 
@@ -399,9 +421,9 @@ digraph G {
     node [shape=point, width=0];
     start;
     node [shape=circle];
-    q0; q1; q_int; q2;
+    q0; q_int; q2;
     node [shape=doublecircle];
-    qf;
+    q1; qf;
     start -> q0;
     q0 -> q1 [label="b"];
     q0 -> q2 [label="a"];
@@ -413,12 +435,7 @@ digraph G {
     q2 -> qf [label="b"];
 }
 ```
-
-> [!note]
-> The `(ab+b)*` loop demands that every `a` be followed by a `b` (concatenation rule). The old design gave q1 free `a`/`b` self-loops, which incorrectly accepted arbitrary mixes. The fix introduces q_int: q1 —a→ q_int —b→ q1, forcing `a` to pair with `b`. The self-loop on `q1` handles the standalone `b` alternative in the union.
-
----
-
+	
 ### ✏️ Worked Example: OTG for r2 = b + a\* + b\*a\*
 
 **Insight:** `a*` accepts λ, and `b*a*` accepts λ — so the start state is immediately final.
@@ -431,9 +448,7 @@ digraph G {
     node [shape=point, width=0];
     start;
     node [shape=doublecircle];
-    q0; q2;
-    node [shape=circle];
-    q1;
+    q0; q1; q2;
     start -> q0;
     q0 -> q1 [label="b"];
     q0 -> q2 [label="a"];
@@ -467,7 +482,7 @@ digraph G {
     D [label="Step 4\nFor every i->q and q->j pair:\ncompute new i->j label using formula\nUnion (+) if edge already exists"];
     E [label="Step 5\nDelete q and all its edges"];
     F [shape=diamond, label="Only qs\nand qf\nremain?"];
-    G [label="Step 7\nLabel on qs->qf edge\n= your Regular Expression ✓"];
+    G [label="Step 6\nLabel on qs->qf edge\n= your Regular Expression ✓"];
     A -> B;
     B -> C;
     C -> D;
@@ -496,15 +511,18 @@ digraph G {
     node [shape=doublecircle];
     q2;
     start -> q0;
-    q0 -> q0 [label="a, b"];
-    q0 -> q1 [label="a, b"];
-    q1 -> q2 [label="a, b"];
-    q2 -> q2 [label="b"];
+    q0 -> q0 [label="a"];
+    q0 -> q1 [label="a"];
+    q0 -> q2 [label="b"];
+    q1 -> q2 [label="a"];
+    q1 -> q0 [label="b"];
     q2 -> q0 [label="a"];
+    q2 -> q1 [label="b"];
+    q2 -> q2 [label="b"];
 }
 ```
 
-**After adding qs and qf (edge labels combined):**
+**After adding qs and qf:**
 
 ```dot
 digraph G {
@@ -516,18 +534,32 @@ digraph G {
     node [shape=doublecircle];
     qf;
     start -> qs;
-    qs -> q0 [label="ε"];
-    q0 -> q0 [label="a+b"];
-    q0 -> q1 [label="a+b"];
-    q1 -> q2 [label="a+b"];
-    q2 -> q2 [label="b"];
+    qs -> q0 [label="λ"];
+    q0 -> q0 [label="a"];
+    q0 -> q1 [label="a"];
+    q0 -> q2 [label="b"];
+    q1 -> q2 [label="a"];
+    q1 -> q0 [label="b"];
     q2 -> q0 [label="a"];
-    q2 -> qf [label="ε"];
+    q2 -> q1 [label="b"];
+    q2 -> q2 [label="b"];
+    q2 -> qf [label="λ"];
 }
 ```
 
-**Eliminate q1 (no self-loop):**
-New edge q0 → q2 = `(a+b)(a+b)`
+**Eliminate q1** (no self-loop — eliminate first to keep algebra simple):
+
+Incoming edges to q1: `q0 --a--> q1`, `q2 --b--> q1`
+Outgoing edges from q1: `q1 --a--> q2`, `q1 --b--> q0`
+
+Compute new edges for every (i, j) pair where i→q1 and q1→j:
+
+| i | j | r_iq1 | r_q1j | new label | existing edge? | combined |
+|---|---|--------|--------|-----------|----------------|----------|
+| q0 | q2 | a | a | aa | b | **b+aa** |
+| q0 | q0 | a | b | ab | a | **a+ab** |
+| q2 | q2 | b | a | ba | b | **b+ba** |
+| q2 | q0 | b | b | bb | a | **a+bb** |
 
 ```dot
 digraph G {
@@ -539,18 +571,25 @@ digraph G {
     node [shape=doublecircle];
     qf;
     start -> qs;
-    qs -> q0 [label="ε"];
-    q0 -> q0 [label="a+b"];
-    q0 -> q2 [label="(a+b)(a+b)"];
-    q2 -> q2 [label="b"];
-    q2 -> q0 [label="a"];
-    q2 -> qf [label="ε"];
+    qs -> q0 [label="λ"];
+    q0 -> q0 [label="a+ab"];
+    q0 -> q2 [label="b+aa"];
+    q2 -> q0 [label="a+bb"];
+    q2 -> q2 [label="b+ba"];
+    q2 -> qf [label="λ"];
 }
 ```
 
-**Eliminate q0 (self-loop = `a+b`):**
-- `qs → q2`: `λ · (a+b)* · (a+b)(a+b)` = `(a+b)*(a+b)(a+b)`
-- `q2 → q2` new: `a · (a+b)* · (a+b)(a+b)` → combined self-loop: `b + a(a+b)*(a+b)(a+b)`
+**Eliminate q0** (self-loop = `a+ab`):
+
+Incoming edges to q0: `qs --λ--> q0`, `q2 --a+bb--> q0`
+Outgoing edges from q0: `q0 --a+ab--> q0` (self-loop), `q0 --b+aa--> q2`
+
+For each i→q0 and q0→j (excluding j=q0 since it is being eliminated):
+
+- **(qs, q2):** `λ · (a+ab)* · (b+aa)` = **`(a+ab)*(b+aa)`**
+- **(q2, q2):** `(a+bb) · (a+ab)* · (b+aa)` → combined with existing self-loop `b+ba`:
+  **`b+ba + (a+bb)(a+ab)*(b+aa)`**
 
 ```dot
 digraph G {
@@ -562,15 +601,25 @@ digraph G {
     node [shape=doublecircle];
     qf;
     start -> qs;
-    qs -> q2 [label="(a+b)*(a+b)(a+b)"];
-    q2 -> q2 [label="b + a(a+b)*(a+b)(a+b)"];
-    q2 -> qf [label="ε"];
+    qs -> q2 [label="(a+ab)*(b+aa)"];
+    q2 -> q2 [label="b+ba + (a+bb)(a+ab)*(b+aa)"];
+    q2 -> qf [label="λ"];
 }
 ```
 
-**Eliminate q2:**
+**Eliminate q2** (self-loop = `b+ba + (a+bb)(a+ab)*(b+aa)`):
 
-$$r = (a+b)^*(a+b)^2 \cdot \Big(b + a(a+b)^*(a+b)^2\Big)^*$$
+Only remaining pair is (qs, qf):
+
+`r_qs,q2 · (r_q2,q2)* · r_q2,qf`
+
+= `(a+ab)*(b+aa) · (b+ba + (a+bb)(a+ab)*(b+aa))* · λ`
+
+= `(a+ab)*(b+aa) (b+ba + (a+bb)(a+ab)*(b+aa))*`
+
+```
+RE = (a+ab)*(b+aa)(b+ba + (a+bb)(a+ab)*(b+aa))*
+```
 
 ---
 
@@ -658,7 +707,7 @@ digraph G {
 
 Derivation: S ⇒ B ⇒ aD ⇒ aaB ⇒ **aaa** ✓
 
-**Conclusion: L(G) is ambiguous** — `w = aaa` has two distinct parse trees.
+**Conclusion: G is ambiguous** — `w = aaa` has two distinct parse trees.
 
 ---
 
@@ -737,6 +786,19 @@ digraph G {
 
 **Phase 1 — NFA from G_R:**
 
+The given Right Linear Grammar G_R:
+```
+S → bA | aT | aC
+A → aB | aU
+T → bS
+C → aA
+B → bF
+U → bF
+F → λ
+```
+
+Translate each production to an NFA transition (variables → states, terminals → labels, final variable F → double circle):
+
 ```dot
 digraph G {
     rankdir=LR;
@@ -778,30 +840,52 @@ digraph G {
     A -> S [label="b"];
     A -> C [label="a"];
     C -> S [label="a"];
-    T -> S [label="b"];
-    S -> T [label="a"];
+    T -> S [label="a"];
+    S -> T [label="b"];
 }
 ```
 
 **Phase 3 — Read as Left Linear Grammar G_L:**
 
-- `F → λ` (start variable — produces empty string; NOT a terminal)
-- `B → Fb` ... read reversed arrows as `X → Ya` means seeing `Y --a--> X`
-- Substitute `F → λ` into dependent productions:
-  - `B → Fb → λb` simplifies to `B → b`
-  - `U → Fb → λb` simplifies to `U → b`
-- Final LLG (F is start variable):
+Rule: For each reversed arrow `Y --a--> X`, the LLG production is `X → Ya` (variable then terminal).
+
+| Edge | Raw LLG Production | After F→λ substitution |
+|------|-------------------|------------------------|
+| F --b--> B | B → Fb | B → b |
+| F --b--> U | U → Fb | U → b |
+| B --a--> A | A → Ba | A → Ba |
+| U --a--> A | A → Ua | A → Ua |
+| A --b--> S | S → Ab | S → Ab |
+| A --a--> C | C → Aa | C → Aa |
+| C --a--> S | S → Ca | S → Ca |
+| T --a--> S | S → Ta | S → Ta |
+| S --b--> T | T → Sb | T → Sb |
+
+Start variable `F → λ` (generates the empty string).
+
+Substituting `F → λ`, `B → b`, `U → b`:
 
 ```
 F → λ             (start variable)
 B → b
-A → bS | aC
-C → aS
-S → baS
+U → b
+A → Ba | Ua
+C → Aa
+S → Ab | Ca | Ta
+T → Sb
 ```
 
-> [!warning] LLG start variable
-> The start variable of a Left-Linear Grammar must derive λ, never a terminal directly. Assigning `F → b` causes downstream doubling (e.g. `B → Fb` becomes `B → bb` instead of the correct `B → b`).
+After further substitution of `A` and `C`:
+
+```
+F → λ
+B → b
+U → b
+A → ba
+C → baa
+S → bab | baaa | Ta
+T → Sb
+```
 
 ---
 
@@ -987,10 +1071,10 @@ digraph G {
 
 **Grammar after Pass 1 (P₁):**
 ```
-S → aS | a | A | aBD | aD | aB | c
+S → aS | a | A | aBD | aD | aB | c | λ
 A → bAD | bA | bD | b
 B → bC | b | C
-C → AcDD | cDD | AcD | Ac | cD | c
+C → AcDD | cDD | AcD | Ac | cD | c | D
 D → a
 E → b
 ```
@@ -1001,23 +1085,28 @@ E → b
 digraph G {
     rankdir=TB;
     node [shape=box, style=rounded];
-    UP [label="Unit productions: S→A, B→C"];
+    UP [label="Unit productions: S→A, B→C, C→D"];
     PA [label="(S,A): copy A's non-unit productions to S\n→ S gains: bAD, bA, bD, b"];
     PB [label="(B,C): copy C's non-unit productions to B\n→ B gains: AcDD, cDD, AcD, Ac, cD, c"];
-    DEL [label="Delete S→A and B→C"];
+    PC [label="(C,D): copy D's non-unit productions to C\n→ C gains: a"];
+    PD [label="(B,D) transitive via C→D:\nB gains: a"];
+    DEL [label="Delete S→A, B→C, and C→D"];
     UP -> PA;
     UP -> PB;
+    UP -> PC;
     PA -> DEL;
     PB -> DEL;
+    PC -> DEL;
+    PD -> DEL;
 }
 ```
 
 **Grammar after Pass 2 (P₂):**
 ```
-S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b | λ
 A → bAD | bA | bD | b
-B → bC | b | AcDD | cDD | AcD | Ac | cD | c
-C → AcDD | cDD | AcD | Ac | cD | c
+B → bC | b | AcDD | cDD | AcD | Ac | cD | c | a
+C → AcDD | cDD | AcD | Ac | cD | c | a
 D → a
 E → b
 ```
@@ -1028,7 +1117,7 @@ E → b
 digraph G {
     rankdir=LR;
     node [shape=box, style=rounded];
-    GEN [label="All variables generate ✓\n(D→a, E→b, A→b, B→b, C→c, S→a)"];
+    GEN [label="All variables generate ✓\n(D→a, E→b, A→b, B→b|a, C→c|a, S→a)"];
     REA [label="Reachable from S:\nS ✓, A ✓, B ✓, C ✓, D ✓"];
     UNREA [label="E is NEVER mentioned\nin any production → NOT reachable"];
     REM [label="Remove E → b"];
@@ -1040,10 +1129,10 @@ digraph G {
 
 **Final simplified grammar G':**
 ```
-S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b | λ
 A → bAD | bA | bD | b
-B → bC | b | AcDD | cDD | AcD | Ac | cD | c
-C → AcDD | cDD | AcD | Ac | cD | c
+B → bC | b | AcDD | cDD | AcD | Ac | cD | c | a
+C → AcDD | cDD | AcD | Ac | cD | c | a
 D → a
 ```
 
@@ -1091,6 +1180,15 @@ digraph G {
 }
 ```
 
+**Applying the pattern to the rest of the grammar:**
+
+- Step 1 (terminal rules): Every terminal `a`, `b`, `c` appearing in a RHS of length ≥ 2 is replaced by `Ba`, `Bb`, `Bc` respectively, and we add `Ba → a`, `Bb → b`, `Bc → c`.
+- Step 2 (chaining): For every RHS of length ≥ 3, introduce new variables to chain into pairs, following the same pattern as the examples above.
+
+After fully applying both steps, every production will have one of the two legal CNF forms: `A → BC` or `A → a`.
+
+> [!tip] The examples above demonstrate the complete procedure. The full CNF grammar is long but mechanically follows the same pattern for each production in G'.
+
 ---
 
 ## PROBLEM 6C — Convert to Greibach Normal Form (GNF)
@@ -1119,6 +1217,40 @@ digraph G {
     D -> DONE;
 }
 ```
+
+---
+
+### ✏️ Worked Example (from simplified G')
+
+Start from the simplified grammar G':
+
+```
+S → aS | aBD | aD | aB | c | bAD | bA | bD | b | λ
+A → bAD | bA | bD | b
+B → bC | b | AcDD | AcD | Ac | cDD | cD | c | a
+C → AcDD | cDD | AcD | Ac | cD | c | a
+D → a
+```
+
+**Step 2 — Substitute non-terminal starters:** B and C have productions starting with A (non-terminal). Look up A's productions and substitute each into B and C.
+
+For B → AcDD, substitute A → bAD | bA | bD | b:
+  ⇒ B → bADcDD | bAcDD | bDcDD | bcDD
+Repeat for B → AcD and B → Ac similarly. After substitution:
+
+```
+S → aS | aBD | aD | aB | c | bAD | bA | bD | b | λ
+A → bAD | bA | bD | b
+B → bC | b | bADcDD | bAcDD | bDcDD | bcDD | bADcD | bAcD | bDcD | bcD | bADc | bAc | bDc | bc | cDD | cD | c | a
+C → bADcDD | bAcDD | bDcDD | bcDD | bADcD | bAcD | bDcD | bcD | bADc | bAc | bDc | bc | cDD | cD | c | a
+D → a
+```
+
+**Step 3 — All RHS start with a terminal** (a, b, or c) except S → λ ✓. No left recursion present ✓.
+
+**Result: Grammar is in GNF** — every production has form `A → aα` (terminal followed by variables, or just terminal).
+
+> [!tip] The NPDA example in Problem 6D below uses a separate, smaller GNF grammar for clarity. The conversion procedure shown here applies to any simplified CFG.
 
 ---
 
@@ -1174,7 +1306,7 @@ digraph G {
     start -> q0;
     q0 -> q1 [label="λ, Z / SZ\n(push start variable)", fontsize=10];
     q1 -> q1 [label="a, S / A\nb, S / BD\nc, S / λ\na, A / λ\nb, B / D\na, D / λ", fontsize=10];
-    q1 -> q2 [label="λ, Z / λ\n(empty stack \→ accept)", fontsize=10];
+    q1 -> q2 [label="λ, Z / λ\n(empty stack → accept)", fontsize=10];
 }
 ```
 
@@ -1235,7 +1367,7 @@ digraph G {
 | **5** s-grammar | Check: starts with terminal AND no duplicate (Var, terminal) pairs | A→B (unit) instantly fails |
 | **6a** Simplify | λ-nullable → unit pairs → useless (ALWAYS this order) | S stays if S was nullable |
 | **6b** CNF | Bₐ for each terminal in long RHS; chain vars for length ≥ 3 | A→a and A→BC are the only legal forms |
-| **6c** GNF | Substitute until every RHS starts with terminal | A→Bα: replace using B's productions |
+| **6c** GNF | Substitute until every RHS starts with terminal | A→Bα: replace using B's productions; remove left recursion if needed |
 | **6d** NPDA | 3-state template; one δ line per GNF production | δ(q₀,λ,Z)=(q₁,SZ) always first |
 
 ---
@@ -1247,7 +1379,7 @@ digraph G {
 > 2. **Nullable propagation** — if D→λ and C→D (unit), then C is nullable. Unit steps count.
 > 3. **Unit pair closure** — if (S,A) and (A,B) are unit pairs, then (S,B) is also a unit pair.
 > 4. **s-grammar with units** — `A → B` (unit production) automatically fails s-grammar (B is not a terminal).
-> 5. **State elimination self-loop** — if no self-loop exists on the eliminated state, use `r* = λ* = λ` — i.e., just omit the star, write `r_iq · r_qj` directly.
+> 5. **State elimination self-loop** — if no self-loop exists on the eliminated state, the term `(r_qq)*` simplifies to `λ` (since the only way to go from q to q is to take no transition at all). Effectively: just omit the star, write `r_iq · r_qj` directly.
 > 6. **LLG direction** — `A → aB` (RLG) reverses to `B → Aa` (LLG), NOT `B → aA`.
 > 7. **CNF terminal rule** — `A → a` (single terminal) is ALREADY in CNF. Don't introduce Bₐ for it — only for terminals inside longer productions.
 > 8. **NPDA stack push order** — `δ(q₁, a, A) = (q₁, XY)` means X is top of stack. Write the string left-to-right as it appears in the grammar production.

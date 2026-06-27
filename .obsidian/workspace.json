@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Theoratical/TCS_MockExam_Procedures.md",
+                "file": "Theoratical/TCS_CHEATSHEET_FINAL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TCS_MockExam_Procedures"
+              "title": "TCS_CHEATSHEET_FINAL"
             }
           }
         ],
@@ -93,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 345
   },
   "right": {
     "id": "963ded235dc6ed14",
@@ -214,9 +213,15 @@
   },
   "active": "a987533551d38091",
   "lastOpenFiles": [
-    "conflict-files-obsidian-git.md",
-    "Theoratical/TCS_MockExam_Procedures.md",
+    "Theoratical/TCS Exam Procedures Cheatsheet - FINAL.md",
+    "Theoratical/TCS_CHEATSHEET_FINAL.md",
+    "Theoratical/TCS_Finite_Automata_Cheatsheet.md",
     "Theoratical/TCS_Midterm_Cheatsheet.md",
+    "TCS_Midterm_Cheatsheet.md",
+    "TCS_Finite_Automata_Cheatsheet.md",
+    "TCS Exam Procedures Cheatsheet - FINAL.md",
+    "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
+    "conflict-files-obsidian-git.md",
     "Theoratical/04-Context-Free-Language.md",
     "Untitled.md",
     "Obsidian Prompt.md",
@@ -234,12 +239,6 @@
     "Programming 2/Lecture/Vietnamese/OOP_Lec8_StudyGuide.md",
     "Programming 2/Exercises/cheatsheet.md",
     "Programming 2_Cheatsheet_Generator/Code.md",
-    "Programming 2/Lecture/OOP_Lec6_StudyGuide.md",
-    "Programming 2_Cheatsheet_Generator/cheatsheet.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec10_StudyGuide.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec9_StudyGuide.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec8_StudyGuide.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec7_StudyGuide.md",
     "Programming 2_Cheatsheet_Generator",
     "Programming 2/Exercises/test_tmp/check.exe",
     "Programming 2/Exercises/test_tmp/check.cpp",
