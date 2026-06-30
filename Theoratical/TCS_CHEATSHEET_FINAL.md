@@ -3,30 +3,6 @@ tags: [tcs, exam-prep, automata, formal-languages, vgu]
 aliases: [TCS Exam Cheatsheet]
 created: 2025-06-17
 ---
-
-# TCS Exam Cheatsheet — Zero to Full Marks
-
-> [!info] How to use
-> Each section = one problem type. Read the **procedure box** first, then follow the **worked example** step by step. Every step you write on paper is shown explicitly.
-
----
-
-## NOTATION REFERENCE
-
-| Symbol                | Meaning                                                                         |
-| --------------------- | ------------------------------------------------------------------------------- |
-| `→`                   | start state arrow                                                               |
-| `(q)`                 | regular state                                                                   |
-| `((q))`               | final state (double circle)                                                     |
-| `--a-->`              | transition on symbol `a`                                                        |
-| `λ`                   | empty string (lambda)                                                           |
-| `r*`                  | zero or more repetitions of r                                                   |
-| `r+`                  | one or more repetitions of r                                                    |
-| `r1 + r2`             | union (either r1 or r2)                                                         |
-| `r1r2`                | concatenation (r1 then r2)                                                      |
-| `δ(q, a, X) = (p, α)` | NPDA: in state q, reading a, with X on top of stack → go to p, replace X with α |
-
----
 ## PROBLEM 1A — Build NFA from a Regular Expression (Thompson's Construction)
 
 ### What you're doing
@@ -410,54 +386,6 @@ Step 5. Draw the result — states are sets, but rename them q0, q1, ... for nea
 > You do NOT need to mechanically compute all subsets. Look at the Thompson NFA and ask: "what can I reach from the start without reading anything?" Then trace real symbols. The answer key always gives a small clean graph — aim for 3–5 states.
 
 ---
-
-### ✏️ Worked Example: OTG for r1 = b(ab+b)\* + a\*b
-
-**Optimal TG (5 states):**
-
-```dot
-digraph G {
-    rankdir=LR;
-    node [shape=point, width=0];
-    start;
-    node [shape=circle];
-    q0; q_int; q2;
-    node [shape=doublecircle];
-    q1; qf;
-    start -> q0;
-    q0 -> q1 [label="b"];
-    q0 -> q2 [label="a"];
-    q1 -> q_int [label="a"];
-    q_int -> q1 [label="b"];
-    q1 -> q1 [label="b"];
-    q1 -> qf [label="b"];
-    q2 -> q2 [label="a"];
-    q2 -> qf [label="b"];
-}
-```
-	
-### ✏️ Worked Example: OTG for r2 = b + a\* + b\*a\*
-
-**Insight:** `a*` accepts λ, and `b*a*` accepts λ — so the start state is immediately final.
-
-**Optimal TG (3 states):**
-
-```dot
-digraph G {
-    rankdir=LR;
-    node [shape=point, width=0];
-    start;
-    node [shape=doublecircle];
-    q0; q1; q2;
-    start -> q0;
-    q0 -> q1 [label="b"];
-    q0 -> q2 [label="a"];
-    q1 -> q1 [label="b"];
-    q1 -> q2 [label="a"];
-    q2 -> q2 [label="a"];
-}
-```
-
 ---
 
 ## PROBLEM 2 — Find Regular Expression from Automaton (State Elimination)
@@ -618,7 +546,7 @@ Only remaining pair is (qs, qf):
 = `(a+ab)*(b+aa) (b+ba + (a+bb)(a+ab)*(b+aa))*`
 
 ```
-RE = (a+ab)*(b+aa)(b+ba + (a+bb)(a+ab)*(b+aa))*
+RE = (a+ab)*(b+aa) (b+ba + (a+bb)(a+ab)*(b+aa))*
 ```
 
 ---
@@ -711,93 +639,52 @@ Derivation: S ⇒ B ⇒ aD ⇒ aaB ⇒ **aaa** ✓
 
 ---
 
-## PROBLEM 4 — RLG ↔ NFA ↔ LLG
+## Q4 — RLG to LLG (The Double-Reversal Hack)
 
-### Key grammar rules
+### The Shortcut Algorithm
 
-| Grammar type | Production form | Example |
-|---|---|---|
-| Right Linear | `A → aB` or `A → a` or `A → λ` | `S → abA`, `A → b` |
-| Left Linear | `A → Ba` or `A → a` or `A → λ` | `S → Aab`, `A → b` |
+The professor bypasses the LLG arrow-reading rule. **Read an RLG from the reversed NFA, then reverse the strings.**
 
-### Overview of the three phases
+```
+S1: Draw the NFA using empty circles for intermediate states
+    (no formal variables for multiple terminals).
+
+S2: Reverse the NFA (swap start↔final, flip all arrows).
+
+S3: Read a RIGHT-LINEAR grammar directly from the reversed NFA.
+    Skip through empty circles and concatenate their labels.
+    e.g. F --b--> (·) --a--> A  →  F → baA
+
+S4: Reverse the strings in each production to get the LLG.
+    e.g. F → baA  becomes  F → Aab
+         F → bB   becomes  F → Bb
+```
 
 ```dot
 digraph G {
     rankdir=LR;
     node [shape=box, style=rounded];
-    RLG [label="Right Linear\nGrammar GR"];
-    NFA [label="NFA S1"];
-    RNFA [label="Reversed\nNFA S2"];
-    LLG [label="Left Linear\nGrammar GL"];
-    RLG -> NFA [label="Phase 1\nVariables=States\nProductions=Arrows"];
-    NFA -> RNFA [label="Phase 2\nSwap start<->final\nReverse all arrows"];
-    RNFA -> LLG [label="Phase 3\nRead arrows as\nLeft Linear rules"];
+    A [label="S1\nDraw NFA\n(empty circles\nfor multi-terminal)"];
+    B [label="S2\nReverse NFA\n(swap start↔final)"];
+    C [label="S3\nRead RLG from\nreversed NFA"];
+    D [label="S4\nReverse strings\n→ LLG ✓"];
+    A -> B; B -> C; C -> D;
 }
 ```
 
-### Phase 1: RLG → NFA (translation rules)
+> **Quick check:** After S4, every production should have the form `X → Yα` or `X → α` (variable first, then terminals). If a terminal appears before a variable, you reversed wrong.
 
-```dot
-digraph G {
-    rankdir=LR;
-    node [shape=box, style=rounded];
-    prod [label="Production", shape=plain];
-    nfa [label="NFA Arrow", shape=plain];
-    p1 [label="A → aB"];
-    p2 [label="A → a"];
-    p3 [label="A → λ"];
-    p4 [label="A → abB"];
-    r1 [label="A --a--> B"];
-    r2 [label="A --a--> F (final state)"];
-    r3 [label="A becomes a final state"];
-    r4 [label="A --a--> (new) --b--> B"];
-    { rank=same; p1; r1; }
-    { rank=same; p2; r2; }
-    { rank=same; p3; r3; }
-    { rank=same; p4; r4; }
-    p1 -> r1;
-    p2 -> r2;
-    p3 -> r3;
-    p4 -> r4;
-}
+### ✏️ Worked Example
+
+**Given RLG:**
 ```
-
-### Phase 2: Reverse the NFA
-
-```dot
-digraph G {
-    rankdir=LR;
-    node [shape=box, style=rounded];
-    os [label="→ Old Start"];
-    of [label="Old Final ⊗"];
-    ns [label="→ New Start\n(was old final)"];
-    nf [label="New Final ⊗\n(was old start)"];
-    os -> of [label="a"];
-    nf -> ns [label="a", dir=forward];
-    of -> ns [label="becomes", style=dashed, constraint=false];
-    os -> nf [label="becomes", style=dashed, constraint=false];
-}
-```
-
----
-
-### ✏️ Fully Worked Example (mock exam Q4)
-
-**Phase 1 — NFA from G_R:**
-
-The given Right Linear Grammar G_R:
-```
-S → bA | aT | aC
-A → aB | aU
-T → bS
+S → abS | bA | aC
+A → aB | ab
+B → b
 C → aA
-B → bF
-U → bF
-F → λ
 ```
 
-Translate each production to an NFA transition (variables → states, terminals → labels, final variable F → double circle):
+**S1 — Draw NFA** (anonymous empty circles for multi-terminal productions):
 
 ```dot
 digraph G {
@@ -805,23 +692,31 @@ digraph G {
     node [shape=point, width=0];
     start;
     node [shape=circle];
-    S; A; T; C; B; U;
+    S; A; B; C;
     node [shape=doublecircle];
     F;
+    node [shape=circle, style=dashed, label="", width=0.35, height=0.35];
+    i1; i2;
     start -> S;
-    S -> A [label="b"];
-    S -> T [label="a"];
-    T -> S [label="b"];
-    S -> C [label="a"];
-    A -> B [label="a"];
-    A -> U [label="a"];
-    B -> F [label="b"];
-    U -> F [label="b"];
-    C -> A [label="a"];
+    S -> i1 [label="a"];
+    i1 -> S [label="b"];
+    S -> A  [label="b"];
+    S -> C  [label="a"];
+    A -> B  [label="a"];
+    A -> i2 [label="a"];
+    i2 -> F [label="b"];
+    B -> F  [label="b"];
+    C -> A  [label="a"];
 }
 ```
 
-**Phase 2 — Reversed NFA S₂** (swap start↔final, flip all arrows):
+> S→abS creates the loop S→i1→S. A→ab and B→b both feed into the implicit final state F.
+
+**S2 — Reverse the NFA** (swap: F becomes start, S becomes final; flip all arrows):
+
+Original edges reversed (flip direction, keep label):
+- i1 --a--> S,  S --b--> i1,  A --b--> S,  C --a--> S
+- B --a--> A,  i2 --a--> A,  F --b--> i2,  F --b--> B,  A --a--> C
 
 ```dot
 digraph G {
@@ -829,64 +724,60 @@ digraph G {
     node [shape=point, width=0];
     start;
     node [shape=circle];
-    F; B; U; A; C; T;
+    F; A; B; C;
     node [shape=doublecircle];
     S;
+    node [shape=circle, style=dashed, label="", width=0.35, height=0.35];
+    i1; i2;
+
     start -> F;
-    F -> B [label="b"];
-    F -> U [label="b"];
-    B -> A [label="a"];
-    U -> A [label="a"];
-    A -> S [label="b"];
-    A -> C [label="a"];
-    C -> S [label="a"];
-    T -> S [label="a"];
-    S -> T [label="b"];
+    F -> i2 [label="b"];
+    F -> B  [label="b"];
+    i2 -> A [label="a"];
+    B -> A  [label="a"];
+    A -> S  [label="b"];
+    A -> C  [label="a"];
+    C -> S  [label="a"];
+    S -> i1 [label="b"];
+    i1 -> S [label="a"];
 }
 ```
 
-**Phase 3 — Read as Left Linear Grammar G_L:**
+**S3 — Read RLG from reversed NFA** (skip through dashed empty circles, concatenating labels):
 
-Rule: For each reversed arrow `Y --a--> X`, the LLG production is `X → Ya` (variable then terminal).
+| From | Path through reversed NFA | RLG Production |
+|------|--------------------------|----------------|
+| F (start) | F --b--> (i2) --a--> A | F → baA |
+| F | F --b--> B | F → bB |
+| A | A --b--> S | A → bS |
+| A | A --a--> C | A → aC |
+| B | B --a--> A | B → aA |
+| C | C --a--> S | C → aS |
+| S | S --b--> (i1) --a--> S | S → baS |
 
-| Edge | Raw LLG Production | After F→λ substitution |
-|------|-------------------|------------------------|
-| F --b--> B | B → Fb | B → b |
-| F --b--> U | U → Fb | U → b |
-| B --a--> A | A → Ba | A → Ba |
-| U --a--> A | A → Ua | A → Ua |
-| A --b--> S | S → Ab | S → Ab |
-| A --a--> C | C → Aa | C → Aa |
-| C --a--> S | S → Ca | S → Ca |
-| T --a--> S | S → Ta | S → Ta |
-| S --b--> T | T → Sb | T → Sb |
+**S4 — Reverse the strings → LLG:**
 
-Start variable `F → λ` (generates the empty string).
+For each production `X → α`, reverse the RHS string `α` (terminals + variable):
 
-Substituting `F → λ`, `B → b`, `U → b`:
-
-```
-F → λ             (start variable)
-B → b
-U → b
-A → Ba | Ua
-C → Aa
-S → Ab | Ca | Ta
-T → Sb
-```
-
-After further substitution of `A` and `C`:
+| Phase 3 RLG | Reverse RHS | LLG Production |
+|-------------|-------------|----------------|
+| F → baA | "baA" → "Aab" | **F → Aab** |
+| F → bB | "bB" → "Bb" | **F → Bb** |
+| A → bS | "bS" → "Sb" | **A → Sb** |
+| A → aC | "aC" → "Ca" | **A → Ca** |
+| B → aA | "aA" → "Aa" | **B → Aa** |
+| C → aS | "aS" → "Sa" | **C → Sa** |
+| S → baS | "baS" → "Sab" | **S → Sab** |
+`
+**Final Left-Linear Grammar G_L** (start variable = F):
 
 ```
-F → λ
-B → b
-U → b
-A → ba
-C → baa
-S → bab | baaa | Ta
-T → Sb
+F → Aab | Bb
+A → Sb | Ca
+B → Aa
+C → Sa
+S → Sab | lambda
 ```
-
 ---
 
 ## PROBLEM 5 — Is It an s-grammar?
@@ -1071,7 +962,7 @@ digraph G {
 
 **Grammar after Pass 1 (P₁):**
 ```
-S → aS | a | A | aBD | aD | aB | c | λ
+S → aS | a | A | aBD | aD | aB | c 
 A → bAD | bA | bD | b
 B → bC | b | C
 C → AcDD | cDD | AcD | Ac | cD | c | D
@@ -1103,7 +994,7 @@ digraph G {
 
 **Grammar after Pass 2 (P₂):**
 ```
-S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b | λ
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
 A → bAD | bA | bD | b
 B → bC | b | AcDD | cDD | AcD | Ac | cD | c | a
 C → AcDD | cDD | AcD | Ac | cD | c | a
@@ -1129,7 +1020,7 @@ digraph G {
 
 **Final simplified grammar G':**
 ```
-S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b | λ
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b 
 A → bAD | bA | bD | b
 B → bC | b | AcDD | cDD | AcD | Ac | cD | c | a
 C → AcDD | cDD | AcD | Ac | cD | c | a
@@ -1158,7 +1049,7 @@ digraph G {
     B -> C;
 }
 ```
-
+		 
 > [!warning]
 > `S → a` (length 1, all terminal) is already in CNF — do NOT touch it. Only productions of length ≥ 2 with terminals need modification.
 
@@ -1168,11 +1059,11 @@ digraph G {
 digraph G {
     rankdir=LR;
     node [shape=box, style=rounded];
-    TERM [label="Introduce terminal variables:\nBa → a\nBb → b\nBc → c"];
-    EX1 [label="S → aS (length 2 with terminal):\nreplace a → S → BaS ✓"];
-    EX2 [label="S → aBD (length 3):\nS → BaBD → introduce D1→BD\n⇒ S → BaD1, D1 → BD"];
-    EX3 [label="A → bAD (length 3):\nA → BbAD → introduce D2→AD\n⇒ A → BbD2, D2 → AD"];
-    EX4 [label="B → AcDD (length 4):\nB → ABcDD → chain:\nB → AD3, D3 → BcD4, D4 → DD"];
+    TERM [label="Step 1: Terminal variables\nBa → a\nBb → b\nBc → c"];
+    EX1 [label="S → aS (len 2, terminal a):\nreplace a → Ba: S → BaS ✓"];
+    EX2 [label="S → aBD (len 3):\nS → BaBD → chain:\nS → BaD1, D1 → BD"];
+    EX3 [label="B → AcDD (len 4):\nB → ABcDD → chain:\nB → AD3, D3 → BcD4, D4 → DD"];
+    EX4 [label="B → cDD (len 3):\nB → BcDD → chain:\nB → BcD4, D4 → DD"];
     TERM -> EX1;
     TERM -> EX2;
     TERM -> EX3;
@@ -1180,14 +1071,52 @@ digraph G {
 }
 ```
 
-**Applying the pattern to the rest of the grammar:**
+**Step 1 — Replace terminals in RHS of length ≥ 2:**
 
-- Step 1 (terminal rules): Every terminal `a`, `b`, `c` appearing in a RHS of length ≥ 2 is replaced by `Ba`, `Bb`, `Bc` respectively, and we add `Ba → a`, `Bb → b`, `Bc → c`.
-- Step 2 (chaining): For every RHS of length ≥ 3, introduce new variables to chain into pairs, following the same pattern as the examples above.
+Every `a`, `b`, `c` inside a multi-symbol RHS becomes `Ba`, `Bb`, `Bc`. Add `Ba → a`, `Bb → b`, `Bc → c`.
 
-After fully applying both steps, every production will have one of the two legal CNF forms: `A → BC` or `A → a`.
+```
+S → BaS | a | BaBD | BaD | BaB | c | BbAD | BbA | BbD | b 
+A → BbAD | BbA | BbD | b
+B → BbC | b | ABcDD | BcDD | ABcD | ABc | BcD | c | a
+C → ABcDD | BcDD | ABcD | ABc | BcD | c | a
+D → a
+Ba → a    Bb → b    Bc → c
+```
 
-> [!tip] The examples above demonstrate the complete procedure. The full CNF grammar is long but mechanically follows the same pattern for each production in G'.
+**Step 2 — Chain RHS of length ≥ 3 into pairs:**
+
+| Original RHS | Length | Chain variables | Result |
+|---|---|---|---|
+| `BaBD` (S) | 3 | D1 → BD | S → BaD1 |
+| `BbAD` (S, A) | 3 | D2 → AD | S → BbD2, A → BbD2 |
+| `ABcDD` (B, C) | 4 | D3 → BcD4, D4 → DD | B → AD3, C → AD3 |
+| `BcDD` (B, C) | 3 | D4 → DD | B → BcD4, C → BcD4 |
+| `ABcD` (B, C) | 3 | D6 → BcD | B → AD6, C → AD6 |
+
+**Step 3 — Check:** Every RHS is either a single terminal (`a`, `b`, `c`), two non-terminals, or `λ` (S only). ✓
+
+**Final CNF grammar:**
+
+```
+Ba → a
+Bb → b
+Bc → c
+D  → a
+
+S  → BaS | BaD1 | BaD | BaB | BbD2 | BbA | BbD | a | b | c
+A  → BbD2 | BbA | BbD | b
+B  → BbC | AD3 | BcD4 | AD6 | ABc | BcD | b | c | a
+C  → AD3 | BcD4 | AD6 | ABc | BcD | c | a
+
+D1 → BD
+D2 → AD
+D3 → BcD4
+D4 → DD
+D6 → BcD
+```
+
+> [!tip] 37 productions total. Every RHS is exactly `A → BC` or `A → a` (plus `S → λ`). Chain variables D1–D6 are single-use helpers — they carry no linguistic meaning, only structural.
 
 ---
 
@@ -1205,11 +1134,13 @@ Every production must start with a terminal:
 digraph G {
     rankdir=TB;
     node [shape=box, style=rounded];
-    A [label="Step 1: Start from simplified grammar G'"];
+    A0 [label="Step 0 (if λ ∈ L(G)):\nIntroduce new start X.\nX → S | λ.\nX never appears on any RHS."];
+    A [label="Step 1: Replace any terminal\nappearing beyond position 1\nwith a new single-char variable\n(E → c, etc.)."];
     B [label="Step 2: For every production starting\nwith a non-terminal:\nA → Bα and B → b1β1 | b2β2 | ...\nSubstitute: A → b1β1α | b2β2α | ..."];
     C [shape=diamond, label="Every RHS\nstarts with\na terminal?"];
     D [label="Step 3: Handle left recursion if needed:\nA → Aα | β becomes:\nA → β A'\nA' → α A' | α"];
     DONE [label="✓ Grammar is in GNF"];
+    A0 -> A;
     A -> B;
     B -> C;
     C -> B [label="No"];
@@ -1220,46 +1151,63 @@ digraph G {
 
 ---
 
-### ✏️ Worked Example (from simplified G')
+### ✏️ Worked Example (from G')
 
-Start from the simplified grammar G':
+Start from G' (Problem 6A). Note: during simplification, `S → λ` was removed, but `λ ∈ L(G)` is true — the language still contains the empty string. We restore it in Step 0.
 
 ```
-S → aS | aBD | aD | aB | c | bAD | bA | bD | b | λ
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
 A → bAD | bA | bD | b
-B → bC | b | AcDD | AcD | Ac | cDD | cD | c | a
+B → bC | b | AcDD | cDD | AcD | Ac | cD | c | a
 C → AcDD | cDD | AcD | Ac | cD | c | a
 D → a
 ```
 
-**Step 2 — Substitute non-terminal starters:** B and C have productions starting with A (non-terminal). Look up A's productions and substitute each into B and C.
-
-For B → AcDD, substitute A → bAD | bA | bD | b:
-  ⇒ B → bADcDD | bAcDD | bDcDD | bcDD
-Repeat for B → AcD and B → Ac similarly. After substitution:
+**Step 1 — Replace terminals beyond position 1:** The terminal `c` appears at position 2 in `AcDD`, `AcD`, `Ac`. Introduce `E → c` and replace those occurrences:
 
 ```
-S → aS | aBD | aD | aB | c | bAD | bA | bD | b | λ
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
 A → bAD | bA | bD | b
-B → bC | b | bADcDD | bAcDD | bDcDD | bcDD | bADcD | bAcD | bDcD | bcD | bADc | bAc | bDc | bc | cDD | cD | c | a
-C → bADcDD | bAcDD | bDcDD | bcDD | bADcD | bAcD | bDcD | bcD | bADc | bAc | bDc | bc | cDD | cD | c | a
+B → bC | b | AEDD | cDD | AED | AE | cD | c | a
+C → AEDD | cDD | AED | AE | cD | c | a
 D → a
+E → c
 ```
 
-**Step 3 — All RHS start with a terminal** (a, b, or c) except S → λ ✓. No left recursion present ✓.
+All variables are single uppercase letters. ✓
 
-**Result: Grammar is in GNF** — every production has form `A → aα` (terminal followed by variables, or just terminal).
+**Step 2 — Substitute non-terminal starters:** B and C still have productions starting with A (`AEDD`, `AED`, `AE`). Substitute `A → bAD | bA | bD | b` into each:
 
-> [!tip] The NPDA example in Problem 6D below uses a separate, smaller GNF grammar for clarity. The conversion procedure shown here applies to any simplified CFG.
+B → AEDD  ⇒  B → **bAD**EDD | **bA**EDD | **bD**EDD | **b**EDD
+B → AED   ⇒  B → **bAD**ED  | **bA**ED  | **bD**ED  | **b**ED
+B → AE    ⇒  B → **bAD**E   | **bA**E   | **bD**E   | **b**E
+
+Same substitution applies to C.
+
+**Step 3 — Check:** All RHS start with exactly one terminal (a, b, or c). Every symbol after is a single-char variable. ✓ No left recursion. ✓
+
+**Final GNF grammar:**
+
+```
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
+A → bAD | bA | bD | b
+B → bC | b | bADEDD | bAEDD | bDEDD | bEDD | bADED | bAED | bDED | bED | bADE | bAE | bDE | bE | cDD | cD | c | a
+C → bADEDD | bAEDD | bDEDD | bEDD | bADED | bAED | bDED | bED | bADE | bAE | bDE | bE | cDD | cD | c | a
+D → a
+E → c
+```
 
 ---
 
 ## PROBLEM 6D — Build NPDA from GNF Grammar
 
 ### What you're doing
+
 Given a GNF grammar, mechanically write the NPDA. It always has exactly **3 states**.
 
 ### The fixed template (memorise this)
+
+dot
 
 ```dot
 digraph G {
@@ -1272,86 +1220,123 @@ digraph G {
     q2;
     start -> q0;
     q0 -> q1 [label="λ, Z / SZ\n(push start variable)"];
-    q1 -> q1 [label="a, A / α\n(for each rule A → aα)"];
+    q1 -> q1 [label="a, A / α  (for each rule A → aα)\nλ, A / λ  (for each rule A → λ)"];
     q1 -> q2 [label="λ, Z / λ\n(stack empty → accept)"];
 }
 ```
 
-> [!warning] Stack push order
-> `δ(q₁, a, A) = (q₁, XY)` means **X is on top**. Write left-to-right as in the grammar production.
+The rule is always: **one δ line per grammar production**.
+
+- `A → aα` becomes `δ(q₁, a, A) = (q₁, α)`
+- `A → λ` becomes `δ(q₁, λ, A) = (q₁, λ)`
+
+> [!warning] Stack push order `δ(q₁, a, A) = (q₁, YZ)` means **Y is on top**. Write left-to-right as in the grammar production.
+
+> [!note] If λ ∈ L(G) Just add `δ(q₁, λ, S) = (q₁, λ)` as one extra line for S. No new variable needed.
 
 ---
 
 ### ✏️ Fully Worked Example (mock exam Q6d)
 
-**GNF Grammar:**
+**GNF Grammar** (from Problem 6C):
+
 ```
-S → aA | bBD | c
-A → a
-B → bD
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
+A → bAD | bA | bD | b
+B → bC | b | bADEDD | bAEDD | bDEDD | bEDD | bADED | bAED | bDED | bED | bADE | bAE | bDE | bE | cDD | cD | c | a
+C → bADEDD | bAEDD | bDEDD | bEDD | bADED | bAED | bDED | bED | bADE | bAE | bDE | bE | cDD | cD | c | a
 D → a
+E → c
 ```
 
-**NPDA transition diagram:**
-
-```dot
-digraph G {
-    rankdir=LR;
-    node [shape=point, width=0];
-    start;
-    node [shape=circle];
-    q0; q1;
-    node [shape=doublecircle];
-    q2;
-    start -> q0;
-    q0 -> q1 [label="λ, Z / SZ\n(push start variable)", fontsize=10];
-    q1 -> q1 [label="a, S / A\nb, S / BD\nc, S / λ\na, A / λ\nb, B / D\na, D / λ", fontsize=10];
-    q1 -> q2 [label="λ, Z / λ\n(empty stack → accept)", fontsize=10];
-}
-```
-
-**Transition function (all processing loops on q₁):**
+**Transition function** — one line per GNF production (grouped by variable):
 
 ```
-δ(q₀, λ, Z)  = (q₁, SZ)     ← push start variable (always first)
+δ(q₀, λ, Z)  = (q₁, SZ)       ← push start variable S onto stack
 
-δ(q₁, a, S)  = (q₁, A)      ← S → aA
-δ(q₁, b, S)  = (q₁, BD)     ← S → bBD  (B on top of stack)
-δ(q₁, c, S)  = (q₁, λ)      ← S → c     (pop S, push nothing)
-δ(q₁, a, A)  = (q₁, λ)      ← A → a     (pop A)
-δ(q₁, b, B)  = (q₁, D)      ← B → bD    (replace B with D)
-δ(q₁, a, D)  = (q₁, λ)      ← D → a     (pop D)
+── S ──
+δ(q₁, λ, S)  = (q₁, λ)        ← S → λ     (λ ∈ L(G), so accept empty string)
+δ(q₁, a, S)  = (q₁, S)        ← S → aS
+δ(q₁, a, S)  = (q₁, λ)        ← S → a
+δ(q₁, a, S)  = (q₁, BD)       ← S → aBD
+δ(q₁, a, S)  = (q₁, D)        ← S → aD
+δ(q₁, a, S)  = (q₁, B)        ← S → aB
+δ(q₁, b, S)  = (q₁, AD)       ← S → bAD
+δ(q₁, b, S)  = (q₁, A)        ← S → bA
+δ(q₁, b, S)  = (q₁, D)        ← S → bD
+δ(q₁, b, S)  = (q₁, λ)        ← S → b
+δ(q₁, c, S)  = (q₁, λ)        ← S → c
 
-δ(q₁, λ, Z)  = (q₂, λ)      ← empty stack → accept (always last)
+── A ──
+δ(q₁, b, A)  = (q₁, AD)       ← A → bAD
+δ(q₁, b, A)  = (q₁, A)        ← A → bA
+δ(q₁, b, A)  = (q₁, D)        ← A → bD
+δ(q₁, b, A)  = (q₁, λ)        ← A → b
+
+── B ──
+δ(q₁, b, B)  = (q₁, C)        ← B → bC
+δ(q₁, b, B)  = (q₁, λ)        ← B → b
+δ(q₁, b, B)  = (q₁, ADEDD)    ← B → bADEDD
+δ(q₁, b, B)  = (q₁, AEDD)     ← B → bAEDD
+δ(q₁, b, B)  = (q₁, DEDD)     ← B → bDEDD
+δ(q₁, b, B)  = (q₁, EDD)      ← B → bEDD
+δ(q₁, b, B)  = (q₁, ADED)     ← B → bADED
+δ(q₁, b, B)  = (q₁, AED)      ← B → bAED
+δ(q₁, b, B)  = (q₁, DED)      ← B → bDED
+δ(q₁, b, B)  = (q₁, ED)       ← B → bED
+δ(q₁, b, B)  = (q₁, ADE)      ← B → bADE
+δ(q₁, b, B)  = (q₁, AE)       ← B → bAE
+δ(q₁, b, B)  = (q₁, DE)       ← B → bDE
+δ(q₁, b, B)  = (q₁, E)        ← B → bE
+δ(q₁, c, B)  = (q₁, DD)       ← B → cDD
+δ(q₁, c, B)  = (q₁, D)        ← B → cD
+δ(q₁, c, B)  = (q₁, λ)        ← B → c
+δ(q₁, a, B)  = (q₁, λ)        ← B → a
+
+── C ──
+δ(q₁, b, C)  = (q₁, ADEDD)    ← C → bADEDD
+δ(q₁, b, C)  = (q₁, AEDD)     ← C → bAEDD
+δ(q₁, b, C)  = (q₁, DEDD)     ← C → bDEDD
+δ(q₁, b, C)  = (q₁, EDD)      ← C → bEDD
+δ(q₁, b, C)  = (q₁, ADED)     ← C → bADED
+δ(q₁, b, C)  = (q₁, AED)      ← C → bAED
+δ(q₁, b, C)  = (q₁, DED)      ← C → bDED
+δ(q₁, b, C)  = (q₁, ED)       ← C → bED
+δ(q₁, b, C)  = (q₁, ADE)      ← C → bADE
+δ(q₁, b, C)  = (q₁, AE)       ← C → bAE
+δ(q₁, b, C)  = (q₁, DE)       ← C → bDE
+δ(q₁, b, C)  = (q₁, E)        ← C → bE
+δ(q₁, c, C)  = (q₁, DD)       ← C → cDD
+δ(q₁, c, C)  = (q₁, D)        ← C → cD
+δ(q₁, c, C)  = (q₁, λ)        ← C → c
+δ(q₁, a, C)  = (q₁, λ)        ← C → a
+
+── E ──
+δ(q₁, c, E)  = (q₁, λ)        ← E → c
+
+── D ──
+δ(q₁, a, D)  = (q₁, λ)        ← D → a
+
+δ(q₁, λ, Z)  = (q₂, λ)        ← empty stack → accept (always last)
 ```
 
 **Trace — input `"c"` (accepted):**
 
-```dot
-digraph G {
-    rankdir=TB;
-    node [shape=box, style=rounded];
-    header [label="Input | State | Stack", shape=plain];
-    initial [label="Initial", style=dashed];
-    step1 [label="q0, Z"];
-    delta1 [label="δ(q0,λ,Z)=(q1,SZ)", style=dashed];
-    step2 [label="q1, SZ"];
-    read_c [label="read c"];
-    delta2 [label="δ(q1,c,S)=(q1,λ) → pop S", style=dashed];
-    step3 [label="q1, Z"];
-    delta3 [label="δ(q1,λ,Z)=(q2,λ) → ACCEPT ✓", style=dashed];
-    step4 [label="q2, ∅"];
-    header -> initial;
-    initial -> step1;
-    step1 -> delta1;
-    delta1 -> step2;
-    step2 -> read_c;
-    read_c -> delta2;
-    delta2 -> step3;
-    step3 -> delta3;
-    delta3 -> step4;
-}
-```
+|Step|Input left|State|Stack|Rule fired|
+|---|---|---|---|---|
+|1|c|q₀|Z|δ(q₀, λ, Z) = (q₁, SZ)|
+|2|c|q₁|SZ|δ(q₁, c, S) = (q₁, λ) — S → c|
+|3|ε|q₁|Z|δ(q₁, λ, Z) = (q₂, λ) — empty stack|
+|4|ε|q₂|∅|**ACCEPT ✓**|
+
+**Trace — input `""` / λ (accepted):**
+
+|Step|Input left|State|Stack|Rule fired|
+|---|---|---|---|---|
+|1|ε|q₀|Z|δ(q₀, λ, Z) = (q₁, SZ)|
+|2|ε|q₁|SZ|δ(q₁, λ, S) = (q₁, λ) — S → λ|
+|3|ε|q₁|Z|δ(q₁, λ, Z) = (q₂, λ) — empty stack|
+|4|ε|q₂|∅|**ACCEPT ✓**|
 
 ---
 

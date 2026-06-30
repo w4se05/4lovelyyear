@@ -3,9 +3,9 @@
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 0: THE 4 PILLARS OF OOP (THEORY)
-# 
+# ═══════════════════════════════════════════════════
 
 | Pillar | Meaning | C++ How |
 |--------|---------|---------|
@@ -18,37 +18,22 @@
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 1: CLASS BASICS (Lec3, Lec5, Lec6)
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 CLASS SYNTAX TEMPLATE (MEMORIZE THIS)
 
 ```cpp
 class ClassName {
-private:
-    int data;           // hidden state
-
-protected:
-    int sharedData;     // visible to derived classes only
-
-public:
-    ClassName();                        // default constructor
-    ClassName(int val);                 // parameterized constructor
-    ClassName(const ClassName& other);  // copy constructor
-    ~ClassName();                       // destructor
-
-    int getData() const;    // const = does NOT modify state
-    void setData(int val);  // modifier
-
-    static int getCount();  // belongs to CLASS, not object
-};
-
-// Out-of-line definition (outside class body):
-int ClassName::getData() const { return data; }
-
-// Out-of-line + inline keyword:
-inline void ClassName::setData(int val) { data = val; }
+private:                          // hidden data
+    int data1;
+    double data2;
+public:                           // public interface
+    ClassName(int d1, double d2);  // constructor
+    int getData1() const;          // selector (const = won't modify)
+    void setData2(double val);     // modifier
+};  // ← SEMICOLON MANDATORY — forget this = LOSE MARKS
 ```
 
 ## 🔑 OBJECT LIFECYCLE
@@ -180,9 +165,9 @@ public:
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 2: INHERITANCE (Lec7, Lec8)
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 INHERITANCE SYNTAX
 
@@ -289,9 +274,9 @@ Derived class must define its own constructors, destructor, copy ctor, assignmen
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 3: POLYMORPHISM (Lec9) — THE BIG ONE
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 VIRTUAL FUNCTIONS — THE KEY CONCEPT
 
@@ -428,9 +413,9 @@ Always pass polymorphic objects by **pointer** or **reference**.
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 4: OVERLOADING (Lec10)
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 FUNCTION OVERLOADING
 
@@ -532,9 +517,9 @@ f(1.0, 2.0);  // ❌ AMBIGUOUS — both need one conversion → tie
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 5: TEMPLATES (Lec11)
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 FUNCTION TEMPLATE
 
@@ -619,9 +604,9 @@ class A {
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 6: LINKED LISTS (Lec12)
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 SINGLY LINKED LIST (Template-based: TList<T>)
 
@@ -733,9 +718,9 @@ public:
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 7: OO DESIGN (Lec13)
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 THE 5 DESIGN STEPS
 
@@ -785,9 +770,9 @@ Problem description → underline NOUNS (candidate classes) and VERBS (candidate
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 8: COMMON CODE PATTERNS (PAPER-CODING)
-# 
+# ═══════════════════════════════════════════════════
 
 ## 🔑 PATTERN 1: Class with Dynamic Array
 ```cpp
@@ -977,9 +962,9 @@ public:
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 9: COMMON EXAM TRAPS (DON'T LOSE EASY MARKS)
-# 
+# ═══════════════════════════════════════════════════
 
 | # | TRAP | FIX |
 |---|------|-----|
@@ -1009,9 +994,9 @@ public:
 
 ---
 
-# 
+# ═══════════════════════════════════════════════════
 # SECTION 10: QUICK-REFERENCE CHEAT TABLE
-# 
+# ═══════════════════════════════════════════════════
 
 ## COMMON FORMULAS
 - Merge Sort: O(n log n), O(n) space
@@ -1024,47 +1009,21 @@ public:
 
 ## SIGNATURE TEMPLATE CHECKLIST
 ```
-template <typename T>                  // 1. Template: Khuôn đúc vạn năng (Generic)
-class LopCon : public LopCha {         // 2. Kế thừa chuẩn: public (IS-A)
-private: 
-    T* data;                           // Két sắt: Chỉ class này xài được
-protected: 
-    // Gia truyền: Lớp Cha + Con xài được (Bên ngoài cấm)
-public: 
-    // --- BỘ 3 QUẢN LÝ SINH TỬ (RULE OF THREE) ---
-    // BẮT BUỘC tự viết nếu class có xài 'new' (con trỏ)
-    LopCon();                          // Default Constructor
-    LopCon(const LopCon& other);       // Copy Constructor (Deep Copy)
-    LopCon& operator=(const LopCon&);  // Copy Assignment 
-    virtual ~LopCon();                 // Virtual Destructor: CHỐNG MEMORY LEAK!
-
-    // --- GIAO DIỆN HÀNH VI (METHODS) ---
-    virtual T layData() const;         // 'const': Lời thề KHÔNG sửa dữ liệu
-    virtual void hamHopDong() = 0;     // '= 0': Pure Virtual -> Lớp Trừu Tượng
-    void thayDoiData();                // Hàm bình thường
-    
-    // --- PHÉP THUẬT NẠP CHỒNG (OPERATOR OVERLOADING) ---
-    // 'friend' cấp quyền xé rào private cho cout
-    friend ostream& operator<<(ostream& os, const LopCon& obj); 
-}; // <--- QUÊN DẤU CHẤM PHẨY (;) NÀY LÀ ĂN ZERO ĐIỂM TOÀN BÀI
-```
-
-```
-class ________ : ________ ________ {     // class Name : public/protected/private Base
-private:                                  // data hidden
-    ________ ________;
-protected:                                // shared with derived
-    ________ ________;
-public:                                   // interface
-    ________();                           // default ctor
-    ________(________);                   // parameterized ctor
-    ________(const ________&);            // copy ctor
-    ________& operator=(const ________&); // assignment
-    virtual ~________();                  // destructor (virtual if base!)
-    virtual ________ ________() const;    // selector
-    virtual ________ ________() = 0;      // pure virtual (abstract)
-    void ________();                      // modifier
-};  // ← DON'T FORGET THIS SEMICOLON!
+class ________ : ________ ________ {     // class Name : public/protected/private Base
+private:                                  // data hidden
+    ________ ________;
+protected:                                // shared with derived
+    ________ ________;
+public:                                   // interface
+    ________();                           // default ctor
+    ________(________);                   // parameterized ctor
+    ________(const ________&);            // copy ctor
+    ________& operator=(const ________&); // assignment
+    virtual ~________();                  // destructor (virtual if base!)
+    virtual ________ ________() const;    // selector
+    virtual ________ ________() = 0;      // pure virtual (abstract)
+    void ________();                      // modifier
+};  // ← DON'T FORGET THIS SEMICOLON!
 ```
 
 ## OUTPUT TRACING ORDER
@@ -1072,8 +1031,6 @@ public:                                   // interface
 Construction:  Base ctor → Members (declaration order) → Body
 Destruction:   Body → Members (reverse) → Base destructor (reverse)
 ```
-
-
 
 ## THE 10 MOST FREQUENTLY ASKED CODE PATTERNS
 1. Complete a class with private data + public methods + constructor

@@ -8,35 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "284952b1ec75df82",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Theoratical/TCS_MockExam_Procedures.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "TCS_MockExam_Procedures"
-            }
-          },
-          {
             "id": "a987533551d38091",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Theoratical/TCS_CHEATSHEET_FINAL.md",
+                "file": "IOT-Material/Study Sheet/Module 1_Getting Started (IoT).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TCS_CHEATSHEET_FINAL"
+              "title": "Module 1_Getting Started (IoT)"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -213,41 +198,41 @@
   },
   "active": "a987533551d38091",
   "lastOpenFiles": [
-    "Theoratical/TCS Exam Procedures Cheatsheet - FINAL.md",
-    "Theoratical/TCS_CHEATSHEET_FINAL.md",
-    "Theoratical/TCS_Finite_Automata_Cheatsheet.md",
-    "Theoratical/TCS_Midterm_Cheatsheet.md",
-    "TCS_Midterm_Cheatsheet.md",
-    "TCS_Finite_Automata_Cheatsheet.md",
-    "TCS Exam Procedures Cheatsheet - FINAL.md",
-    "Theoratical/03_Regular_Language_and_Regular_Grammar.md",
-    "conflict-files-obsidian-git.md",
-    "Theoratical/04-Context-Free-Language.md",
-    "Untitled.md",
-    "Obsidian Prompt.md",
-    "Programming 2_Cheatsheet_Generator/Ultimate_Cheatsheet.md",
-    "Programming 2/Programming2_Ultimate_Cheatsheet.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec13_StudyGuide.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec12_StudyGuide.md",
-    "Programming 2_Cheatsheet_Generator/OOP_Lec11_StudyGuide.md",
-    "Programming 2/Lecture/Vietnamese/OOP_Lec11_StudyGuide.md",
-    "Programming 2/Lecture/Vietnamese/OOP_Lec10_StudyGuide.md",
-    "Programming 2/Lecture/Vietnamese/OOP_Lec9_StudyGuide.md",
-    "Programming 2/Lecture/Vietnamese/OOP_Lec13_StudyGuide.md",
-    "Programming 2/Lecture/Vietnamese/OOP_Lec12_StudyGuide.md",
-    "Programming 2/Lecture/Vietnamese/OOP_Lec7_StudyGuide.md",
-    "Programming 2/Lecture/Vietnamese/OOP_Lec8_StudyGuide.md",
-    "Programming 2/Exercises/cheatsheet.md",
-    "Programming 2_Cheatsheet_Generator/Code.md",
+    "IOT-Material/Study Sheet/Module 5_Study-sheet.md",
+    "IOT-Material/Study Sheet/Module 6_consumer-study-sheet.md",
+    "IOT-Material/Study Sheet/Module 4_study-sheet.md",
+    "IOT-Material/Study Sheet/Module 2_study-sheet.md",
+    "IOT-Material/Study Sheet/Module 1_Getting Started (IoT).md",
+    "IOT-Material/Study Sheet/Module 3_Transport.md",
+    "IOT-Material/Study Sheet",
+    "IOT-Material/New folder",
+    "IOT-Material/Module 03_Transport.md",
+    "IOT-Material/Module 3_Transport.md",
+    "IOT-Material/Module 1_Getting Started (IoT).md",
+    "IOT-Material/06-consumer-study-sheet.md",
+    "IOT-Material/STUDY-SHEET-MODULE-05.md",
+    "IOT-Material/module-04-study-sheet.md",
+    "IOT-Material/Module_2_study-sheet.md",
+    "IOT-Material/02-farm/Module_2_study-sheet.md",
+    "IOT-Material/06-consumer/06-consumer-study-sheet.md",
+    "IOT-Material/02-farm/study-sheet.md",
+    "IOT-Material/Module 1 - Getting Started (IoT).md",
+    "IOT-Material/03-transport/lesson-13-visualize-location-data.md",
+    "IOT-Material/04-manufacturing/module-04-study-sheet.md",
+    "IOT-Material/02-farm/lesson-06-detect-soil-moisture.md",
+    "IOT-Material/05-retail/STUDY-SHEET-MODULE-05.md",
+    "IOT-Material/structure.txt",
+    "IOT-Material/02-farm/lesson-05-predict-plant-growth.md",
+    "IOT-Material/01-getting-started/lesson-04-connect-internet.md",
+    "IOT-Material/01-getting-started/lesson-03-sensors-and-actuators.md",
+    "IOT-Material/01-getting-started/lesson-02-deeper-dive.md",
+    "IOT-Material/01-getting-started/lesson-01-introduction-to-iot.md",
+    "graph_lecture_video.py",
     "Programming 2_Cheatsheet_Generator",
     "Programming 2/Exercises/test_tmp/check.exe",
     "Programming 2/Exercises/test_tmp/check.cpp",
     "Programming 2/Exercises/test_tmp",
     "Programming 2/Lecture/Vietnamese",
-    "graph_lecture_video.py",
-    "Programming 2/Exercises/test_tmp/sanity.cpp",
-    "Programming 2/Exercises/test_tmp/test_lec10_2.exe",
-    "Programming 2/Exercises/test_tmp/test_lec8_1.exe",
-    "Programming 2/Exercises/test_tmp/test_lec11.exe"
+    "Programming 2/Exercises/test_tmp/sanity.cpp"
   ]
 }

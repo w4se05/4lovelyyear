@@ -176,13 +176,6 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-The C++ Programming Language by Bjarne Stroustrup (2013), paperback, $59.99, Addison-Wesley
-```
-
-> Demonstrates a multi-field constructor and formatted output via `print()`. All fields stored as `private`, accessed through getters — standard encapsulation pattern for exam-relevant `Book`-style classes.
-
 ## Ex2: Rational Class
 
 ```cpp
@@ -231,13 +224,6 @@ int main() {
 ```
 
 **Key:** `reduce()` called in constructor keeps fraction simplified. `explicit` prevents implicit `int -> Rational`.
-
-**Expected Output:**
-```
-3/4
-```
-
-> `Rational r2(6,8)` calls `reduce()` → `gcd(6,8)=2` → `num=3, den=4`. Printed as `3/4`. `r1` is `0/1` (default), `r3` is `5/1` (whole number, prints just `5`).
 
 ---
 
@@ -319,18 +305,6 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-=== Transaction History for Nam ===
-[2025-06-20 14:30] Wallet created for Nam with balance 100.000000
-[2025-06-20 14:30] Nam transferred 10.000000 to B
-=== Transaction History for B ===
-[2025-06-20 14:30] Wallet created for B with balance 50.000000
-[2025-06-20 14:30] Nam transferred 10.000000 to B
-```
-
-> After transfer: Nam balance = `90`, B balance = `60`. Both wallets record the same transaction event — the `transferTo` method pushes identical messages to both `history` vectors. The timestamp shows when each action occurred.
-
 ## Q2: Incorrect Class Declarations
 
 **a)**
@@ -356,6 +330,9 @@ C::setx(C x) { x.x=100; }   // ❌
 # Lec8_Ex1 — Quadrilateral Hierarchy
 
 ```cpp
+#include <iostream>
+#include <vector>
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -407,20 +384,8 @@ int main() {
 
 **Trapezium area:** $\frac{a+b}{2} \cdot h$
 
-**Expected Output:**
-```
-Area: 15
-Area: 24
-Area: 16
-```
-
-> - `Rectangle(5,3)` → area = `5 × 3 = 15`
-> - `Parallelogram(4,6)` → area = `4 × 6 = 24` (same formula as rectangle)
-> - `Trapezium(3,5,4)` → area = `(3+5)/2 × 4 = 16`
->
-> All stored as `Quadrilateral*` in a `vector`; the `print()` method in `Quadrilateral` uses `area()` which dispatches to the correct derived version at runtime via the vtable. The `virtual ~Quadrilateral()` ensures proper cleanup when `delete` is called through the base pointer.
-
 ---
+
 # Lec8_Ex2 — Inheritance & Access Control
 
 ## Q1: Class Hierarchy Analysis
@@ -498,15 +463,6 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-Drawing Generic Shape
-Drawing a Rectangle
-Drawing a Triangle
-```
-
-> `s` is a `Shape` object (not a pointer/reference), so `s.draw()` calls `Shape::draw()` directly — no virtual dispatch because no indirection. `r` and `t` are concrete derived objects; their overridden `draw()` methods are called directly. This shows **static binding** for stack objects vs **dynamic binding** through pointers/references.
-
 ## Q3: Multiple Inheritance — Constructor Order
 
 ```
@@ -519,6 +475,8 @@ Drawing a Triangle
 ```
 
 ```cpp
+#include <iostream>
+
 #include <iostream>
 using namespace std;
 
@@ -543,28 +501,6 @@ int main() { D d; }
 // Output: A1, A2, C1, B1, B2, C2, D
 // Order: depth-first, left-to-right as declared in inheritance list
 ```
-
-**Expected Output:**
-```
-A1
-A2
-C1
-B1
-B2
-C2
-D
-```
-
-> Constructor call order follows the **inheritance graph**, not the class hierarchy DAG:
-> 1. `D`'s first base `C1` (declared `: public C1, public C2`)
-> 2. `C1`'s bases: `A1` then `A2` (left-to-right)
-> 3. Then `C1`'s own body
-> 4. Back to `D`'s second base `C2`
-> 5. `C2`'s bases: `B1` then `B2`
-> 6. Then `C2`'s own body
-> 7. Finally `D`'s own body
->
-> **Rule:** Depth-first, left-to-right per base-specifier list. Destructors run in exact reverse order.
 
 ## Q4: Virtual `draw()`
 
@@ -610,18 +546,16 @@ int main() {
 
 **Key:** Upcasting `Circle* → Shape*` + virtual function = the correct derived `draw()` is called at runtime via vtable lookup.
 
-**Expected Output:**
-```
-Drawing Circle
-Drawing Square
-Drawing Triangle
-```
-
-> Each `new Circle()` returns a `Circle*` which is implicitly upcast to `Shape*` when pushed into `vector<Shape*>`. The loop calls `s->draw()` through a base pointer — but because `draw()` is virtual, the compiler generates a vtable lookup at runtime. Each call dispatches to the correct overridden `draw()` in `Circle`, `Square`, or `Triangle`. Without `virtual`, all three would call `Shape::draw()` (static binding).
-
 ## Q5: Galactic Habitability Simulation
 
 ```cpp
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <random>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -727,16 +661,6 @@ int main() {
 
 **Design note:** Planets are stored in a **doubly-linked list sorted by distance** from their sun. All habitable-distance data is generated randomly per run.
 
-**Expected Output (sample — random, varies per run):**
-```
-=== Solar System: Kepler-62 ===
-Kepler-62b [Terrestrial] dist=0.71 AU, radius=1.42 R_e, gravity=2.34 m/s^2, habitable=YES
-Kepler-62c [Gas Giant] dist=1.83 AU, radius=1.05 R_e, gravity=3.12 m/s^2, habitable=NO
-Kepler-62d [Terrestrial] dist=0.95 AU, radius=0.87 R_e, gravity=2.80 m/s^2, habitable=YES
-```
-
-> `isHabitable()` checks: terrestrial type + distance in 0.7–1.5 AU + has atmosphere + pressure 0.5–5.0 atm. Data read from `planets.txt`. Random generators fill in the physics. The `Galaxy` class holds multiple `SolarSystem*` — designed for galactic-scale simulation.
-
 ---
 
 # Lec8_QuickTest — Quick OOP Drills
@@ -744,6 +668,8 @@ Kepler-62d [Terrestrial] dist=0.95 AU, radius=0.87 R_e, gravity=2.80 m/s^2, habi
 ## Q1: Mother & Daughter
 
 ```cpp
+#include <iostream>
+
 #include <iostream>
 using namespace std;
 
@@ -763,16 +689,12 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-I am the Daughter
-```
-
-> `Daughter` overrides `display()` from `Mother`. Even though `d` is a concrete `Daughter` object (not a pointer), the `override` keyword ensures the derived version runs. If `display()` were NOT virtual, `d.display()` would still call `Daughter::display()` because the static type of `d` is `Daughter` — the virtual keyword matters only when accessing through a base pointer/reference.
-
 ## Q2: Animal, Zebra, Dolphin
 
 ```cpp
+#include <iostream>
+#include <string>
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -805,17 +727,13 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-Marty is 5 years old. Origin: African Savanna
-Flipper is 3 years old. Origin: Pacific Ocean
-```
-
-> `set_value` is inherited from `Animal` and stores into `protected` members `name` and `age`. Both `Zebra::show()` and `Dolphin::show()` access these inherited members directly — they're `protected` so derived classes can read/write them, but external code cannot. Each derived class hardcodes its origin string. No virtual dispatch here — these are independent concrete classes.
-
 ## Q3: Student at VGU
 
 ```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -848,6 +766,9 @@ public:
 ## Q4: Person / Student / Teacher
 
 ```cpp
+#include <iostream>
+#include <string>
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -945,18 +866,10 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-Drawing Circle
-Drawing Square
-Drawing Triangle
-```
-
-> Same vtable dispatch pattern — `vector<Shape*>` stores base pointers but the overridden `draw()` in each derived class runs. Note: `Shape::draw()` is virtual but NOT pure (=0), so `Shape` is concrete (not abstract) and can be instantiated. If you created `Shape s; s.draw()` it would print `"Drawing a generic Shape"` — but here the derived overrides take precedence through virtual dispatch.
-
 ## Q2: Pure Virtual `draw()`
 
 ```cpp
+#include <iostream>
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -985,16 +898,11 @@ int main() {
 
 **Key:** Pure virtual = `= 0`. Class becomes abstract. Cannot instantiate. Can still provide a body (called via `Shape::draw()` from derived).
 
-**Expected Output:**
-```
-Drawing Circle
-```
-
-> Only one object created: `Circle*` stored in `Shape* c`. The commented line `Shape s;` would be a **compile error** because `Shape` is abstract. Since `Circle::draw()` overrides, `c->draw()` calls it. The `= 0` on line makes `Shape` abstract, but the body on line 884 (`void Shape::draw() { ... }`) is still valid — derived classes can call `Shape::draw()` explicitly if desired (e.g., for fallback rendering).
-
 ## Q3: Pass by Value vs Reference (Slicing!)
 
 ```cpp
+#include <iostream>
+
 #include <iostream>
 using namespace std;
 
@@ -1023,20 +931,12 @@ int main() {
 
 **Slicing:** Passing `Circle` by value to `Shape` parameter copies only the `Shape` part; derived info is lost. Always pass polymorphic objects by **reference** or **pointer**.
 
-**Expected Output (with `Shape&`):**
-```
-Drawing Circle
-```
-
-**What happens if you uncomment `void renderShape(Shape s)` instead:**
-```
-Cannot instantiate abstract class    // COMPILE ERROR
-```
-But if `Shape` were concrete (non-pure), the call would compile but `s.draw()` would call `Shape::draw()` — **slicing** strips the `Circle` identity at the call site. Moral: never pass polymorphic objects by value.
-
 ## Q4: Shapes with Area
 
 ```cpp
+#include <iostream>
+#include <cmath>
+
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -1076,6 +976,10 @@ public:
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int main() {
@@ -1095,23 +999,8 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-Area: 78.5398
-Area: 28.2743
-Area: 16
-Area: 9
-```
-
-> `sort()` with lambda `a->area() > b->area()` orders by **decreasing area**:
-> - `Circle_(5.0)` → π × 25 = **78.54**
-> - `Circle_(3.0)` → π × 9 = **28.27**
-> - `Square_(4.0)` → 16
-> - `Triangle_(3.0, 6.0)` → ½ × 3 × 6 = **9**
->
-> Lambda captures `Shape*` and calls virtual `area()` — the vtable ensures the correct area formula (circle vs square vs triangle) runs for each pointer.
-
 ---
+
 # Lec9_Ex1 — File I/O with Shapes
 
 ## Q1 & Q2: Read from File, Sort by Area, Write Output
@@ -1233,23 +1122,8 @@ int main() {
 
 **Triangle area formula (shoelace):** $\frac{1}{2}|x_1(y_2-y_3) + x_2(y_3-y_1) + x_3(y_1-y_2)|$
 
-**Expected Output (`input.txt` has 4 shapes: `t 0 0 3 0 0 4` `r 0 0 4 3` `s 0 0 2 2` `p 0 0 0 3 4 4`):**
-```
-Done. Check output.txt
-```
-
-**Contents of `output.txt`:**
-```
-4
-t 0 0 3 0 0 4 -> 6
-r 0 0 4 3 -> 12
-s 0 0 2 2 -> 4
-p 0 0 0 3 4 4 -> 12
-```
-
-> Pipeline: read shape count `n` → for each line, read type char (`t`, `r`, `s`, `p`) → parse coordinates → `new` derived shape → push to `vector<Shape*>`. Then `sort` by `area()` descending via lambda. Write to `output.txt` via `Shape::print(ostream&)` — each derived class writes its type, coordinates, and area. The `virtual` print method ensures correct formatting per shape type.
-
 ---
+
 # Lec10_ex1 — Operator Overloading
 
 ## Q1: `operator++` (Prefix & Postfix)
@@ -1283,14 +1157,6 @@ int main() {
 ```
 
 **Compiler warning if both missing dummy int:** "_no postfix operator++ declared_" — uses prefix as fallback.
-
-**Expected Output:**
-```
-6
-7
-```
-
-> `++c` calls `operator++()` (prefix) → increments `value` from 5 to 6, returns `*this` by reference — no copy. `c++` calls `operator++(int)` (postfix, dummy int distinguishes it) → saves old `Counter(5)`, increments to 6, returns the **old** copy (5). Next `c.print()` shows 7 because the previous postfix already incremented to 6, then postfix again to 7. The commented `c++++;` would fail if postfix returns `const Counter` (see Q5).
 
 ## Q2: Binary `operator+` as Member
 
@@ -1404,6 +1270,7 @@ public:
 
 ```cpp
 #include <iostream>
+#include <iostream>
 #include <iomanip>
 using namespace std;
 
@@ -1462,18 +1329,14 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-13:16:15
-t1 later
-10:30:45
-```
-
-> `t1(10:30:45) + t2(2:45:30)` → raw sum = `12:75:75`. `normalize()` runs: 75 seconds → `+1 min, 15 sec`; then 76 minutes → `+1 hr, 16 min`; final = `13:16:15`. The `>` operator compares hierarchically: hours first, then minutes, then seconds (`10:30:45 > 2:45:30`). Assignment `t4 = t1` uses `operator=` with self-assignment guard.
-
 ## Q2: Complex Class (Sort by Modulus)
 
 ```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -1524,31 +1387,18 @@ int main() {
 
 **Modulus formula:** $|z| = \sqrt{a^2 + b^2}$ where $z = a + bi$
 
-**Expected Output:**
-```
-Sorted by decreasing modulus:
-5 - 12i  (|z|=13)
-8 + 6i  (|z|=10)
-3 + 4i  (|z|=5)
-0 + 2i  (|z|=2)
-1 + 1i  (|z|=1.414)
-```
-
-> Each `|z|` computed via `sqrt(re² + im²)`:
-> - `5-12i` → √(25+144) = **13**
-> - `8+6i` → √(64+36) = **10**
-> - `3+4i` → √(9+16) = **5**
-> - `0+2i` → √(0+4) = **2**
-> - `1+1i` → √(1+1) ≈ **1.414**
->
-> Lambda `a.modulus() > b.modulus()` sorts descending. `print()` shows `+` or `-` based on sign of imaginary part.
-
 ---
+
 # Lec11_ex1 — Template & Container Classes
 
 ## Q1: Matrix Norms
 
 ```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -1614,28 +1464,12 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-Frobenius: 16.8819
-Row sum:   24
-Total:     27
-```
-
-> Matrix:
-> ```
-> 1 2 3
-> 4 5 6
-> 7 8 9
-> ```
-> - **Frobenius** = √(1²+2²+3²+4²+5²+6²+7²+8²+9²) = √(285) ≈ **16.88**
-> - **Row sum** = max(1+2+3=6, 4+5+6=15, 7+8+9=24) = **24** (takes fabs, all positive here)
-> - **Total** = `n × max|aᵢⱼ|` = 3 × 9 = **27**
->
-> `template<typename T>` allows the matrix to hold `int`, `double`, etc. — the norm formulas work generically.
-
 ## Q2: Generic Stack Template (Array-based)
 
 ```cpp
+#include <iostream>
+#include <string>
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -1696,16 +1530,8 @@ int main() {
 
 **Key:** `T()` is the **default constructor** call — returns `0` for numerics, `""` for string, etc. `topIndex = -1` means empty.
 
-**Expected Output:**
-```
-30
-20
-World
-```
-
-> Push 10→20→30 (top at index 2). `pop()` returns 30, topIndex becomes 1. `peek()` returns 20 without removing. String stack: push "Hello"→"World", `pop()` returns "World". Both stacks use the same template — `Stack<int>` and `Stack<string>` are separate template instantiations with separate memory layouts, compiled from the same generic code.
-
 ---
+
 # Lec12_ex1 — Linked List & Stack via Linked List
 
 ## Q1: Generic Linked List Template
@@ -1843,24 +1669,6 @@ int main() {
 }
 ```
 
-**Expected Output:**
-```
-5 -> 10 -> 15 -> 20 -> nullptr
-2
-10
-99 -> 10 -> 15 -> nullptr
-```
-
-> Step-by-step trace:
-> 1. `append(10), append(20), prepend(5)` → `[5, 10, 20]`
-> 2. `insert(2, 15)` inserts at index 2 → `[5, 10, 15, 20]`
-> 3. `find(15)` scans from head, returns index **2**
-> 4. `get(1)` traverses to index 1, returns **10**
-> 5. `replace(0, 99)` overwrites head → `[99, 10, 15, 20]`
-> 6. `remove(20)` deletes tail node → `[99, 10, 15]`
->
-> Operations: `append` O(n), `prepend` O(1), `insert` O(n), `find` O(n), `get` O(n), `remove` O(n). All use raw pointer traversal.
-
 ## Q2: Stack using Linked List
 
 ```cpp
@@ -1927,27 +1735,8 @@ int main() {
 
 **LL vs Array Stack:** LL-based has no `isFull()` (grows dynamically). `push` = prepend. `pop` = remove head. All O(1).
 
-**Expected Output:**
-```
-3
-2
-2
-1
-Stack Underflow
-0
-```
-
-> Trace:
-> 1. `push(1)→push(2)→push(3)` — stack: `[3 (top), 2, 1]`
-> 2. `pop()` returns **3** → stack: `[2 (top), 1]`
-> 3. `peek()` returns **2** (no removal)
-> 4. `pop()` returns **2** → stack: `[1 (top)]`
-> 5. `pop()` returns **1** → stack empty
-> 6. `pop()` on empty → prints "Stack Underflow", returns `int()` = **0**
->
-> LL stack uses `topNode` as the head pointer. `push` creates a new node and links it before the current head (O(1)). `pop` saves the top node's data, advances head to next, then `delete`s the old node (O(1)). No capacity limit — only limited by heap memory.
-
 ---
+
 # Lec12_13_Ex1 — Farey & AMRDS
 
 ## Q1: Farey Sequences
@@ -1959,6 +1748,10 @@ The **Farey sequence** of order N is the set of all reduced fractions $\frac{a}{
 #include <vector>
 #include <algorithm>
 #include <numeric>
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 struct Fraction {
@@ -1997,14 +1790,8 @@ int main() {
 
 **Property:** For consecutive fractions $\frac{a}{b}, \frac{c}{d}$: $bc - ad = 1$
 
-**Expected Output:**
-```
-Farey(5): 0/1 1/5 1/4 1/3 2/5 1/2 3/5 2/3 3/4 4/5 1/1
-```
-
-> Algorithm: iterate `den` from 1 to N, `num` from 0 to `den`, keep only reduced fractions (`gcd(num,den)==1`). Sort by floating-point value. Verify Farey property: between any consecutive pair (e.g., 1/3, 2/5): `(3×2) - (1×5) = 6-5 = 1`.
-
 ---
+
 ## Q2: AMRDS (Autonomous Mobile Robot Dispatching System)
 
 ```cpp
