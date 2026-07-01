@@ -20,6 +20,16 @@
               "icon": "lucide-file",
               "title": "IoT_Flashcards"
             }
+          },
+          {
+            "id": "6d3eb0c965b83ac9",
+            "type": "leaf",
+            "state": {
+              "type": "spaced-repetition-tab-view",
+              "state": {},
+              "icon": "SpacedRepIcon",
+              "title": "Spaced Repetition"
+            }
           }
         ]
       }
@@ -53,7 +63,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#flashcards",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +88,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 345
+    "width": 345,
+    "collapsed": true
   },
   "right": {
     "id": "963ded235dc6ed14",
@@ -207,18 +218,18 @@
       "obsidian-spaced-repetition:Review flashcards": false
     }
   },
-  "active": "1b365bc18457caa0",
+  "active": "a987533551d38091",
   "lastOpenFiles": [
+    "IOT-Material/Multiple Choice/IoT_Quizzes.md",
+    "IOT-Material/Multiple Choice/IoT_Flashcards.md",
     "graph_lecture_video.py",
     "IOT-Material/06-consumer/06-consumer-study-sheet.md",
     "IOT-Material/05-retail/STUDY-SHEET-MODULE-05.md",
     "IOT-Material/04-manufacturing/module-04-study-sheet.md",
     "IOT-Material/02-farm/study-sheet.md",
-    "IOT-Material/Multiple Choice/IoT_Quizzes.md",
     "IOT-Material/Study Sheet/Module 2_study-sheet.md",
     "IOT-Material/Study Sheet/Module 3_Transport.md",
     "IOT-Material/Study Sheet/Module 1_Getting Started (IoT).md",
-    "IOT-Material/Multiple Choice/IoT_Flashcards.md",
     "IOT-Material/Multiple Choice",
     "IOT-Material/New folder",
     "IOT-Material/Study Sheet/MASTER_STUDY_DOCUMENT.md",

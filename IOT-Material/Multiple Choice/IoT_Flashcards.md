@@ -1,10 +1,7 @@
 # IoT Flashcards — Complete Quiz Bank Study Guide
 
-#flashcards
 
-> All 144 questions from the official quiz bank, with explanations written for absolute beginners.
-
----
+#flashcards 
 ## Lesson 1 — Introduction to IoT: Pre-Lecture Quiz
 
 **Q1.** The I in IoT stands for:
@@ -14,6 +11,7 @@
 ?
 ANSWER: **Internet**
 WHY: IoT is short for "Internet of Things," so the first letter simply stands for Internet — the global network that connects all these devices.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** What's the estimated number of IoT devices in use by the end of 2020?
 - 30
@@ -23,6 +21,7 @@ WHY: IoT is short for "Internet of Things," so the first letter simply stands fo
 ANSWER: **30 billion**
 WHY: By 2020, IoT had already exploded globally — 30 million sounds big but is far too small for a world of sensors and smart devices. 30 is absurdly low.
 TRAP: 30 million sounds like a large number, but IoT devices already outnumbered people on Earth.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Smartphones are IoT devices
 - True
@@ -30,6 +29,7 @@ TRAP: 30 million sounds like a large number, but IoT devices already outnumbered
 ?
 ANSWER: **True**
 WHY: A smartphone connects to the internet and has many built-in sensors (camera, GPS, accelerometer). Any device that senses the world and connects to the internet fits the definition of an IoT device.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 1 — Introduction to IoT: Post-Lecture Quiz
 
@@ -40,6 +40,7 @@ WHY: A smartphone connects to the internet and has many built-in sensors (camera
 ANSWER: **False**
 WHY: The keyword is "always." Many IoT devices can work offline and sync data later when they reconnect. Think of a fitness tracker that stores steps and uploads them when you open the app.
 TRAP: Beginners assume "IoT = internet, so it must always be online." But IoT devices are designed to handle intermittent connections.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** IoT devices are always secure
 - True
@@ -47,6 +48,7 @@ TRAP: Beginners assume "IoT = internet, so it must always be online." But IoT de
 ?
 ANSWER: **False**
 WHY: Security is one of the biggest challenges in IoT. Many cheap or poorly designed devices have weak or no security features. The word "always" makes this statement false — nothing is "always" secure.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** AI can be run on low powered IoT devices
 - True
@@ -54,6 +56,7 @@ WHY: Security is one of the biggest challenges in IoT. Many cheap or poorly desi
 ?
 ANSWER: **True**
 WHY: Modern AI models can be compressed into small, efficient versions (called "compact" or "tiny" models) that run directly on low-cost, low-power chips without needing the cloud.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 2 — A deeper dive into IoT: Pre-Lecture Quiz
 
@@ -65,6 +68,7 @@ WHY: Modern AI models can be compressed into small, efficient versions (called "
 ANSWER: **Things**
 WHY: IoT = Internet of Things. The "Things" are the physical objects — sensors, gadgets, appliances — that are connected to the internet.
 TRAP: "Transistors" is wrong because transistors are tiny electronic components inside chips, not the devices themselves.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** IoT devices gather information from the world around them using:
 - Sensors
@@ -74,6 +78,7 @@ TRAP: "Transistors" is wrong because transistors are tiny electronic components 
 ANSWER: **Sensors**
 WHY: Sensors are components that detect physical conditions (temperature, motion, light, etc.) and convert them into electrical signals that a device can read. Actuators do the opposite — they perform actions.
 TRAP: Actuators control the physical world (like motors and lights). They are the OUTPUT, not the INPUT.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** IoT devices draw more power than the average desktop or laptop computer
 - True
@@ -81,6 +86,7 @@ TRAP: Actuators control the physical world (like motors and lights). They are th
 ?
 ANSWER: **False**
 WHY: IoT devices are designed to be small, cheap, and energy-efficient. Many run on small batteries for months or years. A desktop computer draws hundreds of watts; an IoT sensor may draw milliwatts.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 2 — A deeper dive into IoT: Post-Lecture Quiz
 
@@ -92,6 +98,7 @@ WHY: IoT devices are designed to be small, cheap, and energy-efficient. Many run
 ANSWER: **Fetch, Decode, Execute**
 WHY: The order matters. First the CPU FETCHES (grabs) an instruction from memory, then DECODES (figures out what it means), then EXECUTES (carries it out). Think of it like: read the recipe step → understand it → do it.
 TRAP: "Decode, Execute, Fetch" has the wrong order — you can't execute something you haven't fetched yet.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** What operating system do Raspberry Pis run?
 - They don't run an OS
@@ -101,6 +108,7 @@ TRAP: "Decode, Execute, Fetch" has the wrong order — you can't execute somethi
 ANSWER: **Raspberry Pi OS**
 WHY: Raspberry Pi OS (formerly called Raspbian) is the official, optimized operating system made specifically for Raspberry Pi hardware. Raspberry Pis do run an OS — they are full computers.
 TRAP: Windows 95 is a joke answer. Raspberry Pis definitely run an OS — they're not microcontroller boards.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** IoT devices typically run faster and have more memory than the average desktop or laptop computer
 - True
@@ -108,6 +116,7 @@ TRAP: Windows 95 is a joke answer. Raspberry Pis definitely run an OS — they'r
 ?
 ANSWER: **False**
 WHY: IoT devices are designed to be cheap and low-power, so they deliberately use slower processors and less memory. A typical desktop has gigabytes of RAM; a basic IoT microcontroller may have only kilobytes.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 3 — Interact with the physical world with sensors and actuators: Pre-Lecture Quiz
 
@@ -118,6 +127,7 @@ WHY: IoT devices are designed to be cheap and low-power, so they deliberately us
 ANSWER: **False**
 WHY: An LED (Light Emitting Diode) produces light — it's an output device, not an input device. Sensors detect things; LEDs display or signal things. LED = actuator, not sensor.
 TRAP: Beginners may think any electronic component is a "sensor." But if it produces an output (light, motion, sound), it's an actuator.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Sensors are used to:
 - Gather data from the physical world
@@ -129,11 +139,13 @@ WHY: The word "sensor" comes from "sense" — just like your five senses gather 
 <!--SR:!2026-07-04,3,250-->
 
 **Q3.** Actuators are used to:
-- True
-- False
+- Gather data from the physical world.
+- Control the physical world. 
+- To calculate insurance risks.
 ?
 ANSWER: **Control the physical world.**
 WHY: The word "actuator" comes from "act" or "activate" — they perform actions. Examples: motors spin, LEDs light up, pumps push water, relays switch power on/off.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 3 — Interact with the physical world with sensors and actuators: Post-Lecture Quiz
 
@@ -145,6 +157,7 @@ WHY: The word "actuator" comes from "act" or "activate" — they perform actions
 ANSWER: **High and low voltages only**
 WHY: "Digital" means only two states — ON (high voltage) and OFF (low voltage), like 1 and 0 in binary. A button is a digital sensor: it's either pressed or not pressed.
 TRAP: "Voltage ranges" describes analog sensors, which can send any value along a continuous range (like a dimmer switch, not just on/off).
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** What digital signal is sent when a button is pressed?
 - 0
@@ -161,6 +174,7 @@ TRAP: Beginners might pick 0, thinking the button "starts" at rest. But the ques
 ?
 ANSWER: **True**
 WHY: PWM (Pulse-Width Modulation) is a clever trick — it rapidly switches a digital signal on and off so fast that an analog device "sees" it as a varying level. For example, a dimmed LED is actually blinking extremely fast.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 4 — Connect your device to the Internet: Pre-Lecture Quiz
 
@@ -170,6 +184,7 @@ WHY: PWM (Pulse-Width Modulation) is a clever trick — it rapidly switches a di
 ?
 ANSWER: **False**
 WHY: "Always" is the trap word. Devices can operate locally without internet and only connect periodically to sync data or receive updates. A smart thermostat still controls your temperature even if the Wi-Fi is down.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** IoT devices always communicate over HTTP, the same as web apps and other web APIs:
 - False
@@ -177,6 +192,7 @@ WHY: "Always" is the trap word. Devices can operate locally without internet and
 ?
 ANSWER: **False**
 WHY: HTTP is heavy and power-hungry for small devices. IoT commonly uses lightweight protocols like MQTT (Message Queueing Telemetry Transport), which uses far less bandwidth and battery. "Always" is the red flag.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** IoT devices rely on the cloud for all their decision making:
 - False
@@ -184,6 +200,7 @@ WHY: HTTP is heavy and power-hungry for small devices. IoT commonly uses lightwe
 ?
 ANSWER: **False**
 WHY: "All" is the trap. Edge computing allows devices to process data and make decisions locally without sending anything to the cloud. A security camera can detect motion on-device without needing the cloud.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 4 — Connect your device to the Internet: Post-Lecture Quiz
 
@@ -195,6 +212,7 @@ WHY: "All" is the trap. Edge computing allows devices to process data and make d
 ANSWER: **Telemetry**
 WHY: Telemetry is the standard IoT term for automated data collection and transmission from a remote device to a central system. Think "tele" (far away) + "metry" (measuring) = measuring from afar.
 TRAP: "Measurements" is close in meaning, but "telemetry" is the precise technical term used in IoT.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** What should happen to a command if the IoT device is offline:
 - It should always be resent when the device is back online
@@ -204,6 +222,7 @@ TRAP: "Measurements" is close in meaning, but "telemetry" is the precise technic
 ANSWER: **It depends on the command, the device and the requirements of the IoT app**
 WHY: There is no one-size-fits-all rule. A "turn on lights" command might expire after 30 seconds (no point turning lights on if the person left). A firmware update command might need to be queued and delivered whenever the device reconnects. Context always matters.
 TRAP: Beginners look for a simple yes/no answer, but real IoT systems must handle each scenario differently.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** MQTT, or Message Queueing Telemetry Transport, has message queues:
 - True
@@ -212,6 +231,7 @@ TRAP: Beginners look for a simple yes/no answer, but real IoT systems must handl
 ANSWER: **False**
 WHY: Despite the word "Queueing" in the name, MQTT does NOT actually use message queues. It uses a publish/subscribe model — devices publish messages to topics, and other devices subscribe to those topics to receive them. The name is misleading.
 TRAP: "It's in the name, so it must be true" — this is a classic trick question. The name is historical and doesn't reflect the actual architecture.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 5 — Predict plant growth: Pre-Lecture Quiz
 
@@ -221,6 +241,7 @@ TRAP: "It's in the name, so it must be true" — this is a classic trick questio
 ?
 ANSWER: **True**
 WHY: IoT sensors can monitor soil moisture, temperature, light levels, and humidity — all critical for farming. Farmers use IoT to make data-driven decisions about irrigation, fertilization, and harvesting.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Plant needs include: (pick the best answer)
 - Carbon dioxide, water, nutrients
@@ -230,6 +251,7 @@ WHY: IoT sensors can monitor soil moisture, temperature, light levels, and humid
 ANSWER: **Carbon dioxide, water, nutrients, light, warmth**
 WHY: The question says "pick the best answer" — this means choose the most complete list. Plants need ALL five for photosynthesis and healthy growth. The other options leave something out.
 TRAP: Three-ingredient or four-ingredient lists seem complete, but "best answer" means the one that lists everything plants need.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Sensors are too expensive for farmers in developed nations to use:
 - False
@@ -237,6 +259,7 @@ TRAP: Three-ingredient or four-ingredient lists seem complete, but "best answer"
 ?
 ANSWER: **False**
 WHY: IoT sensors have become very affordable in recent years. Farmers in developed nations already widely use precision agriculture technology including soil sensors, drones, and GPS-guided equipment.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 5 — Predict plant growth: Post-Lecture Quiz
 
@@ -246,6 +269,7 @@ WHY: IoT sensors have become very affordable in recent years. Farmers in develop
 ?
 ANSWER: **True**
 WHY: Temperature directly controls the speed of chemical reactions inside plants. Too cold = growth stops entirely. Too hot = enzymes break down. Each plant has a specific temperature range where it grows best.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** The temperatures to consider for plant growth are:
 - Minimum, maximum
@@ -255,6 +279,7 @@ WHY: Temperature directly controls the speed of chemical reactions inside plants
 ANSWER: **Base, optimal, maximum**
 WHY: These are the three key temperature thresholds for any plant: Base = the minimum temperature where growth begins. Optimal = the temperature where growth is fastest. Maximum = the temperature above which growth stops (the plant gets heat stress).
 TRAP: "Minimum, maximum" misses the optimal — the middle range where plants actually thrive.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Growing Degree Days are calculated using which formula:
 - (day max + day min) - plant base
@@ -264,6 +289,7 @@ TRAP: "Minimum, maximum" misses the optimal — the middle range where plants ac
 ANSWER: **((day max + day min) / 2) - plant base**
 WHY: GDD measures heat accumulation over time. First, you average the day's high and low temperatures (add them, divide by 2). Then subtract the plant's base temperature — the minimum temperature at which that plant grows. This tells you how much "growing heat" the plant received that day.
 TRAP: The formula without dividing by 2 gives you the sum, not the average — it would dramatically overestimate growth.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 6 — Detect soil moisture: Pre-Lecture Quiz
 
@@ -273,6 +299,7 @@ TRAP: The formula without dividing by 2 gives you the sum, not the average — i
 ?
 ANSWER: **True**
 WHY: Soil moisture sensors are a standard IoT component, especially in smart agriculture. They measure how much water is in the soil and send that data for analysis and automated watering decisions.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Which of these can cause problems for plant growth (pick one)?
 - Too little water
@@ -282,6 +309,7 @@ WHY: Soil moisture sensors are a standard IoT component, especially in smart agr
 ANSWER: **Too little or too much water**
 WHY: Both extremes are harmful. Too little water = wilting and death from dehydration. Too much water = roots rot because they can't get oxygen. The correct answer is the one that covers both dangers.
 TRAP: Picking only "too little" or only "too much" ignores the other half of the problem.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** All sensors are provided pre-calibrated for standard units:
 - True
@@ -289,6 +317,7 @@ TRAP: Picking only "too little" or only "too much" ignores the other half of the
 ?
 ANSWER: **False**
 WHY: "All" is rarely true in technology. Many sensors need to be calibrated by the user — factors like manufacturing variance, environment, and voltage levels mean each sensor may read slightly differently until calibrated against a known standard.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 6 — Detect soil moisture: Post-Lecture Quiz
 
@@ -308,6 +337,7 @@ WHY: Resistive sensors: more water = more electrical conductivity between the pr
 ?
 ANSWER: **Only one controller and multiple peripherals**
 WHY: SPI (Serial Peripheral Interface) uses a master-slave architecture. There is one "boss" (controller/master) that controls all communication, and multiple "workers" (peripherals/slaves) that only respond when the controller talks to them.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** The I2C protocol supports:
 - Only one controller and only one peripheral
@@ -327,6 +357,7 @@ WHY: I2C (Inter-Integrated Circuit) is more flexible than SPI. It supports multi
 ANSWER: **False**
 WHY: IoT devices run on low voltage (typically 3.3V or 5V) and can't provide the high current needed to drive a pump directly. They need a relay — a switch that lets the low-power device control a high-power circuit. The IoT device controls the relay; the relay controls the pump.
 TRAP: "They can control pumps" is true ONLY with a relay in between. The device by itself cannot.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Actuators can be used to control power to additional devices
 - True
@@ -334,6 +365,7 @@ TRAP: "They can control pumps" is true ONLY with a relay in between. The device 
 ?
 ANSWER: **True**
 WHY: A relay is a type of actuator that switches power on and off to another device. This is how a tiny IoT board can turn on a large water pump, a heater, or a lighting system.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Sensors detect changes from actuators immediately
 - True
@@ -353,6 +385,7 @@ WHY: There is always a delay. If a pump starts watering soil, it takes time for 
 ANSWER: **Electromechanical**
 WHY: A relay combines electrical and mechanical parts: an electromagnet (electrical) physically moves a metal contact (mechanical) to open or close a circuit. That's what "electromechanical" means.
 TRAP: "Electrical" would mean purely electronic with no moving parts. "Mechanical" would mean purely physical. A relay is both.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** A relay allows:
 - A low power device to control a higher power device
@@ -362,6 +395,7 @@ TRAP: "Electrical" would mean purely electronic with no moving parts. "Mechanica
 ANSWER: **A low power device to control a higher power device**
 WHY: This is the entire purpose of a relay — it's a bridge. A tiny 3.3V signal from a microcontroller energizes an electromagnet, which physically closes a switch on a separate high-voltage circuit (like a 120V water pump). The low-power side and high-power side are electrically isolated.
 TRAP: It's not the other way around — a high-power device doesn't need a relay to control a low-power device.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Actuators should always respond instantly to sensor readings:
 - True
@@ -369,6 +403,7 @@ TRAP: It's not the other way around — a high-power device doesn't need a relay
 ?
 ANSWER: **False**
 WHY: Instant response can be wasteful or harmful. If a moisture sensor reads "dry" for one second, you don't want the pump to turn on — the soil might be temporarily dry on the surface but wet underneath. Delays, averaging, and thresholds prevent over-reaction.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 8 — Migrate your plant to the cloud: Pre-Lecture Quiz
 
@@ -379,6 +414,7 @@ WHY: Instant response can be wasteful or harmful. If a moisture sensor reads "dr
 ANSWER: **False**
 WHY: Public MQTT brokers have no security guarantees — anyone can listen to your data or even send fake commands to your devices. Commercial projects need private, secured infrastructure.
 TRAP: Public brokers work for learning and prototyping, but "commercial" implies real products with real security requirements.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Cloud computing allows you to:
 - Only rent computers
@@ -395,6 +431,7 @@ WHY: The cloud is not just about renting virtual machines. It's a full ecosystem
 ?
 ANSWER: **True**
 WHY: Major cloud providers (Microsoft Azure, Amazon AWS, Google Cloud) have data centers on every inhabited continent — North America, South America, Europe, Asia, Africa, and Australia — giving them near-global coverage.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 8 — Migrate your plant to the cloud: Post-Lecture Quiz
 
@@ -406,6 +443,7 @@ WHY: Major cloud providers (Microsoft Azure, Amazon AWS, Google Cloud) have data
 ANSWER: **Direct method request**
 WHY: A direct method is a cloud-to-device command that asks the device to do something immediately AND waits for a response (like "turn on pump" → "pump turned on"). It's a request-reply pattern.
 TRAP: "Device twin" stores device state/properties but doesn't issue immediate commands. "Device to cloud message" goes the opposite direction (device → cloud).
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** IoT Hub lets any device connect without any security:
 - False
@@ -413,6 +451,7 @@ TRAP: "Device twin" stores device state/properties but doesn't issue immediate c
 ?
 ANSWER: **False**
 WHY: IoT Hub requires every device to authenticate before connecting. This is fundamental — an unsecured hub would be a massive security risk. Devices typically authenticate using connection strings or certificates.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** IoT Hub names must be unique:
 - True
@@ -430,6 +469,7 @@ WHY: The IoT Hub name becomes part of a public URL (like `yourhub.azure-devices.
 ?
 ANSWER: **True**
 WHY: Serverless functions (like Azure Functions) can be set to trigger automatically whenever new data arrives from an IoT device. You don't need a full-time running server — the code runs only when there's work to do, saving cost and complexity.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** When you send IoT events to IoT Hub:
 - Only one service can read events off the IoT Hub
@@ -438,6 +478,7 @@ WHY: Serverless functions (like Azure Functions) can be set to trigger automatic
 ?
 ANSWER: **Any number of services can read events off the IoT Hub**
 WHY: IoT Hub supports multiple consumer groups. Each service that reads from the hub gets its own independent copy of the data stream. You could have one service storing data, another analyzing it, and a third sending alerts — all reading the same events independently.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** When reading events off IoT hub, you can only do so using code that runs in the cloud
 - True
@@ -455,6 +496,7 @@ WHY: You can read IoT Hub events from anywhere — a local server in your office
 ?
 ANSWER: **True**
 WHY: You can develop and test serverless functions on your own computer before deploying them to the cloud. The Azure Functions runtime runs locally, letting you set breakpoints, inspect variables, and fix bugs just like any other code.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Serverless code can only be written in JavaScript and COBOL:
 - False
@@ -463,6 +505,7 @@ WHY: You can develop and test serverless functions on your own computer before d
 ANSWER: **False**
 WHY: "Only" and the mention of COBOL (a very old language from the 1960s) are both clues that this is false. Serverless platforms support many modern languages: C#, Python, Java, TypeScript, PowerShell, Go, and more.
 TRAP: COBOL is a joke red herring — no modern serverless platform primarily uses COBOL.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** When deploying a Functions App to the cloud, you need to create and deploy:
 - A Functions App only
@@ -471,6 +514,7 @@ TRAP: COBOL is a joke red herring — no modern serverless platform primarily us
 ?
 ANSWER: **A Functions App, a Storage Account, and Application Settings**
 WHY: All three are required. The Functions App is the container that runs your code. The Storage Account stores logs, triggers, and function code. Application Settings hold configuration values like connection strings and API keys. You can't deploy with just one or two of these.
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 10 — Keep your plant secure: Pre-Lecture Quiz
 
@@ -480,6 +524,7 @@ WHY: All three are required. The Functions App is the container that runs your c
 ?
 ANSWER: **False**
 WHY: This question appears multiple times because it's one of the most important concepts in IoT. IoT security is hard — many devices ship with default passwords, unencrypted connections, or unpatched vulnerabilities. Never assume "always secure."
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** There are no documented cases of hackers using an IoT device to hack into a network:
 - True
@@ -487,6 +532,7 @@ WHY: This question appears multiple times because it's one of the most important
 ?
 ANSWER: **False**
 WHY: There are many well-documented real-world cases. In one famous example, hackers breached a casino's database through an internet-connected fish tank thermometer. IoT devices are a common entry point for cyberattacks because they're often the weakest link in network security.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** You can share your IoT device connection string with anyone
 - True
@@ -494,6 +540,7 @@ WHY: There are many well-documented real-world cases. In one famous example, hac
 ?
 ANSWER: **False**
 WHY: A connection string is like a password that grants access to your IoT Hub. Sharing it with anyone gives them the ability to impersonate your device, send fake data, or receive commands meant for your device. Treat connection strings like passwords.
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 10 — Keep your plant secure: Post-Lecture Quiz
 
@@ -506,6 +553,7 @@ WHY: A connection string is like a password that grants access to your IoT Hub. 
 ANSWER: **Symmetric key encryption is faster than asymmetric, but less secure**
 WHY: Symmetric = one shared key for both encrypting and decrypting. It's fast because it uses simpler math, but risky — if anyone steals the key, they can both read AND forge messages. Asymmetric = two keys (public + private). It's slower but more secure because the private key never needs to be shared.
 TRAP: Don't mix up which is faster and which is more secure. Symmetric = FAST (good for IoT devices). Asymmetric = MORE SECURE (good for initial authentication).
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Self-signed X.509 certificates are ideal for a production environment
 - True
@@ -513,6 +561,7 @@ TRAP: Don't mix up which is faster and which is more secure. Symmetric = FAST (g
 ?
 ANSWER: **False**
 WHY: Self-signed certificates are not trusted by any certificate authority — they're like making your own ID card instead of getting a government-issued one. For real production systems, you need certificates issued by a trusted Certificate Authority (CA) that browsers and services will accept.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** X.509 certificates:
 - Should never be shared between IoT devices
@@ -521,6 +570,7 @@ WHY: Self-signed certificates are not trusted by any certificate authority — t
 ?
 ANSWER: **Can be shared between devices**
 WHY: Unlike symmetric keys (which should ideally be unique per device), X.509 certificates can technically be installed on multiple devices. This is useful when you want a group of devices to authenticate using the same certificate. However, best practice often still favors unique certificates per device.
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 11 — Location tracking: Pre-Lecture Quiz
 
@@ -532,6 +582,7 @@ WHY: Unlike symmetric keys (which should ideally be unique per device), X.509 ce
 ANSWER: **Latitude and Longitude**
 WHY: You need both coordinates. Latitude tells you how far north or south you are (horizontal lines on a map). Longitude tells you how far east or west you are (vertical lines). One without the other gives you only a line, not a point.
 TRAP: Latitude or longitude alone can't pinpoint a location — it's like giving someone your street name but not your house number.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** The types of sensors that can track your location are called:
 - GPS
@@ -541,6 +592,7 @@ TRAP: Latitude or longitude alone can't pinpoint a location — it's like giving
 ANSWER: **GPS**
 WHY: GPS (Global Positioning System) is the satellite network that provides location data. A GPS receiver in your device listens to signals from orbiting satellites and calculates your position.
 TRAP: PGP is encryption software. GIF is an image format. Only GPS does location.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** There is no value in tracking vehicle locations
 - True
@@ -548,6 +600,7 @@ TRAP: PGP is encryption software. GIF is an image format. Only GPS does location
 ?
 ANSWER: **False**
 WHY: Vehicle tracking has enormous value in fleet management (delivery trucks), logistics (when will my package arrive?), ride-sharing (Uber/Lyft), theft recovery, and even insurance (safe driving discounts). The statement is clearly false.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 11 — Location tracking: Post-Lecture Quiz
 
@@ -559,6 +612,7 @@ WHY: Vehicle tracking has enormous value in fleet management (delivery trucks), 
 ANSWER: **NMEA sentences**
 WHY: NMEA (National Marine Electronics Association) is the standard text format that GPS modules use. An NMEA sentence looks like a coded string of text containing latitude, longitude, altitude, speed, and other data all in one line. It's the "language" GPS modules speak.
 TRAP: Latitude and longitude are the DATA inside the NMEA sentence, not the format/way the data is transmitted. The question asks how the data is SENT.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** To get a good GPS fix you need to receive signals from at least how many satellites
 - 1
@@ -567,6 +621,7 @@ TRAP: Latitude and longitude are the DATA inside the NMEA sentence, not the form
 ?
 ANSWER: **3**
 WHY: You need at least 3 satellites for triangulation (2D position on Earth's surface). Each satellite gives you a distance, and where the three distance spheres intersect is your location. Four satellites give you altitude too (3D fix), but the minimum for a "good fix" is 3.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** GPS sensors send data over:
 - SPI
@@ -576,6 +631,7 @@ WHY: You need at least 3 satellites for triangulation (2D position on Earth's su
 ANSWER: **UART**
 WHY: UART (Universal Asynchronous Receiver-Transmitter) is a simple serial communication protocol. GPS modules almost always use UART to send NMEA sentences to a microcontroller, because it's simple, reliable, and doesn't require a clock signal.
 TRAP: SPI is another protocol, but it's not what standard GPS modules typically use for their primary data output.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 12 — Store location data: Pre-Lecture Quiz
 
@@ -586,6 +642,7 @@ TRAP: SPI is another protocol, but it's not what standard GPS modules typically 
 ANSWER: **False**
 WHY: IoT Hub is a message broker — it receives and routes messages, but it does NOT store them long-term. Think of it as a post office: it handles delivering mail but doesn't keep the letters forever. You need a separate database or storage service to actually keep the data.
 TRAP: It seems logical that a "hub" would store things. But in Azure, IoT Hub passes data through; you must set up storage separately.
+<!--SR:!2026-07-03,2,230-->
 
 **Q2.** Data can be divided into the following two types
 - Blob and table
@@ -594,6 +651,7 @@ TRAP: It seems logical that a "hub" would store things. But in Azure, IoT Hub pa
 ?
 ANSWER: **Structured and unstructured**
 WHY: Structured data = organized in tables with rows and columns (like a spreadsheet of temperature readings). Unstructured data = free-form with no predefined format (like images, videos, audio recordings, or raw text). These are the two fundamental categories of all data.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** Serverless code can be used to write IoT data to a database
 - True
@@ -601,6 +659,7 @@ WHY: Structured data = organized in tables with rows and columns (like a spreads
 ?
 ANSWER: **True**
 WHY: This is one of the most common IoT patterns: IoT Hub receives data → triggers a serverless function → the function writes the data to a database. The whole pipeline runs automatically with no permanent server running.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 12 — Store location data: Post-Lecture Quiz
 
@@ -611,6 +670,7 @@ WHY: This is one of the most common IoT patterns: IoT Hub receives data → trig
 ?
 ANSWER: **Hot**
 WHY: The hot path = real-time processing. Data is analyzed the moment it arrives (like detecting an intruder from a security sensor). Warm path = processed within minutes/hours. Cold path = stored for later batch analysis (like monthly reports). "Hot" means "now."
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Azure storage has the following storage types:
 - Boxes, tubs, bins
@@ -620,6 +680,7 @@ WHY: The hot path = real-time processing. Data is analyzed the moment it arrives
 ANSWER: **Blob, table, queue and file**
 WHY: These are the four core Azure storage services: Blob = for unstructured objects (images, videos, backups). Table = for structured NoSQL data. Queue = for message queuing between apps. File = for file shares accessible via SMB protocol.
 TRAP: "Hot, warm, cold" are data processing paths, not storage types. "Boxes, tubs, bins" is a joke answer.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Azure Functions can be bound to database to write return values to the database
 - True
@@ -627,6 +688,7 @@ TRAP: "Hot, warm, cold" are data processing paths, not storage types. "Boxes, tu
 ?
 ANSWER: **True**
 WHY: Azure Functions support output bindings — you can configure a function so that its return value is automatically written to a database table. This eliminates the need to write database connection code manually. It's a key serverless feature.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 13 — Visualize location data: Pre-Lecture Quiz
 
@@ -636,6 +698,7 @@ WHY: Azure Functions support output bindings — you can configure a function so
 ?
 ANSWER: **False**
 WHY: Large tables without proper indexing become slow to query. As data grows, you need indexes (like a book's index), aggregation, and summarization to maintain fast lookups. Raw large tables get slower, not easier.
+<!--SR:!2026-07-03,2,230-->
 
 **Q2.** GPS data can be visualized on maps
 - True
@@ -643,6 +706,7 @@ WHY: Large tables without proper indexing become slow to query. As data grows, y
 ?
 ANSWER: **True**
 WHY: GPS coordinates (latitude, longitude) map directly to points on a map. This is the most natural visualization for location data — each GPS reading becomes a dot or marker on a map.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** On maps of large areas, the same distance drawn on the map represents the same distance on the real world no matter where on the map the measurement is taken
 - True
@@ -651,6 +715,7 @@ WHY: GPS coordinates (latitude, longitude) map directly to points on a map. This
 ANSWER: **False**
 WHY: Map projections distort distances because you're flattening a sphere onto a rectangle. On a Mercator projection (like Google Maps), Greenland looks as big as Africa, but Africa is actually 14 times larger. A centimeter near the poles represents much more real-world distance than a centimeter near the equator.
 TRAP: This seems like it should be true on an intuitive level, but the Earth is round and maps are flat — something has to distort.
+<!--SR:!2026-07-02,1,230-->
 
 ## Lesson 13 — Visualize location data: Post-Lecture Quiz
 
@@ -662,6 +727,7 @@ TRAP: This seems like it should be true on an intuitive level, but the Earth is 
 ANSWER: **Azure Maps**
 WHY: Azure Maps is Microsoft's mapping platform — it provides APIs and SDKs to display interactive maps on websites and in apps, similar to Google Maps but integrated with the Azure ecosystem.
 TRAP: "Azure Atlas" and "Azure World Visualizer" are made-up names that sound plausible but don't exist.
+<!--SR:!2026-07-03,2,230-->
 
 **Q2.** Azure maps plots data using:
 - GeoJSON
@@ -671,6 +737,7 @@ TRAP: "Azure Atlas" and "Azure World Visualizer" are made-up names that sound pl
 ANSWER: **GeoJSON**
 WHY: GeoJSON is a standard format for encoding geographic data in JSON (JavaScript Object Notation). It can represent points, lines, and polygons with their coordinates. Azure Maps uses GeoJSON as its primary data format for plotting locations.
 TRAP: "Lists of latitude and longitude" describes what's inside GeoJSON, but GeoJSON is the actual format specification Azure Maps expects.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Blobs can be retrieved via a URL
 - True
@@ -678,6 +745,7 @@ TRAP: "Lists of latitude and longitude" describes what's inside GeoJSON, but Geo
 ?
 ANSWER: **True**
 WHY: Every blob in Azure Blob Storage gets a unique URL. If the blob is publicly accessible, anyone with the URL can access it. If private, you need authentication (a shared access signature appended to the URL).
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 14 — Geofences: Pre-Lecture Quiz
 
@@ -687,6 +755,7 @@ WHY: Every blob in Azure Blob Storage gets a unique URL. If the blob is publicly
 ?
 ANSWER: **True**
 WHY: A geofence is a virtual boundary defined by GPS coordinates (like drawing a circle or polygon on a map). You can check whether a given GPS coordinate falls inside that boundary — this is the core concept of geofencing.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** GPS is incredibly accurate so can indicate with precision of less than 1M when a device enters a given area
 - True
@@ -695,6 +764,7 @@ WHY: A geofence is a virtual boundary defined by GPS coordinates (like drawing a
 ANSWER: **False**
 WHY: Consumer GPS accuracy is typically 5-10 meters, not under 1 meter. Buildings, trees, weather, and satellite geometry all degrade accuracy. Sub-meter GPS exists but requires expensive specialized equipment, not standard smartphone/sensor GPS.
 TRAP: Movies and TV shows make GPS seem pinpoint-accurate. Real-world consumer GPS is much rougher.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Geofences are useful when tracking vehicles to:
 - Determine when a vehicle enters a given area only
@@ -704,6 +774,7 @@ TRAP: Movies and TV shows make GPS seem pinpoint-accurate. Real-world consumer G
 ANSWER: **Determine when a vehicle enters or leaves a given area**
 WHY: Both events are valuable. Entering triggers actions like "welcome" messages, fare calculations, or "arrived at destination." Leaving triggers alerts like "vehicle left the depot" or "truck departed the warehouse." You need both.
 TRAP: Choosing only "enters" or only "leaves" gives you only half the picture.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 14 — Geofences: Post-Lecture Quiz
 
@@ -714,6 +785,7 @@ TRAP: Choosing only "enters" or only "leaves" gives you only half the picture.
 ?
 ANSWER: **Consumer groups**
 WHY: A consumer group gives a service its own independent view of the data stream, with its own cursor/position tracking. If two services share a consumer group, they'll split the data. Separate consumer groups = each service sees all data independently.
+<!--SR:!2026-07-03,2,230-->
 
 **Q2.** The default search buffer for a geofence call is:
 - 5m
@@ -722,6 +794,7 @@ WHY: A consumer group gives a service its own independent view of the data strea
 ?
 ANSWER: **50m**
 WHY: The 50-meter buffer accounts for GPS inaccuracy. Instead of checking exactly on the boundary line (which GPS might miss), the system checks a 50-meter wide zone around the boundary. This prevents false negatives where a device is right at the edge but GPS says it's slightly outside.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** Points inside the geofence have a distance:
 - Less than 0 (a negative value)
@@ -729,6 +802,7 @@ WHY: The 50-meter buffer accounts for GPS inaccuracy. Instead of checking exactl
 ?
 ANSWER: **Less than 0 (a negative value)**
 WHY: The geofence API returns a signed distance: negative values mean INSIDE the boundary (how deep inside), zero means exactly ON the boundary, and positive values mean OUTSIDE (how far away). Think of it like being inside a building: negative floors are the basement.
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 15 — Train a fruit quality detector: Pre-Lecture Quiz
 
@@ -738,6 +812,7 @@ WHY: The geofence API returns a signed distance: negative values mean INSIDE the
 ?
 ANSWER: **True**
 WHY: A camera captures visual data from the physical world — that's exactly what a sensor does. In IoT, cameras are used for quality inspection, security monitoring, traffic analysis, facial recognition, and many other sensing tasks.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Fruit can be sorted using cameras
 - True
@@ -745,6 +820,7 @@ WHY: A camera captures visual data from the physical world — that's exactly wh
 ?
 ANSWER: **True**
 WHY: Computer vision AI can analyze images of fruit to detect ripeness, bruises, size, and color — then trigger automated sorting systems to separate good fruit from bad. This is already used in real-world food processing plants.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Images-based AI models are incredibly complex and time consuming to train, requiring hundreds of thousands of images:
 - True
@@ -752,6 +828,7 @@ WHY: Computer vision AI can analyze images of fruit to detect ripeness, bruises,
 ?
 ANSWER: **False**
 WHY: Transfer learning changes this completely. You start with a model already trained on millions of general images, then "fine-tune" it with just a small set of your specific images (as few as 5 per category). This takes minutes, not weeks.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 15 — Train a fruit quality detector: Post-Lecture Quiz
 
@@ -763,6 +840,7 @@ WHY: Transfer learning changes this completely. You start with a model already t
 ANSWER: **Transfer learning**
 WHY: Transfer learning = "transferring" knowledge from a big pre-trained model to your specific task. The base model already knows what edges, shapes, and textures look like. You just teach it your specific categories (ripe vs. unripe fruit). This is why you don't need thousands of images.
 TRAP: "Transformational learning" and "transaction learning" sound similar but are made-up terms.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Image classifiers can be trained using:
 - Only 1 image per tag
@@ -772,6 +850,7 @@ TRAP: "Transformational learning" and "transaction learning" sound similar but a
 ANSWER: **At least 5 images per tag**
 WHY: Custom Vision's minimum requirement is 5 labeled images per category/tag to train a classifier. More images = better accuracy, but 5 is the hard minimum to get started.
 TRAP: 1 image is too few for the AI to learn what makes that category unique. 50 is enough but the question asks for the MINIMUM.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** The hardware that allows ML models to be trained quickly, as well as making the graphics on our Xbox look amazing are called:
 - PGU
@@ -800,6 +879,7 @@ WHY: Many IoT devices (especially single-board computers like Raspberry Pi) have
 ANSWER: **False**
 WHY: Digital camera sensors use electronic light-sensing chips (CMOS or CCD sensors), not physical film. These chips convert light into electrical signals pixel by pixel. Film is analog photography technology, not digital.
 TRAP: Don't confuse traditional film cameras with modern digital sensors. IoT uses digital.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Camera sensors send which type of data
 - Digital
@@ -808,6 +888,7 @@ TRAP: Don't confuse traditional film cameras with modern digital sensors. IoT us
 ANSWER: **Digital**
 WHY: Modern digital camera sensors output digital data — each pixel is represented as a number (or three numbers for color: red, green, blue). This digital data can then be processed by software and AI models.
 TRAP: While light is analog, the camera sensor CONVERTS it to digital output. The question asks what type of data the sensor SENDS.
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 16 — Check fruit quality from an IoT device: Post-Lecture Quiz
 
@@ -827,6 +908,7 @@ TRAP: "Instance" sounds similar but isn't the term Custom Vision uses. "Iguana" 
 ?
 ANSWER: **True**
 WHY: Custom Vision can store the images you submit for prediction and let you tag them later. These real-world images from actual usage are extremely valuable for improving model accuracy because they show exactly what the model encounters in practice.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** You don't need to use images captured from an IoT device to train the model as the cameras are as good quality as phone cameras:
 - True
@@ -834,7 +916,7 @@ WHY: Custom Vision can store the images you submit for prediction and let you ta
 ?
 ANSWER: **False**
 WHY: IoT device cameras often have different quality, angle, lighting conditions, and resolution than phone cameras. Training with images from the actual device the model will run on produces much better real-world accuracy. Phone images may not represent what the IoT camera sees.
-<!--SR:!2026-07-01,0,230-->
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 17 — Run your fruit detector on the edge: Pre-Lecture Quiz
 
@@ -844,6 +926,7 @@ WHY: IoT device cameras often have different quality, angle, lighting conditions
 ?
 ANSWER: **True**
 WHY: Processing data locally on the edge device means sensitive data never has to travel over the internet or sit on someone else's server. If you're analyzing security camera footage, processing it on-device means the video never leaves your building.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Running an ML model on an edge device is less accurate than running an ML model in the cloud.
 - True
@@ -861,6 +944,7 @@ TRAP: Beginners might think "edge = weaker = less accurate." But the math is ide
 ANSWER: **False**
 WHY: The whole point of edge computing is local processing WITHOUT needing the cloud. An edge device can run its AI model, make decisions, and control actuators completely offline. Internet is only needed when you want to sync data or receive updates.
 TRAP: "Always" is the red flag. Edge devices CAN work offline by design.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 17 — Run your fruit detector on the edge: Post-Lecture Quiz
 
@@ -875,6 +959,7 @@ TRAP: "Always" is the red flag. Edge devices CAN work offline by design.
 ANSWER: **Compact**
 WHY: Compact models are optimized versions that are smaller in file size and use less memory — specifically designed to run on resource-constrained edge devices. A regular model might be too large or too slow for a small IoT device.
 TRAP: "General" and "Food" are classification DOMAINS (what the model detects), not the deployment FORMAT. The question asks about the format.
+<!--SR:!2026-07-03,2,230-->
 
 **Q2.** What is a container?
 - Self-contained applications that hold ML models
@@ -885,6 +970,7 @@ TRAP: "General" and "Food" are classification DOMAINS (what the model detects), 
 ANSWER: **Self-contained applications that run in isolation from other programs.**
 WHY: A container packages an application with everything it needs to run (code, libraries, settings) into one portable unit. "Isolation" is key — containers don't interfere with each other or the host system. They run the same way on any device.
 TRAP: Containers aren't only for ML models, only for edge devices, or only for cloud communication. They're a general-purpose packaging technology.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** How do you do Custom Vision model retraining for ML models deployed on edge devices?
 - Take images on the edge device, save to the edge device, and point the ML model to the new image folder
@@ -893,6 +979,7 @@ TRAP: Containers aren't only for ML models, only for edge devices, or only for c
 ?
 ANSWER: **Upload images from the edge device to the cloud, retrain the model in Custom Vision, then re-deploy onto the edge device.**
 WHY: The edge device collects images and runs the current model, but the actual TRAINING happens in the cloud (Custom Vision service requires cloud resources). After retraining, you download the new improved model and deploy it back to the edge device. It's a cycle: collect → upload → retrain → redeploy.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 18 — Trigger fruit quality detection from a sensor: Pre-Lecture Quiz
 
@@ -903,6 +990,7 @@ WHY: The edge device collects images and runs the current model, but the actual 
 ?
 ANSWER: **Things**
 WHY: The "Things" in IoT are the physical devices with sensors — they're the ones that directly interact with the real world and collect data. Cloud services process data, edge devices run logic, but only the "things" gather the raw data.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** The only outputs of an IoT application are actuators.
 - True
@@ -910,6 +998,7 @@ WHY: The "Things" in IoT are the physical devices with sensors — they're the o
 ?
 ANSWER: **False**
 WHY: "Only" makes this false. Outputs include actuators (physical actions), but also: dashboard displays, email/SMS alerts, database records, reports, API responses, and notifications to other systems. IoT applications have many types of output.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** Things don't need to connect directly to IoT Hub, they can use edge devices as gateways.
 - True
@@ -917,6 +1006,7 @@ WHY: "Only" makes this false. Outputs include actuators (physical actions), but 
 ?
 ANSWER: **True**
 WHY: An edge device can act as a gateway — small, low-power sensors talk to the edge device locally (via Bluetooth, Zigbee, etc.), and the edge device aggregates their data and forwards it to IoT Hub. This is a very common IoT architecture pattern.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 18 — Trigger fruit quality detection from a sensor: Post-Lecture Quiz
 
@@ -928,6 +1018,7 @@ WHY: An edge device can act as a gateway — small, low-power sensors talk to th
 ANSWER: **Things, Insights, Actions**
 WHY: This is the fundamental IoT architecture: THINGS gather data from the physical world → INSIGHTS process and analyze that data to find meaning → ACTIONS respond based on those insights (send alerts, trigger actuators, update dashboards).
 TRAP: "Things, Internet, Databases" misses the decision-making and action components. "AI, Blockchain, FizzBuzzers" is a joke answer.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** The component that communicates between the things and the components that create insights is:
 - Azure Functions
@@ -936,6 +1027,7 @@ TRAP: "Things, Internet, Databases" misses the decision-making and action compon
 ?
 ANSWER: **IoT Hub**
 WHY: IoT Hub sits in the middle as the messaging bridge. Things send data to IoT Hub; services that create insights read from IoT Hub. It decouples the data producers from the data consumers so neither needs to know about the other directly.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** How do time of flight proximity sensors work?
 - They send laser beams and time how long till they bounce off an object
@@ -945,6 +1037,7 @@ WHY: IoT Hub sits in the middle as the messaging bridge. Things send data to IoT
 ANSWER: **They send laser beams and time how long till they bounce off an object**
 WHY: "Time of flight" literally means measuring how long light takes to travel. The sensor fires a laser pulse, starts a very fast timer, waits for the reflection to return, and calculates distance = (speed of light × time) / 2. The "divided by 2" is because the light travels to the object AND back.
 TRAP: Sound-based measurement is SONAR (like a bat or submarine), not time-of-flight. Time-of-flight uses LIGHT (lasers).
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 19 — Train a stock detector: Pre-Lecture Quiz
 
@@ -963,6 +1056,7 @@ WHY: Object detection AI models are specifically designed to both identify AND c
 ?
 ANSWER: **A wide range of uses including stock checking, monitoring for mask where required, tracking footfall, automated billing**
 WHY: The most complete answer is correct. IoT+AI in retail goes far beyond just counting stock — it includes customer tracking, safety compliance (mask detection), automated checkout, theft prevention, and inventory management. The narrow answers miss most of the value.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Object detection involves:
 - Detecting objects in an image and tracking their location and probability
@@ -972,6 +1066,7 @@ WHY: The most complete answer is correct. IoT+AI in retail goes far beyond just 
 ANSWER: **Detecting objects in an image and tracking their location and probability**
 WHY: Object detection does three things: (1) finds what objects are present, (2) draws bounding boxes showing WHERE each object is, and (3) gives a confidence score (probability) for each detection. It's more than just counting or classifying — it locates.
 TRAP: "Counting objects only" and "classifying images" are incomplete. Object detection includes all three: detection + location + probability.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 19 — Train a stock detector: Post-Lecture Quiz
 
@@ -981,6 +1076,7 @@ TRAP: "Counting objects only" and "classifying images" are incomplete. Object de
 ?
 ANSWER: **False**
 WHY: Object detectors return a separate result for EACH object detected. If there are 10 cans of soda in an image, the detector returns 10 individual results, each with its own bounding box and confidence score.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** What is the best domain to use in Custom Vision for stock counting
 - General
@@ -990,6 +1086,7 @@ WHY: Object detectors return a separate result for EACH object detected. If ther
 ANSWER: **Products on shelves**
 WHY: Custom Vision offers specialized domains optimized for specific scenarios. "Products on shelves" is specifically designed for retail shelf recognition — it's pre-tuned for the angles, lighting, and arrangements typical of store shelves.
 TRAP: "General" would work but is less optimized. "Food" is for food items specifically. "Products on shelves" is purpose-built for this exact task.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** At least how many images do you need to train an object detector?
 - 1
@@ -999,6 +1096,7 @@ TRAP: "General" would work but is less optimized. "Food" is for food items speci
 ANSWER: **15**
 WHY: Object detection needs more training data than simple image classification (which needs only 5 per tag). The model has to learn not just what an object looks like but also its boundaries and location, which requires at least 15 labeled images per tag in Custom Vision.
 TRAP: 5 is the minimum for image CLASSIFICATION, not object DETECTION. Object detection is harder and needs more data.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 20 — Check stock from an IoT device: Pre-Lecture Quiz
 
@@ -1008,6 +1106,7 @@ TRAP: 5 is the minimum for image CLASSIFICATION, not object DETECTION. Object de
 ?
 ANSWER: **False**
 WHY: With compact model formats and optimized inference engines, IoT devices can run object detection locally. Modern edge hardware includes dedicated AI accelerators that make on-device object detection practical.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Object detectors give you:
 - The count of objects detected
@@ -1017,6 +1116,7 @@ WHY: With compact model formats and optimized inference engines, IoT devices can
 ANSWER: **The count, location and probability of objects detected**
 WHY: The most complete answer is correct. Object detectors return all three: HOW MANY objects (count), WHERE they are (location/bounding box), and HOW CONFIDENT the model is about each detection (probability/confidence score).
 TRAP: "The count of objects detected" and "The count and location" are partially correct but incomplete — they leave out probability.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Object detectors can be used to detect where missing stock should be to allow robots to automatically stock shelves
 - True
@@ -1024,6 +1124,7 @@ TRAP: "The count of objects detected" and "The count and location" are partially
 ?
 ANSWER: **True**
 WHY: By comparing the detected objects against a planogram (a diagram of where products SHOULD be), the system can identify empty spots. A robot can then be dispatched to fill those specific gaps. This is active research and real-world retail automation.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 20 — Check stock from an IoT device: Post-Lecture Quiz
 
@@ -1033,6 +1134,7 @@ WHY: By comparing the detected objects against a planogram (a diagram of where p
 ?
 ANSWER: **False**
 WHY: Raw counts can be misleading. You also need to consider the probability threshold (low-confidence detections might be wrong), filter overlapping bounding boxes (the same object detected twice), and verify against expected positions. Pure count without quality checks is unreliable.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Bounding boxes use:
 - Percentage based coordinates
@@ -1042,6 +1144,7 @@ WHY: Raw counts can be misleading. You also need to consider the probability thr
 ANSWER: **Percentage based coordinates**
 WHY: Bounding boxes use values from 0 to 1 representing percentage of image width and height (e.g., left=0.2, top=0.3, width=0.4, height=0.5). This makes the coordinates independent of image resolution — they work the same on a 640×480 image or a 4K image.
 TRAP: Pixel-based coordinates would break if the image is resized. Percentage-based coordinates scale automatically.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Can detected objects overlap?
 - Yes
@@ -1049,6 +1152,7 @@ TRAP: Pixel-based coordinates would break if the image is resized. Percentage-ba
 ?
 ANSWER: **Yes**
 WHY: Objects can overlap in an image — products stacked behind each other on a shelf, or items partially obscured. The object detector will return overlapping bounding boxes for each detected object, even if one is partially hidden behind another.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 21 — Recognize speech with an IoT device: Pre-Lecture Quiz
 
@@ -1058,6 +1162,7 @@ WHY: Objects can overlap in an image — products stacked behind each other on a
 ?
 ANSWER: **True**
 WHY: Smart speakers (like Amazon Echo, Google Home) are IoT devices that recognize speech every day. With a microphone and speech recognition AI, IoT devices convert spoken words into text and commands.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** Voice assistants should send all the audio they hear to the cloud for processing:
 - True
@@ -1073,6 +1178,7 @@ WHY: Sending ALL audio constantly would be a massive privacy violation and bandw
 ?
 ANSWER: **False**
 WHY: Modern MEMS (Micro-Electro-Mechanical Systems) microphones are tiny — just a few millimeters across — and are used in smartphones, earbuds, and IoT devices. Size is not a barrier. Multiple small microphones can work together (beamforming) for better audio quality.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 21 — Recognize speech with an IoT device: Post-Lecture Quiz
 
@@ -1083,6 +1189,7 @@ WHY: Modern MEMS (Micro-Electro-Mechanical Systems) microphones are tiny — jus
 ANSWER: **Analog**
 WHY: Sound waves are continuous (analog) pressure variations in the air. A microphone converts these varying sound waves into a continuously varying voltage — that's an analog signal. The conversion to digital (via an ADC — Analog to Digital Converter) happens AFTER the microphone.
 TRAP: It's tempting to say "digital" because the final data a computer processes is digital. But the microphone sensor ITSELF outputs analog — something else converts it later.
+<!--SR:!2026-07-03,2,230-->
 
 **Q2.** Sound waves are converted to digital signals using:
 - Pulse Code Modulation
@@ -1092,6 +1199,7 @@ TRAP: It's tempting to say "digital" because the final data a computer processes
 ANSWER: **Pulse Code Modulation**
 WHY: PCM (Pulse Code Modulation) is the standard method for digitizing audio. It works by SAMPLING the analog waveform thousands of times per second (sample rate) and assigning each sample a numeric value (bit depth). CD-quality audio is 44,100 samples/second at 16 bits each.
 TRAP: The other two options are made-up acronyms designed to look similar.
+<!--SR:!2026-07-03,2,230-->
 
 **Q3.** 1 second of 16-bit audio sampled at 16KHz is how large?
 - 1KB
@@ -1101,6 +1209,7 @@ TRAP: The other two options are made-up acronyms designed to look similar.
 ANSWER: **32KB**
 WHY: 16 bits = 2 bytes per sample. 16 KHz = 16,000 samples per second. So: 2 bytes × 16,000 = 32,000 bytes = 32KB (since 1KB = 1,024 bytes, this is approximately 32KB).
 TRAP: 16KB would be correct if you forgot that 16 bits = 2 bytes (not 1 byte). The bit depth (16) and sample rate (16,000) look similar, but you must multiply them.
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 22 — Understand language: Pre-Lecture Quiz
 
@@ -1110,6 +1219,7 @@ TRAP: 16KB would be correct if you forgot that 16 bits = 2 bytes (not 1 byte). T
 ?
 ANSWER: **False**
 WHY: NLU (Natural Language Understanding) interprets MEANING, not just keywords. "Turn on the light" and "Can you make it brighter in here?" mean the same thing but share no fixed words. Fixed-word matching is how old command-line programs worked, not modern AI language understanding.
+<!--SR:!2026-07-03,2,230-->
 
 **Q2.** Language understanding involves:
 - Looking at the individual words in a sentence and trying to get the meaning
@@ -1118,6 +1228,7 @@ WHY: NLU (Natural Language Understanding) interprets MEANING, not just keywords.
 ?
 ANSWER: **Looking at the whole sentence and trying to get the meaning using the context of the words**
 WHY: Words change meaning based on context. "Set a timer" vs "Set the table" — "set" means completely different things. NLU looks at the full sentence and the relationships between words to determine intent, not just individual words in isolation.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** Cloud providers have AI services that can understand language:
 - True
@@ -1125,6 +1236,7 @@ WHY: Words change meaning based on context. "Set a timer" vs "Set the table" —
 ?
 ANSWER: **True**
 WHY: Almost every major cloud provider offers language understanding services: Azure has LUIS, Google has Dialogflow, Amazon has Lex, IBM has Watson Assistant. These are ready-to-use cloud APIs that understand natural language.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 22 — Understand language: Post-Lecture Quiz
 
@@ -1136,6 +1248,7 @@ WHY: Almost every major cloud provider offers language understanding services: A
 ANSWER: **Intents and entities**
 WHY: Intent = the GOAL or ACTION the user wants (e.g., "set a timer," "check weather," "play music"). Entity = the specific DETAILS or PARAMETERS (e.g., "3 minutes," "New York," "jazz"). Every NLU system breaks sentences down this way.
 TRAP: "Ideas and explanations" sounds philosophical but isn't the technical term. "Imps and elves" is a joke answer.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** The Microsoft service for language understanding is called:
 - LUIS
@@ -1145,6 +1258,7 @@ TRAP: "Ideas and explanations" sounds philosophical but isn't the technical term
 ANSWER: **LUIS**
 WHY: LUIS = Language Understanding Intelligent Service. It's Microsoft Azure's NLU service that extracts intents and entities from user sentences.
 TRAP: Luigi is a Nintendo video game character (Mario's brother). Jarvis is Iron Man's AI assistant. LUIS is the real product name.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** In the sentence 'set a 3 minute timer' the:
 - The intent is 3 minutes and the entity is a timer
@@ -1154,6 +1268,7 @@ TRAP: Luigi is a Nintendo video game character (Mario's brother). Jarvis is Iron
 ANSWER: **The intent is set a timer and the entity is 3 minutes**
 WHY: The user's GOAL (intent) is to create a timer. The specific DURATION (entity) is "3 minutes." Think of it as: intent = the verb phrase (what to do), entity = the noun/value (the details).
 TRAP: Swapping intent and entity is the most common mistake. Ask: "What does the user want to DO?" = intent. "What are the specifics?" = entity.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 23 — Set a timer and provide spoken feedback: Pre-Lecture Quiz
 
@@ -1163,6 +1278,7 @@ TRAP: Swapping intent and entity is the most common mistake. Ask: "What does the
 ?
 ANSWER: **False**
 WHY: Modern neural text-to-speech (TTS) produces remarkably natural-sounding voices with proper intonation, emotion, and rhythm. The old robotic-sounding speech is outdated technology. Current AI voices can be nearly indistinguishable from human speech.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** AI models can only create speech in American English:
 - True
@@ -1170,6 +1286,7 @@ WHY: Modern neural text-to-speech (TTS) produces remarkably natural-sounding voi
 ?
 ANSWER: **False**
 WHY: "Only" makes this false. Modern TTS services support hundreds of voices across dozens of languages and regional accents — British English, Spanish, Mandarin, Arabic, Japanese, and many more. American English is just one of many options.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** AI models would convert 1234 into which spoken phrase:
 - One two three four
@@ -1179,6 +1296,7 @@ WHY: "Only" makes this false. Modern TTS services support hundreds of voices acr
 ANSWER: **It can be 'one two three four' or 'one thousand two hundred and thirty four' depending on the context**
 WHY: AI text-to-speech uses context to decide. "Enter PIN: 1234" → read as digits. "The hall seats 1234 people" → read as a number. This is called "text normalization" and is a key part of modern TTS systems.
 TRAP: Neither format is always correct. Good TTS adapts based on surrounding text.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 23 — Set a timer and provide spoken feedback: Post-Lecture Quiz
 
@@ -1197,6 +1315,7 @@ WHY: Step 1 (Text Analysis): understand and normalize the raw text (handle numbe
 ?
 ANSWER: **True**
 WHY: Given enough voice samples, AI can create a custom voice model that mimics a specific person's speaking style, pitch, and cadence. This technology is called "voice cloning" or "custom voice." It requires careful ethical and legal considerations.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** The markup language used to encode speech is called:
 - SSML
@@ -1205,6 +1324,7 @@ WHY: Given enough voice samples, AI can create a custom voice model that mimics 
 ?
 ANSWER: **SSML**
 WHY: SSML = Speech Synthesis Markup Language. It's an XML-based language that lets you control exactly how text is spoken: pronunciation, pauses, pitch, speaking rate, volume, and emphasis. Think of it like HTML for speech instead of web pages.
+<!--SR:!2026-07-03,2,230-->
 
 ## Lesson 24 — Support multiple languages: Pre-Lecture Quiz
 
@@ -1214,6 +1334,7 @@ WHY: SSML = Speech Synthesis Markup Language. It's an XML-based language that le
 ?
 ANSWER: **False**
 WHY: "Only" makes this false. LUIS and other NLU services support dozens of languages including Spanish, French, German, Chinese, Japanese, Portuguese, and many more. English is not the only language.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** AI speech to text models understand multiple languages:
 - True
@@ -1221,6 +1342,7 @@ WHY: "Only" makes this false. LUIS and other NLU services support dozens of lang
 ?
 ANSWER: **True**
 WHY: Speech recognition services support many languages, and some can even auto-detect which language is being spoken without being told. You can speak Spanish to a device configured for Spanish, and it will transcribe correctly.
+<!--SR:!2026-07-04,3,250-->
 
 **Q3.** AI translation involves swapping individual words for their translated version:
 - True
@@ -1229,6 +1351,7 @@ WHY: Speech recognition services support many languages, and some can even auto-
 ANSWER: **False**
 WHY: Word-by-word translation produces garbage results. Languages have different grammar, word order, idioms, and cultural context. Modern neural translation considers the ENTIRE sentence to produce a natural-sounding translation that preserves meaning.
 TRAP: This is what early (pre-AI) translation systems tried to do, and they failed badly. Modern AI translation is fundamentally different.
+<!--SR:!2026-07-04,3,250-->
 
 ## Lesson 24 — Support multiple languages: Post-Lecture Quiz
 
@@ -1240,6 +1363,7 @@ TRAP: This is what early (pre-AI) translation systems tried to do, and they fail
 ANSWER: **70 years**
 WHY: Machine translation research began in the early 1950s, shortly after the first computers were built. It's one of the oldest problems in AI — researchers have been working on it since the 1950s, making it roughly 70+ years of research history.
 TRAP: 7 or 17 years feels more "modern" because recent breakthroughs (neural MT) happened in the last decade, but the field itself is much older.
+<!--SR:!2026-07-04,3,250-->
 
 **Q2.** AI language translators are called:
 - Noddy translators
