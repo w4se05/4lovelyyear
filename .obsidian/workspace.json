@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "IOT-Material/Study Sheet/Module 1_Getting Started (IoT).md",
+                "file": "IOT-Material/Multiple Choice/IoT_Flashcards.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Module 1_Getting Started (IoT)"
+              "title": "IoT_Flashcards"
             }
           }
         ]
@@ -174,9 +174,19 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "26e0b7cda46f3667",
+            "type": "leaf",
+            "state": {
+              "type": "review-queue-list-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "review-queue-list-view"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -193,19 +203,32 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-spaced-repetition:Review flashcards": false
     }
   },
-  "active": "a987533551d38091",
+  "active": "1b365bc18457caa0",
   "lastOpenFiles": [
+    "graph_lecture_video.py",
+    "IOT-Material/06-consumer/06-consumer-study-sheet.md",
+    "IOT-Material/05-retail/STUDY-SHEET-MODULE-05.md",
+    "IOT-Material/04-manufacturing/module-04-study-sheet.md",
+    "IOT-Material/02-farm/study-sheet.md",
+    "IOT-Material/Multiple Choice/IoT_Quizzes.md",
+    "IOT-Material/Study Sheet/Module 2_study-sheet.md",
+    "IOT-Material/Study Sheet/Module 3_Transport.md",
+    "IOT-Material/Study Sheet/Module 1_Getting Started (IoT).md",
+    "IOT-Material/Multiple Choice/IoT_Flashcards.md",
+    "IOT-Material/Multiple Choice",
+    "IOT-Material/New folder",
+    "IOT-Material/Study Sheet/MASTER_STUDY_DOCUMENT.md",
+    "IOT-Material/Study Sheet/MASTER_PART3.md",
+    "IOT-Material/Study Sheet/MASTER_PART2.md",
+    "IOT-Material/Study Sheet/MASTER_PART1.md",
     "IOT-Material/Study Sheet/Module 5_Study-sheet.md",
     "IOT-Material/Study Sheet/Module 6_consumer-study-sheet.md",
     "IOT-Material/Study Sheet/Module 4_study-sheet.md",
-    "IOT-Material/Study Sheet/Module 2_study-sheet.md",
-    "IOT-Material/Study Sheet/Module 1_Getting Started (IoT).md",
-    "IOT-Material/Study Sheet/Module 3_Transport.md",
     "IOT-Material/Study Sheet",
-    "IOT-Material/New folder",
     "IOT-Material/Module 03_Transport.md",
     "IOT-Material/Module 3_Transport.md",
     "IOT-Material/Module 1_Getting Started (IoT).md",
@@ -214,25 +237,12 @@
     "IOT-Material/module-04-study-sheet.md",
     "IOT-Material/Module_2_study-sheet.md",
     "IOT-Material/02-farm/Module_2_study-sheet.md",
-    "IOT-Material/06-consumer/06-consumer-study-sheet.md",
-    "IOT-Material/02-farm/study-sheet.md",
     "IOT-Material/Module 1 - Getting Started (IoT).md",
-    "IOT-Material/03-transport/lesson-13-visualize-location-data.md",
-    "IOT-Material/04-manufacturing/module-04-study-sheet.md",
-    "IOT-Material/02-farm/lesson-06-detect-soil-moisture.md",
-    "IOT-Material/05-retail/STUDY-SHEET-MODULE-05.md",
     "IOT-Material/structure.txt",
-    "IOT-Material/02-farm/lesson-05-predict-plant-growth.md",
-    "IOT-Material/01-getting-started/lesson-04-connect-internet.md",
-    "IOT-Material/01-getting-started/lesson-03-sensors-and-actuators.md",
-    "IOT-Material/01-getting-started/lesson-02-deeper-dive.md",
-    "IOT-Material/01-getting-started/lesson-01-introduction-to-iot.md",
-    "graph_lecture_video.py",
     "Programming 2_Cheatsheet_Generator",
     "Programming 2/Exercises/test_tmp/check.exe",
     "Programming 2/Exercises/test_tmp/check.cpp",
     "Programming 2/Exercises/test_tmp",
-    "Programming 2/Lecture/Vietnamese",
-    "Programming 2/Exercises/test_tmp/sanity.cpp"
+    "Programming 2/Lecture/Vietnamese"
   ]
 }

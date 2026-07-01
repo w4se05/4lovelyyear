@@ -1076,7 +1076,7 @@ digraph G {
 Every `a`, `b`, `c` inside a multi-symbol RHS becomes `Ba`, `Bb`, `Bc`. Add `Ba → a`, `Bb → b`, `Bc → c`.
 
 ```
-S → BaS | a | BaBD | BaD | BaB | c | BbAD | BbA | BbD | b 
+S → BaS | a | BaBD | BaD | BaB | c | BbAD | BbA | BbD | b | λ
 A → BbAD | BbA | BbD | b
 B → BbC | b | ABcDD | BcDD | ABcD | ABc | BcD | c | a
 C → ABcDD | BcDD | ABcD | ABc | BcD | c | a
@@ -1104,7 +1104,7 @@ Bb → b
 Bc → c
 D  → a
 
-S  → BaS | BaD1 | BaD | BaB | BbD2 | BbA | BbD | a | b | c
+S  → BaS | BaD1 | BaD | BaB | BbD2 | BbA | BbD | a | b | c | λ
 A  → BbD2 | BbA | BbD | b
 B  → BbC | AD3 | BcD4 | AD6 | ABc | BcD | b | c | a
 C  → AD3 | BcD4 | AD6 | ABc | BcD | c | a
@@ -1163,6 +1163,19 @@ C → AcDD | cDD | AcD | Ac | cD | c | a
 D → a
 ```
 
+**Step 0 — Restore λ via new start X** (since `λ ∈ L(G)` but `S` no longer derives it):
+
+```
+X → S | λ
+S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
+A → bAD | bA | bD | b
+B → bC | b | AcDD | cDD | AcD | Ac | cD | c | a
+C → AcDD | cDD | AcD | Ac | cD | c | a
+D → a
+```
+
+X never appears on any RHS. ✓
+
 **Step 1 — Replace terminals beyond position 1:** The terminal `c` appears at position 2 in `AcDD`, `AcD`, `Ac`. Introduce `E → c` and replace those occurrences:
 
 ```
@@ -1189,6 +1202,7 @@ Same substitution applies to C.
 **Final GNF grammar:**
 
 ```
+X → S | λ
 S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
 A → bAD | bA | bD | b
 B → bC | b | bADEDD | bAEDD | bDEDD | bEDD | bADED | bAED | bDED | bED | bADE | bAE | bDE | bE | cDD | cD | c | a
@@ -1197,17 +1211,16 @@ D → a
 E → c
 ```
 
+> [!tip] `X → S | λ` isolates the empty string. `X` never appears on any RHS. All other productions strictly conform to `A → aα` with single-char variables only.
+
 ---
 
 ## PROBLEM 6D — Build NPDA from GNF Grammar
 
 ### What you're doing
-
 Given a GNF grammar, mechanically write the NPDA. It always has exactly **3 states**.
 
 ### The fixed template (memorise this)
-
-dot
 
 ```dot
 digraph G {
@@ -1220,25 +1233,19 @@ digraph G {
     q2;
     start -> q0;
     q0 -> q1 [label="λ, Z / SZ\n(push start variable)"];
-    q1 -> q1 [label="a, A / α  (for each rule A → aα)\nλ, A / λ  (for each rule A → λ)"];
+    q1 -> q1 [label="a, A / α\n(for each rule A → aα)"];
     q1 -> q2 [label="λ, Z / λ\n(stack empty → accept)"];
 }
 ```
 
-The rule is always: **one δ line per grammar production**.
-
-- `A → aα` becomes `δ(q₁, a, A) = (q₁, α)`
-- `A → λ` becomes `δ(q₁, λ, A) = (q₁, λ)`
-
-> [!warning] Stack push order `δ(q₁, a, A) = (q₁, YZ)` means **Y is on top**. Write left-to-right as in the grammar production.
-
-> [!note] If λ ∈ L(G) Just add `δ(q₁, λ, S) = (q₁, λ)` as one extra line for S. No new variable needed.
+> [!warning] Stack push order
+> `δ(q₁, a, A) = (q₁, XY)` means **X is on top**. Write left-to-right as in the grammar production.
 
 ---
 
 ### ✏️ Fully Worked Example (mock exam Q6d)
 
-**GNF Grammar** (from Problem 6C):
+**GNF Grammar** (from Problem 6C above):
 
 ```
 S → aS | a | aBD | aD | aB | c | bAD | bA | bD | b
@@ -1249,13 +1256,34 @@ D → a
 E → c
 ```
 
+**NPDA transition diagram** (3 states; X → S and X → λ add two extra λ-loops on q₁):
+
+```dot
+digraph G {
+    rankdir=LR;
+    node [shape=point, width=0];
+    start;
+    node [shape=circle];
+    q0; q1;
+    node [shape=doublecircle];
+    q2;
+    start -> q0;
+    q0 -> q1 [label="λ, Z / XZ\n(push start variable)", fontsize=10];
+    q1 -> q1 [label="λ, X / S  (X→S)\nλ, X / λ  (X→λ)\na,S / S,λ,BD,D,B\nb,S / AD,A,D,λ\nc,S / λ\nb,A / AD,A,D,λ\nb,B / C,λ,...(14 total)\nc,B / DD,D,λ\na,B / λ\nb,C / ...(12 total)\nc,C / DD,D,λ\na,C / λ\nc,E / λ\na,D / λ", fontsize=7];
+    q1 -> q2 [label="λ, Z / λ\n(empty stack → accept)", fontsize=10];
+}
+```
+
 **Transition function** — one line per GNF production (grouped by variable):
 
 ```
-δ(q₀, λ, Z)  = (q₁, SZ)       ← push start variable S onto stack
+δ(q₀, λ, Z)  = (q₁, XZ)       ← push new start variable X
+
+── X (new start, isolates λ) ──
+δ(q₁, λ, X)  = (q₁, S)        ← X → S     (replace X with S, no input)
+δ(q₁, λ, X)  = (q₁, λ)        ← X → λ     (pop X, λ accepted via Z→q₂)
 
 ── S ──
-δ(q₁, λ, S)  = (q₁, λ)        ← S → λ     (λ ∈ L(G), so accept empty string)
 δ(q₁, a, S)  = (q₁, S)        ← S → aS
 δ(q₁, a, S)  = (q₁, λ)        ← S → a
 δ(q₁, a, S)  = (q₁, BD)       ← S → aBD
@@ -1322,21 +1350,31 @@ E → c
 
 **Trace — input `"c"` (accepted):**
 
-|Step|Input left|State|Stack|Rule fired|
-|---|---|---|---|---|
-|1|c|q₀|Z|δ(q₀, λ, Z) = (q₁, SZ)|
-|2|c|q₁|SZ|δ(q₁, c, S) = (q₁, λ) — S → c|
-|3|ε|q₁|Z|δ(q₁, λ, Z) = (q₂, λ) — empty stack|
-|4|ε|q₂|∅|**ACCEPT ✓**|
-
-**Trace — input `""` / λ (accepted):**
-
-|Step|Input left|State|Stack|Rule fired|
-|---|---|---|---|---|
-|1|ε|q₀|Z|δ(q₀, λ, Z) = (q₁, SZ)|
-|2|ε|q₁|SZ|δ(q₁, λ, S) = (q₁, λ) — S → λ|
-|3|ε|q₁|Z|δ(q₁, λ, Z) = (q₂, λ) — empty stack|
-|4|ε|q₂|∅|**ACCEPT ✓**|
+```dot
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    header [label="Input | State | Stack", shape=plain];
+    initial [label="Initial", style=dashed];
+    step1 [label="q0, Z"];
+    delta1 [label="δ(q0,λ,Z)=(q1,SZ)", style=dashed];
+    step2 [label="q1, SZ"];
+    read_c [label="read c"];
+    delta2 [label="δ(q1,c,S)=(q1,λ) → pop S", style=dashed];
+    step3 [label="q1, Z"];
+    delta3 [label="δ(q1,λ,Z)=(q2,λ) → ACCEPT ✓", style=dashed];
+    step4 [label="q2, ∅"];
+    header -> initial;
+    initial -> step1;
+    step1 -> delta1;
+    delta1 -> step2;
+    step2 -> read_c;
+    read_c -> delta2;
+    delta2 -> step3;
+    step3 -> delta3;
+    delta3 -> step4;
+}
+```
 
 ---
 
