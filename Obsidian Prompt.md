@@ -37,7 +37,7 @@
 > 
 > ## 🏗️ Structure Requirements
 > 
-> Each note must follow this exact three-part structure:
+> Each note must follow this exact structure:
 > 
 > ### Part 1 — Conceptual Section (Teach Mode)
 > 
@@ -45,16 +45,13 @@
 > - Definitions, formulas, theorems, and properties written concisely inside callouts.
 > - Introduce and clarify any new terminology, abbreviations, or notation immediately when first used.
 > - Keep math notation **consistent throughout** — no switching between equivalent forms without declaring it.
-> 
-> ### Part 2 — Application Section (Exam Mode)
-> 
-> - Grouped under the header `## 📘 Examples & Applications`.
-> - Include **all worked examples from the source files**.
+> - Any definition, concept, property or implication must has corresponding `## 📘 Examples & Applications`right below.
+> - Include **all worked examples from the source files**. If there is no sufficient example, create one
 > - If the source contains fewer than 2 examples, supplement with one exam-style problem that combines multiple concepts from the topic.
 > - Each example opens with a tag line: `**Using:** [list of concepts applied]`.
 > - Solutions must be **fully worked, step-by-step, in LaTeX math form** — no skipped steps.
 > 
-> ### Part 3 — Summary Section
+> ### Part 2 — Summary Section
 > 
 > - Grouped under `## 🗂️ Summary`.
 > - Concise bullet-point recap of all key results, formulas, and facts for exam revision.

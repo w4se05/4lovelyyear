@@ -4,5 +4,6 @@
   "textFontFamily": "Times New Roman",
   "baseFontSize": 23,
   "baseFontSizeAction": true,
-  "theme": "obsidian"
+  "theme": "obsidian",
+  "showRibbon": true
 }

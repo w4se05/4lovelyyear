@@ -1,0 +1,33 @@
+
+| **Description / Sequence**                                                                     | **Generating Function (OGF)**      | **Series Expansion / General Formula**          | **Explicit Sequence Term (an​ or ak​)**           |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------- | ----------------------------------------------- | ------------------------------------------------- |
+| **Combinatorial Conditions**                                                                   |                                    | _(Building blocks for a single variable $x_i$)_ | _(Coefficient $a_n$ of $x^n$)_                    |
+| $x_i \geq a$                                                                                   | $\frac{x^a}{1 - x}$                | $x^a + x^{a+1} + x^{a+2} + \dots$               | $a_n = 1$ (if $n \geq a$), else $0$               |
+| $x_i = a$ (exactly $a$)                                                                        | $x^a$                              | $x^a$                                           | $a_n = 1$ (if $n = a$), else $0$                  |
+| $a \leq x_i \leq b$                                                                            | $\frac{x^a(1 - x^{b-a+1})}{1 - x}$ | $x^a + x^{a+1} + \dots + x^b$                   | $a_n = 1$ (if $a \leq n \leq b$), else $0$        |
+| $x_i$ even                                                                                     | $\frac{1}{1 - x^2}$                | $1 + x^2 + x^4 + \dots$                         | $a_n = 1$ (if $n$ is even), else $0$              |
+| $x_i$ odd                                                                                      | $\frac{x}{1 - x^2}$                | $x + x^3 + x^5 + \dots$                         | $a_n = 1$ (if $n$ is odd), else $0$               |
+| $x_i$ multiple of $m$                                                                          | $\frac{1}{1 - x^m}$                | $1 + x^m + x^{2m} + \dots$                      | $a_n = 1$ (if $n$ is a multiple of $m$), else $0$ |
+| $x_i \geq a$, at least 2 turns                                                                 | $\frac{x^{2a}}{(1 - x^a)^2} \dots$ | $(x^a + x^{a+1} + \dots)^2$                     | $a_n = n - 2a + 1$ (if $n \geq 2a$), else $0$     |
+| **Standard Sequences**                                                                         |                                    | _(Closed-form OGFs for common sequences)_       | _(Coefficient $a_k$ of $x^k$)_                    |
+| Constant 1s: $(1, 1, 1, \dots)$                                                                | $\frac{1}{1 - x}$                  | $\sum_{k=0}^{\infty} x^k$                       | $a_k = 1$                                         |
+| Geometric: $(1, r, r^2,r^3 \dots)$                                                             | $\frac{1}{1 - rx}$                 | $\sum_{k=0}^{\infty} r^k x^k$                   | $a_k = r^k$                                       |
+| Alternating: $(1, 0, 1, 0, \dots)$                                                             | $\frac{1}{1 - x^2}$                | $\sum_{k=0}^{\infty} x^{2k}$                    | $a_k = 1$ (if $k$ is even), else $0$              |
+| Binomial Theorem:<br><br>  <br><br>$\binom{n}{0}, \binom{n}{1}, \dots, \binom{n}{n}, 0, \dots$ | $(1 + x)^n$                        | $\sum_{k=0}^{n} \binom{n}{k} x^k$               | $a_k = \binom{n}{k}$ (for $k \leq n$), else $0$   |
+| Multichoose / Combinations with repetition: $\binom{n+k-1}{k}$                                 | $\frac{1}{(1 - x)^n}$              | $\sum_{k=0}^{\infty} \binom{n+k-1}{k} x^k$      | $a_k = \binom{n+k-1}{k}$                          |
+| Counting: $(1, 2, 3, 4, \dots)$                                                                | $\frac{1}{(1 - x)^2}$              | $\sum_{k=0}^{\infty} (k+1) x^k$                 | $a_k = k + 1$                                     |
+| Whole Numbers: $(0, 1, 2, 3, \dots)$                                                           | $\frac{x}{(1 - x)^2}$              | $\sum_{k=0}^{\infty} k x^k$                     | $a_k = k$                                         |
+| Squares: $(1, 4, 9, 16, \dots)$                                                                | $\frac{1 + x}{(1 - x)^3}$          | $\sum_{k=0}^{\infty} (k+1)^2 x^k$               | $a_k = (k+1)^2$                                   |
+|                                                                                                |                                    |                                                 |                                                   |
+
+
+| **Transform**                                         | **Result (Generating Function)**                     | **New Sequence Term (cn​)**                                                |
+| ----------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| $(a_1, a_2, a_3, \ldots)$ — drop first term           | $\frac{A(x) - a_0}{x}$                               | $c_n = a_{n+1}$                                                            |
+| $(a_0, 2a_1, 4a_2, \ldots)$ — scale by powers of 2    | $A(2x)$                                              | $c_n = 2^n a_n$                                                            |
+| $(a_0, a_0+a_1, a_0+a_1+a_2, \ldots)$ — prefix sums   | $\frac{A(x)}{1-x}$                                   | $c_n = \sum_{i=0}^n a_i$                                                   |
+| $(a_0, a_1 b, a_2 b^2, \ldots)$ — scale by $b^n$      | $A(bx)$                                              | $c_n = b^n a_n$                                                            |
+| $(a_0, 0, a_2, 0, a_4, \ldots)$ — even terms in place | $\frac{A(x)+A(-x)}{2}$                               | $c_n = a_n$ (if $n$ is even), else $0$                                     |
+| $(a_0, a_2, a_4, \ldots)$ — extract even-indexed      | $\frac{A(\sqrt{x})+A(-\sqrt{x})}{2}$                 | $c_n = a_{2n}$                                                             |
+| Right shift by $k$<br><br>  <br><br>Left shift by $k$ | $x^k \cdot A(x)$<br><br>  <br><br>$\frac{A(x)}{x^k}$ | $c_n = a_{n-k}$ (if $n \geq k$), else $0$<br><br>  <br><br>$c_n = a_{n+k}$ |
+| Convolution $c_n = \sum a_i b_{n-i}$                  | $A(x) \cdot B(x)$                                    | $c_n = \sum_{i=0}^n a_i b_{n-i}$                                           |
